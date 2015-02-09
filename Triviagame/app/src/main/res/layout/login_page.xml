@@ -55,7 +55,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignEnd="@+id/editText"
+        android:phoneNumber="false"
+        android:singleLine="true" />
 
     <Button
         android:layout_width="wrap_content"

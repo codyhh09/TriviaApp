@@ -1,4 +1,4 @@
-package edu.ycp.cs482.triviagmae;
+package edu.ycp.cs482.triviagame;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

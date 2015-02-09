@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.login_page);
 
         Button Signin = (Button) findViewById(R.id.signin);
-        Button Signup = (Button) findViewById(R.id.button2);
+        Button Signup = (Button) findViewById(R.id.sign_up);
 
         Signup.setOnClickListener(new View.OnClickListener(){
 

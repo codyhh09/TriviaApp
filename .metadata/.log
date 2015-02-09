@@ -49,3 +49,6 @@ Caused by: org.eclipse.jgit.errors.TransportException: https://github.com/J-Fid/
 	at org.eclipse.jgit.transport.Transport.push(Transport.java:1173)
 	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:156)
 	... 4 more
+
+!ENTRY org.eclipse.equinox.security 1 0 2015-02-09 12:47:44.768
+!MESSAGE New keyring password generated. 

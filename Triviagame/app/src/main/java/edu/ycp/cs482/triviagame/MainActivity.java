@@ -45,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
 
         Button Signin = (Button) findViewById(R.id.signin);
         Button Signup = (Button) findViewById(R.id.sign_up);
+        Button Settings = (Button) findViewById(R.id.btnSettings);
 
         Signup.setOnClickListener(new View.OnClickListener(){
 

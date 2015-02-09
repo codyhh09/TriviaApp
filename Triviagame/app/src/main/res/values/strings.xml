@@ -2,11 +2,7 @@
 <resources>
 
     <string name="app_name">Triviagame</string>
-    <string name="sign_in">Sign in</string>
-    <string name="sign_up">Sign up</string>
+    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="password">Password</string>
-    <string name="username">Username</string>
-    <string name="trivia">Welcome to The Trivia</string>
 
 </resources>

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Triviagmae</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Triviagame</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="trivia">Welcome to the Trivia</string>
     <string name="action_settings">Settings</string>
 
 </resources>

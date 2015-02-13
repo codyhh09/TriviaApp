@@ -1,0 +1,2 @@
+INDEX VERSION 1.127+C:\Users\choward8\Documents\GitHub\TriviaApp\.metadata\.plugins\org.eclipse.jdt.core
+4017158656.index

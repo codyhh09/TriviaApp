@@ -1,6 +1,7 @@
-=\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=refs/remotes/jason/master
-GitRepositoriesView.GitDirectories=C\:\\Users\\choward8\\Documents\\GitHub\\TriviaApp\\.git;
+<<<<<<< HEAD
+GitRepositoriesView.GitDirectories=C\:\\Users\\J-Fid\\Documents\\GitHub\\TriviaApp\\.git;
 RepositorySearchDialogSearchPath=C\:\\Users\\J-Fid\\Documents\\GitHub\\TriviaApp
+=======
+GitRepositoriesView.GitDirectories=C\:\\Users\\choward8\\Documents\\GitHub\\TriviaApp\\.git;
+>>>>>>> refs/remotes/Chalupa_Batman/master
 eclipse.preferences.version=1

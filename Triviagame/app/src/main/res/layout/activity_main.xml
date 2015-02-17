@@ -30,4 +30,5 @@
         android:id="@+id/btnSettings"
         android:layout_alignBottom="@+id/button"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

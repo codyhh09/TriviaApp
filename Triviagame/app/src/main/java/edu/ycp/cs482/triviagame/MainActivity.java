@@ -17,7 +17,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -44,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.login_page);
 
         Button Signin = (Button) findViewById(R.id.signin);
-        Button Signup = (Button) findViewById(R.id.sign_up);
+        Button Signup = (Button) findViewById(R.id.button2);
         Button Settings = (Button) findViewById(R.id.btnSettings);
 
         Signup.setOnClickListener(new View.OnClickListener(){

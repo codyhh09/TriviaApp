@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setDefaultView();
+        setActionPage();
 
     }
 
@@ -69,28 +69,30 @@ public class MainActivity extends ActionBarActivity {
     {
         setContentView(R.layout.action_page);
 
-        final int TIMER = 20000;
+        final int TIMER = 21000;
 
         Button AnswerA = (Button) findViewById(R.id.btnAnsA);
         Button AnswerB = (Button) findViewById(R.id.btnAnsB);
         Button AnswerC = (Button) findViewById(R.id.btnAnsC);
         Button AnswerD = (Button) findViewById(R.id.btnAnsD);
 
-        final TextView time = (TextView)findViewById(R.id.lblTimer);
 
-        final CountDownTimer timer = new CountDownTimer(TIMER, 1000)
+
+        new CountDownTimer(TIMER, 1000)
         {
+            TextView time = (TextView)findViewById(R.id.lblTimer);
             public void onTick(long millisUntilFinished)
             {
-                time.setText((int) millisUntilFinished);
+                time.setText("Time Remaining: " + (int) millisUntilFinished/ 1000);
             }
 
             public void onFinish()
             {
                 //Time-out Pop-Up
                 Toast.makeText(MainActivity.this, "Time Up!", Toast.LENGTH_SHORT).show();
+                //time.setText("Times Up!");
             }
-        };
+        }.start();
     }
 
     public void setMainPage(){

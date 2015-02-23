@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+	<Resource driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
+				name="jdbc/za_embedded_datasource" type="javax.sql.Datasource"
+				url="jdbc:derby:C:/Users/Carl/MyDB"
+				username="trivia" password="data" />
+	
+</Context>

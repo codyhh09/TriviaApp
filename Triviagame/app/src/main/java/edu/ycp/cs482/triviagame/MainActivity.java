@@ -1,11 +1,16 @@
 package edu.ycp.cs482.triviagame;
 
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Timer;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -57,6 +62,35 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
+    }
+
+    /*This page is where the questions will be displayed and answered.  There is a timer to countdown time.*/
+    public void setActionPage()
+    {
+        setContentView(R.layout.action_page);
+
+        final int TIMER = 20000;
+
+        Button AnswerA = (Button) findViewById(R.id.btnAnsA);
+        Button AnswerB = (Button) findViewById(R.id.btnAnsB);
+        Button AnswerC = (Button) findViewById(R.id.btnAnsC);
+        Button AnswerD = (Button) findViewById(R.id.btnAnsD);
+
+        final TextView time = (TextView)findViewById(R.id.lblTimer);
+
+        final CountDownTimer timer = new CountDownTimer(TIMER, 1000)
+        {
+            public void onTick(long millisUntilFinished)
+            {
+                time.setText((int) millisUntilFinished);
+            }
+
+            public void onFinish()
+            {
+                //Time-out Pop-Up
+                Toast.makeText(MainActivity.this, "Time Up!", Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 
     public void setMainPage(){

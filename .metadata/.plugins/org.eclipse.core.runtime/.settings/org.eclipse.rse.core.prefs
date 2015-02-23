@@ -1,3 +1,4 @@
 activeuserprofiles=Taco;Team
 eclipse.preferences.version=1
 org.eclipse.rse.systemtype.local.systemType.defaultUserId=Carl
+useridperkey=Taco.Local\=Carl;

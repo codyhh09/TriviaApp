@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+C:\Users\Carl\Documents\GitHub\TriviaApp\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1692434512.index
+1747292908.index
+1389314577.index
+331646902.index
+4005479492.index
+1578200717.index

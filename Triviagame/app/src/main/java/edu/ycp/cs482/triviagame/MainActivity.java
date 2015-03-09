@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setDefaultView();
-
     }
 
     @Override
@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // setting a new account to the Database.
-               setMainPage();//change
+               setMainPage();//change not implemented yet
             }
         });
 
@@ -97,7 +97,7 @@ public class MainActivity extends ActionBarActivity {
             {
                 //Time-out Pop-Up
                 Toast.makeText(MainActivity.this, "Time Up!", Toast.LENGTH_SHORT).show();
-                //time.setText("Times Up!");
+                setMainPage();
             }
         }.start();
 
@@ -189,6 +189,33 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public  void onClick(View v){
                 setMainPage();
+            }
+        });
+    }
+
+    public void setSignUpPage()
+    {
+        setContentView(R.layout.sign_up);
+
+        Button enter = (Button) findViewById(R.id.btnEnter);
+        Button back = (Button) findViewById(R.id.btnBack);
+
+        back.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                setDefaultView();
+            }
+        });
+
+        enter.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                EditText username = (EditText) findViewById(R.id.txtUser);
+
+                String user = username.getText().toString();
+
+                setMainPage();
+                Toast.makeText(MainActivity.this, "Welcome! " + user, Toast.LENGTH_SHORT).show();
             }
         });
     }

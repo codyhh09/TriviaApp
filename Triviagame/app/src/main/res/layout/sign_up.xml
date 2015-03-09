@@ -64,4 +64,13 @@
         android:layout_weight="0.05"
         android:clickable="true"
         android:textSize="24dp" />
+
+    <Button
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/btnBack"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05"
+        android:textSize="22dp" />
 </LinearLayout>

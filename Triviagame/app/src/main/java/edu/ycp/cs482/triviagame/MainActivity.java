@@ -15,10 +15,12 @@ import java.util.Timer;
 
 public class MainActivity extends ActionBarActivity {
 
+    private int streak = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setActionPage();
+        setDefaultView();
 
     }
 
@@ -44,11 +46,12 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setDefaultView(){
+    public void setDefaultView()
+    {
         setContentView(R.layout.login_page);
 
         Button Signin = (Button) findViewById(R.id.signin);
-        Button Signup = (Button) findViewById(R.id.button2);
+        Button Signup = (Button) findViewById(R.id.btnSignUp);
         Button Settings = (Button) findViewById(R.id.btnSettings);
 
         Signup.setOnClickListener(new View.OnClickListener(){
@@ -56,12 +59,21 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // setting a new account to the Database.
-               setMainPage();
+               setMainPage();//change
+            }
+        });
+
+        Signin.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                // setting a new account to the Database.
+                setMainPage();
             }
         });
     }
 
-    /*This page is where the questions will be displayed and answered.  There is a timer to countdown time.*/
+    //This page is where the questions will be displayed and answered.  There is a timer to countdown time.
     public void setActionPage()
     {
         setContentView(R.layout.action_page);
@@ -73,9 +85,7 @@ public class MainActivity extends ActionBarActivity {
         Button AnswerC = (Button) findViewById(R.id.btnAnsC);
         Button AnswerD = (Button) findViewById(R.id.btnAnsD);
 
-
-
-        new CountDownTimer(TIMER, 1000)
+        final CountDownTimer timer = new CountDownTimer(TIMER, 1000)
         {
             TextView time = (TextView)findViewById(R.id.lblTimer);
             public void onTick(long millisUntilFinished)
@@ -90,17 +100,95 @@ public class MainActivity extends ActionBarActivity {
                 //time.setText("Times Up!");
             }
         }.start();
+
+        AnswerA.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                //Temporary CORRECT Answer
+                streak++;
+                Toast.makeText(MainActivity.this, "Correct! Streak: " + streak, Toast.LENGTH_SHORT).show();
+                timer.cancel();
+                //wait(3000); WHAT d0 here? We want to wait 3 seconds before loading the next question.
+                setActionPage();
+            }
+        });
+
+        AnswerB.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                streak = 0;
+                Toast.makeText(MainActivity.this, "Incorrect!", Toast.LENGTH_SHORT).show();
+                timer.cancel();
+                setMainPage();
+            }
+        });
+
+        AnswerC.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                streak = 0;
+                Toast.makeText(MainActivity.this, "Incorrect!", Toast.LENGTH_SHORT).show();
+                timer.cancel();
+                setMainPage();
+            }
+        });
+
+        AnswerD.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                streak = 0;
+                Toast.makeText(MainActivity.this, "Incorrect!", Toast.LENGTH_SHORT).show();
+                timer.cancel();
+                setMainPage();
+            }
+        });
     }
 
-    public void setMainPage(){
+    public void setMainPage()
+    {
         setContentView(R.layout.activity_main);
 
-        Button back = (Button) findViewById(R.id.button);
+        Button back = (Button) findViewById(R.id.btnBack);
+        Button start = (Button) findViewById(R.id.btnStart);
+        Button settings = (Button) findViewById(R.id.btnSettings);
+        Button signOut = (Button) findViewById(R.id.btnSignOut);
 
         back.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
                 setDefaultView();
+            }
+        });
+        start.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                setActionPage();
+            }
+        });
+        settings.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                setSettingsPage();
+            }
+        });
+        signOut.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                setDefaultView();
+            }
+        });
+    }
+
+    public void setSettingsPage()
+    {
+        setContentView(R.layout.settings);
+
+        Button back = (Button) findViewById(R.id.btnBack);
+
+        back.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                setMainPage();
             }
         });
     }

@@ -57,9 +57,6 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 // setting a new account to the Database.
                setMainPage();
-
-
-
             }
         });
     }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>Userpage</servlet-name>
+		<servlet-class>edu.ycp.cs.cs496.TGOH.servlet.Userpage</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetCoursesForUser</servlet-name>
+		<servlet-class>edu.ycp.cs.cs496.TGOH.servlet.GetCoursesForUser</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetCoursesForTeacher</servlet-name>
+		<servlet-class>edu.ycp.cs.cs496.TGOH.servlet.GetCoursesForTeacher</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CoursesPage</servlet-name>
+		<servlet-class>edu.ycp.cs.cs496.TGOH.servlet.CoursesPage</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>RegistrationForCourses</servlet-name>
+		<servlet-class>edu.ycp.cs.cs496.TGOH.servlet.RegistrationForCourses</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetPendingUserForCourse</servlet-name>
+		<servlet-class>edu.ycp.cs.cs496.TGOH.servlet.GetPendingUserForCourse</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Notificationpage</servlet-name>
+		<servlet-class>edu.ycp.cs.cs496.TGOH.servlet.Notificationpage</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UserToRegistration</servlet-name>
+		<servlet-class>edu.ycp.cs.cs496.TGOH.servlet.UserToRegistration</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>findthereg</servlet-name>
+		<servlet-class>edu.ycp.cs.cs496.TGOH.servlet.findthereg</servlet-class>
+	</servlet>
+
+	
+	<!-- Servlet mappings (mapping of paths to servlets). -->
+	<servlet-mapping>
+	    <servlet-name>Userpage</servlet-name>
+		<url-pattern>/user/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>	
+		<servlet-name>GetCoursesForUser</servlet-name>
+		<url-pattern>/coursesforuser/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>	
+		<servlet-name>GetCoursesForTeacher</servlet-name>
+		<url-pattern>/coursesforteacher/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>	
+		<servlet-name>CoursesPage</servlet-name>
+		<url-pattern>/courses/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>	
+		<servlet-name>RegistrationForCourses</servlet-name>
+		<url-pattern>/regforcourses/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>	
+		<servlet-name>GetPendingUserForCourse</servlet-name>
+		<url-pattern>/usersforcourse/*</url-pattern>
+	</servlet-mapping>	
+	<servlet-mapping>	
+		<servlet-name>Notificationpage</servlet-name>
+		<url-pattern>/notification/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>	
+		<servlet-name>UserToRegistration</servlet-name>
+		<url-pattern>/usertoreg/*</url-pattern>
+	</servlet-mapping>
+		<servlet-mapping>	
+		<servlet-name>findthereg</servlet-name>
+		<url-pattern>/reg/*</url-pattern>
+	</servlet-mapping>
+</web-app>

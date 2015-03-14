@@ -1,0 +1,7 @@
+package edu.ycp.cs482.Trivia.persist;
+
+import edu.ycp.cs482.Trivia.persist.IDatabase;
+
+public class FakeDatabase //implements IDatabase{
+
+}

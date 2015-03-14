@@ -9,8 +9,7 @@ public class User {
 
 	}
 
-	public User(int _id, String _Username, String _Password) {
-		this.id = _id;
+	public User(String _Username, String _Password) {
 		this.Username = _Username;
 		this.Password = _Password;
 	}

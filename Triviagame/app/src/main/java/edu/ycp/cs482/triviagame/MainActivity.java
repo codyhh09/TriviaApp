@@ -1,16 +1,14 @@
 package edu.ycp.cs482.triviagame;
 
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Timer;
 
 
 public class MainActivity extends ActionBarActivity {

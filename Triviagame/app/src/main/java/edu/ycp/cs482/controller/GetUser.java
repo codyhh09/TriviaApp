@@ -1,4 +1,7 @@
 package edu.ycp.cs482.controller;
+
+import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.JSON.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;

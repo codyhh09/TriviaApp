@@ -1,3 +1,4 @@
+package edu.ycp.cs482.JSON;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

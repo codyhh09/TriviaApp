@@ -11,4 +11,17 @@
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="java.sql.ResultSetMetaData"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.persist.IDatabase"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.GetUser"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.JSON.JSON"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.AddUser"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.DeleteUser"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.GetAllQuestion"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.GetQuestion"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Model.Question"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.AddQuestion"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.DeleteQuestion"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Model.User"/>
 </qualifiedTypeNameHistroy>

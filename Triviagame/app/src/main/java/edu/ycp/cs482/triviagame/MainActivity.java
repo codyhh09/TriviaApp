@@ -8,8 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.PopupMenu;
+import android.widget.ActionMenuView;
 
 import java.util.Timer;
 
@@ -38,6 +41,16 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        switch(id)
+        {
+            case R.id.btnSettings:
+                setContentView(R.layout.settings);
+                return true;
+            case R.id.btnSignOut:
+                setContentView(R.layout.login_page);
+                return true;
+        }
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -59,7 +72,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // setting a new account to the Database.
-               setMainPage();//change not implemented yet
+               setSignUpPage();
             }
         });
 
@@ -153,6 +166,8 @@ public class MainActivity extends ActionBarActivity {
         Button settings = (Button) findViewById(R.id.btnSettings);
         Button signOut = (Button) findViewById(R.id.btnSignOut);
 
+//        final ImageButton popup = (ImageButton) findViewById(R.id.popup);
+
         back.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
@@ -177,6 +192,13 @@ public class MainActivity extends ActionBarActivity {
                 setDefaultView();
             }
         });
+
+//        popup.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public  void onClick(View v){
+//                popup.getMenuInflater().inflate(R.id.popup, popup.getMenu());
+//            }
+//        });
     }
 
     public void setSettingsPage()

@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.ycp.cs482.Model.Question;
+import edu.ycp.cs482.controller.GetQuestion;
+
 public class MainActivity extends Activity {
 
     private int streak = 0;
@@ -47,6 +50,8 @@ public class MainActivity extends Activity {
     {
         setContentView(R.layout.login_page);
 
+        GetQuestion controller = new GetQuestion();
+
         Button Signin = (Button) findViewById(R.id.signin);
         Button Signup = (Button) findViewById(R.id.btnSignUp);
         Button Settings = (Button) findViewById(R.id.btnSettings);
@@ -76,11 +81,25 @@ public class MainActivity extends Activity {
         setContentView(R.layout.action_page);
 
         final int TIMER = 21000;
+        GetQuestion controller = new GetQuestion();
+        Question q;
 
+        TextView question = (TextView) findViewById(R.id.lblQuestion);
         Button AnswerA = (Button) findViewById(R.id.btnAnsA);
         Button AnswerB = (Button) findViewById(R.id.btnAnsB);
         Button AnswerC = (Button) findViewById(R.id.btnAnsC);
         Button AnswerD = (Button) findViewById(R.id.btnAnsD);
+        try {
+            q = controller.getQuestion(1);
+            question.setText(controller.getQuestion(1).getAnswer2());
+            AnswerA.setText(q.getAnswer1());
+            AnswerB.setText(q.getAnswer2());
+            AnswerC.setText(q.getAnswer3());
+            AnswerD.setText(q.getAnswer4());
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+
 
         final CountDownTimer timer = new CountDownTimer(TIMER, 1000)
         {
@@ -94,7 +113,7 @@ public class MainActivity extends Activity {
             {
                 //Time-out Pop-Up
                 Toast.makeText(MainActivity.this, "Time Up!", Toast.LENGTH_SHORT).show();
-                //time.setText("Times Up!");
+                setMainPage();
             }
         }.start();
 
@@ -139,7 +158,9 @@ public class MainActivity extends Activity {
                 setMainPage();
             }
         });
-    }
+
+
+}
 
     public void setMainPage()
     {

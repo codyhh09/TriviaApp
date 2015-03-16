@@ -207,7 +207,7 @@ public class RealDatabase implements IDatabase{
 				
 				try {
 					// Note: no 'where' clause, so all items will be returned
-					stmt = conn.prepareStatement("select question.* from question");
+					stmt = conn.prepareStatement("select questions.* from questions");
 					
 					resultSet = stmt.executeQuery();
 
@@ -220,6 +220,7 @@ public class RealDatabase implements IDatabase{
 						question.setAnswer2(resultSet.getString(4));
 						question.setAnswer3(resultSet.getString(5));
 						question.setAnswer4(resultSet.getString(6));
+						question.setFinalAnswer(resultSet.getString(7));
 						result.add(question);
 					}
 					
@@ -242,7 +243,7 @@ public class RealDatabase implements IDatabase{
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into question (question, answer1, answer2, answer3, answer4, finalanswer) values (?, ?, ?, ?, ?, ?)",
+							"insert into questions (question, answer1, answer2, answer3, answer4, finalanswer) values (?, ?, ?, ?, ?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
 					
@@ -278,7 +279,7 @@ public class RealDatabase implements IDatabase{
 				ResultSet resultSet = null;
 				
 				try {
-					stmt = conn.prepareStatement("select question.* from question where question.id = ?");
+					stmt = conn.prepareStatement("select questions.* from questions where questions.id = ?");
 					stmt.setInt(1, id);
 					
 					resultSet = stmt.executeQuery();
@@ -290,6 +291,7 @@ public class RealDatabase implements IDatabase{
 					
 					Question question = new Question();
 					loadQuestion(question, resultSet, 1);
+					System.out.println("New User has id " + id);
 					return question;
 				} finally {
 					DBUtil.closeQuietly(resultSet);
@@ -307,7 +309,7 @@ public class RealDatabase implements IDatabase{
 				PreparedStatement stmt = null;
 				
 				try {
-					stmt = conn.prepareStatement("Delete from question where question.id = ?");
+					stmt = conn.prepareStatement("Delete from questions where questions.id = ?");
 					stmt.setInt(1, id);
 					
 					int numRowsAffected = stmt.executeUpdate();
@@ -351,14 +353,14 @@ public class RealDatabase implements IDatabase{
 				try {
 					// Note that the 'id' column is an autoincrement primary key,
 					stmt = conn.prepareStatement(
-							"create table question (" +
+							"create table questions (" +
 							"  id integer primary key not null generated always as identity," +
-							"  question varchar(30)," +
-							"  answer1 varchar(30)," +
-							"  answer2 varchar(30)," +
-							"  answer3 varchar(30)," +
-							"  answer4 varchar(30)," +
-							"  finalanswer varchar(30)" +
+							"  question varchar(70)," +
+							"  answer1 varchar(70)," +
+							"  answer2 varchar(70)," +
+							"  answer3 varchar(70)," +
+							"  answer4 varchar(70)," +
+							"  finalanswer varchar(70)" +
 							")"
 
 					);
@@ -435,7 +437,7 @@ public class RealDatabase implements IDatabase{
 				PreparedStatement stmt = null;
 				
 				try {
-					stmt = conn.prepareStatement("insert into users (username, password) values (?, ?)");
+					stmt = conn.prepareStatement("insert into questions (question, answer1, answer2, answer3, answer4, finalanswer) values (?, ?, ?, ?, ?, ?)");
 					storeQuestionNoId(new Question("What is 2 + 2?","2","4","6","Moscola","4"), stmt, 1);
 					stmt.addBatch();
 					storeQuestionNoId(new Question("Who won Super Bowl I?","Packers","Seahawks","Brown","Giants","Packers"), stmt, 1);

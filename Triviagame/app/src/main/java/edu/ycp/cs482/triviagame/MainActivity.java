@@ -1,8 +1,5 @@
 package edu.ycp.cs482.triviagame;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.app.Activity;
@@ -11,11 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.PopupMenu;
 import android.widget.ActionMenuView;
+//import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
 
 
 public class MainActivity extends Activity {
@@ -31,7 +29,7 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

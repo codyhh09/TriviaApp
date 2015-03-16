@@ -436,11 +436,11 @@ public class RealDatabase implements IDatabase{
 				
 				try {
 					stmt = conn.prepareStatement("insert into users (username, password) values (?, ?)");
-					storeQuestionNoId(new User("What is 2 + 2?","2","4","6","Moscola","4"), stmt, 1);
+					storeQuestionNoId(new Question("What is 2 + 2?","2","4","6","Moscola","4"), stmt, 1);
 					stmt.addBatch();
-					storeQuestionNoId(new User("Who won Super Bowl I?","Packers","Seahawks","Brown","Giants","Packers"), stmt, 1);
+					storeQuestionNoId(new Question("Who won Super Bowl I?","Packers","Seahawks","Brown","Giants","Packers"), stmt, 1);
 					stmt.addBatch();
-					storeQuestionNoId(new User("What color is George Washington's white horse?","Pink","Brown","George Washington didn't have a horse", "White", "White"), stmt, 1);
+					storeQuestionNoId(new Question("What color is George Washington's white horse?","Pink","Brown","George Washington didn't have a horse", "White", "White"), stmt, 1);
 					stmt.addBatch();
 					
 					stmt.executeBatch();

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<servlet>
+<servlet-name>GetUser</servlet-name>
+<servlet-class>GetUser</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>GetUser</servlet-name>
+<url-pattern>/GetUser</url-pattern>
+</servlet-mapping>

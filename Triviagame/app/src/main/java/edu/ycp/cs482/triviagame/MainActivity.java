@@ -1,8 +1,11 @@
 package edu.ycp.cs482.triviagame;
 
-import android.os.CountDownTimer;
-import android.support.v7.app.ActionBarActivity;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,10 +17,8 @@ import android.widget.Toast;
 import android.widget.PopupMenu;
 import android.widget.ActionMenuView;
 
-import java.util.Timer;
 
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private int streak = 0;
 

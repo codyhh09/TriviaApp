@@ -13,9 +13,7 @@ public class Question {
 
 	}
 
-	public Question(int id, String Question, String answer1, String answer2,
-			String answer3, String answer4, String finalanswer) {
-		this.id = id;
+	public Question(String Question, String answer1, String answer2, String answer3, String answer4, String finalanswer) {
 		this.Question = Question;
 		this.answer1 = answer1;
 		this.answer2 = answer2;

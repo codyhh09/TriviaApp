@@ -1,0 +1,5 @@
+package edu.ycp.cs482.Trivia.controller;
+
+public class GetAllQuestion {
+
+}

@@ -1,0 +1,54 @@
+package edu.ycp.cs482.Trivia.persist;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.ycp.cs482.Model.*;
+import edu.ycp.cs482.Trivia.persist.IDatabase;
+
+public class FakeDatabase implements IDatabase{
+	private List<User> users;
+	
+	public FakeDatabase() {
+		users = new ArrayList<User>();
+		User user1 = new User("c","c");
+		user1.setId(2);
+		users.add(user1);
+	}
+	
+	public void addUser(User user) {
+		//add user to the list
+		users.add(user);
+	}
+	
+	public User getUser(String username){
+		for(User user : users){
+			if(user.getUsername().equals(username)){
+				return user;
+			}
+		}
+		return null;
+	}
+
+	// getting a user
+	public User getUserfromRegistration(int Username) {
+		for (User user1 : users) {
+			if (user1.getUsername().equals(Username)) {
+				// return a copy
+				return user1;
+			}
+		}
+		return null;
+	}
+
+	// deleting a user
+	public boolean deleteUser(String user) {
+		for(User temp : users){
+			if(temp.getUsername().equals(user)){
+				return users.remove(getUser(user));
+			}
+		}
+		return false;
+	}
+
+}

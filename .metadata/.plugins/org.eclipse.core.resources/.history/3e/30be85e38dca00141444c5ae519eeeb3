@@ -1,0 +1,12 @@
+package edu.ycp.cs482.Trivia.persist;
+
+import edu.ycp.cs482.Model.User;
+
+public interface IDatabase {
+	// method names going to the servlet
+	public void addUser(User user);
+	
+	public User getUser(String username);
+	
+	public boolean deleteUser(String user);
+}

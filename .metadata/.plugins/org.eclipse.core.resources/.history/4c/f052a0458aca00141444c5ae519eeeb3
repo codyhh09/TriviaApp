@@ -1,0 +1,11 @@
+package edu.ycp.cs482.Trivia.controller;
+
+import edu.ycp.cs482.Trivia.persist.Database;
+import edu.ycp.cs482.Trivia.persist.IDatabase;
+
+public class GetUser {
+	public GetUser(String username){
+		IDatabase db = Database.getInstance();
+		db.getUser(username);
+	}
+}

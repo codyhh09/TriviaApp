@@ -428,31 +428,6 @@ public class RealDatabase implements IDatabase{
 		});
 	}
 	
-	public void loadInitialQuestionData() {
-		executeTransaction(new Transaction<Boolean>() {
-			@Override
-			public Boolean execute(Connection conn) throws SQLException {
-				PreparedStatement stmt = null;
-				
-				try {
-					stmt = conn.prepareStatement("insert into users (username, password) values (?, ?)");
-					storeQuestionNoId(new User("What is 2 + 2?","2","4","6","Moscola","4"), stmt, 1);
-					stmt.addBatch();
-					storeQuestionNoId(new User("Who won Super Bowl I?","Packers","Seahawks","Brown","Giants","Packers"), stmt, 1);
-					stmt.addBatch();
-					storeQuestionNoId(new User("What color is George Washington's white horse?","Pink","Brown","George Washington didn't have a horse", "White", "White"), stmt, 1);
-					stmt.addBatch();
-					
-					stmt.executeBatch();
-					
-					return true;
-				} finally {
-					DBUtil.closeQuietly(stmt);
-				}
-			}
-		});
-	}
-	
 	public static void main(String[] args) {
 		RealDatabase db = new RealDatabase();
 		System.out.println("Creating tables...");
@@ -460,7 +435,6 @@ public class RealDatabase implements IDatabase{
 		db.createQuestionTables();
 		System.out.println("Loading initial data...");
 		db.loadInitialUserData();
-		db.loadInitialQuestionData();
 		System.out.println("Done!");
 	}
 }

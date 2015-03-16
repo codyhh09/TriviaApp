@@ -1,8 +1,5 @@
 package edu.ycp.cs482.triviagame;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.app.Activity;
@@ -12,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 public class MainActivity extends Activity {
 

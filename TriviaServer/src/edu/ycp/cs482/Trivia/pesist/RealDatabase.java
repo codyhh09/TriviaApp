@@ -116,9 +116,6 @@ public class RealDatabase implements IDatabase{
 		});
 	}
 
-	/*
-	 * Done
-	 */
 	public boolean deleteUser(final String user) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -139,9 +136,6 @@ public class RealDatabase implements IDatabase{
 		});
 	}
 
-	/*
-	 * Done
-	 */
 	public User getUser(final String username) {
 		return executeTransaction(new Transaction<User>() {
 			@Override

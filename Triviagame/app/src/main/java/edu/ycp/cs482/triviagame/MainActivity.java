@@ -15,7 +15,6 @@ import android.widget.ActionMenuView;
 //import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 
-
 public class MainActivity extends Activity {
 
     private int streak = 0;

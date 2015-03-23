@@ -1,34 +1,29 @@
 package edu.ycp.cs482.controller;
 
-import edu.ycp.cs482.Model.User;
-import edu.ycp.cs482.JSON.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import android.os.AsyncTask;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-public class GetUser {
+import java.io.IOException;
+import java.net.URISyntaxException;
 
-    public User getUser(String UserName) throws ClientProtocolException, URISyntaxException, IOException {
-        return makeGetRequest(UserName);
-    }
+import edu.ycp.cs482.JSON.JSON;
+import edu.ycp.cs482.Model.User;
 
-    private User makeGetRequest(String Username) throws URISyntaxException, ClientProtocolException, IOException{
+/**
+ * Created by choward8 on 3/23/2015.
+ */
+public class GetUser extends AsyncTask<String, Void, User> {
+    private User getUser(String Username) throws URISyntaxException, IOException {
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();
-        // Construct URI
-        URI uri = URIUtils.createURI("http", "10.0.2.2", 8081, "/user/"+ Username, null, null);
-
         // Construct request
-        HttpGet request = new HttpGet(uri);
+        HttpGet request = new HttpGet("http//10.0.2.2:8081/question/"+Username);
 
         // Execute request
         HttpResponse response = client.execute(request);
@@ -41,6 +36,16 @@ public class GetUser {
         }
 
         // Return null if invalid response
+        return null;
+    }
+
+    @Override
+    protected User doInBackground(String... params) {
+        try{
+            return getUser(params[0]);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 }

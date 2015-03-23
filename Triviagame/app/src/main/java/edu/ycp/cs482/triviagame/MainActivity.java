@@ -1,5 +1,6 @@
 package edu.ycp.cs482.triviagame;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.app.Activity;
@@ -7,15 +8,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.ycp.cs482.Model.Question;
 import edu.ycp.cs482.controller.GetQuestion;
+import edu.ycp.cs482.controller.GetUser;
 
 public class MainActivity extends Activity {
 
     private int streak = 0;
+
+    private String name, password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,28 +55,41 @@ public class MainActivity extends Activity {
     public void setDefaultView()
     {
         setContentView(R.layout.login_page);
-
-        GetQuestion controller = new GetQuestion();
-
-        Button Signin = (Button) findViewById(R.id.signin);
-        Button Signup = (Button) findViewById(R.id.btnSignUp);
+        EditText name1 = (EditText) findViewById(R.id.txtUser);
+        EditText password1 = (EditText) findViewById(R.id.txtPass);
+        name = name1.getText().toString();
+        password = password1.getText().toString();
+        Button Signup = (Button) findViewById(R.id.signin);
+        Button Signin = (Button) findViewById(R.id.btnSignUp);
         Button Settings = (Button) findViewById(R.id.btnSettings);
 
-        Signup.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                // setting a new account to the Database.
-               setMainPage();//change
-            }
-        });
 
         Signin.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                // setting a new account to the Database.
-                setMainPage();
+                GetUser controller = new GetUser();
+                try{
+                    if(controller.execute(name).get() != null) {
+                        Intent i = new Intent(getApplicationContext(), Action_page.class);
+                        startActivity(i);
+                    }else{
+
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                //new GetUser().execute(name);
+            }
+        });
+
+        Signup.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), Sign_up.class);
+                startActivity(i);
             }
         });
     }
@@ -90,12 +109,11 @@ public class MainActivity extends Activity {
         Button AnswerC = (Button) findViewById(R.id.btnAnsC);
         Button AnswerD = (Button) findViewById(R.id.btnAnsD);
         try {
-            q = controller.getQuestion(1);
-            question.setText(controller.getQuestion(1).getAnswer2());
-            AnswerA.setText(q.getAnswer1());
-            AnswerB.setText(q.getAnswer2());
-            AnswerC.setText(q.getAnswer3());
-            AnswerD.setText(q.getAnswer4());
+            //question.setText(controller.getQuestion(1).getAnswer2());
+           // AnswerA.setText(q.getAnswer1());
+           // AnswerB.setText(q.getAnswer2());
+           // AnswerC.setText(q.getAnswer3());
+            //AnswerD.setText(q.getAnswer4());
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -210,4 +228,5 @@ public class MainActivity extends Activity {
             }
         });
     }
+
 }

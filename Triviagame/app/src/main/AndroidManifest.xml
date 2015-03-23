@@ -10,12 +10,30 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="edu.ycp.cs482.triviagame.MainActivity"
-            android:label="@string/app_name" >
+            android:label="Trivia" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        
+        <!-- Add user Activity -->
+        <activity
+        android:name="edu.ycp.cs482.triviagame.Sign_up"
+        android:label="Sign_up">
+        </activity>
+        <activity
+            android:name="edu.ycp.cs482.triviagame.Action_page"
+            android:label="Action_page">
+        </activity>
+        <activity
+        android:name="edu.ycp.cs482.triviagame.Settings"
+        android:label="Setting_page">
+        </activity>
+        <activity
+            android:name="edu.ycp.cs482.triviagame.GamePage"
+            android:label="Game_page">
         </activity>
     </application>
 

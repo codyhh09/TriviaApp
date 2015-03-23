@@ -1,16 +1,15 @@
 package edu.ycp.cs482.controller;
 
+import android.os.AsyncTask;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import edu.ycp.cs482.JSON.JSON;
@@ -19,20 +18,12 @@ import edu.ycp.cs482.Model.Question;
 /**
  * Created by Carl on 3/15/2015.
  */
-public class GetQuestion extends {
-
-    public Question getQuestion(int id) throws ClientProtocolException, URISyntaxException, IOException {
-        return makeGetRequest(id);
-    }
-
-    private Question makeGetRequest(int id) throws URISyntaxException, ClientProtocolException, IOException{
+public class GetQuestion extends AsyncTask<Integer, Void, Question>{
+    private Question getQuestion(int id) throws URISyntaxException, IOException{
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();
-        // Construct URI
-        URI uri = URIUtils.createURI("http", "10.0.2.2", 8081, "/question/" + id, null, null);
-
         // Construct request
-        HttpGet request = new HttpGet(uri);
+        HttpGet request = new HttpGet("http//10.0.2.2:8081/question/"+id);
 
         // Execute request
         HttpResponse response = client.execute(request);
@@ -45,6 +36,16 @@ public class GetQuestion extends {
         }
 
         // Return null if invalid response
+        return null;
+    }
+
+    @Override
+    protected Question doInBackground(Integer... params) {
+        try{
+            return getQuestion(params[0]);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 }

@@ -23,7 +23,7 @@ public class GetQuestion extends AsyncTask<Integer, Void, Question>{
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();
         // Construct request
-        HttpGet request = new HttpGet("http//10.0.2.2:8081/question/"+id);
+        HttpGet request = new HttpGet("http://10.0.2.2:8081/question/"+id);
 
         // Execute request
         HttpResponse response = client.execute(request);

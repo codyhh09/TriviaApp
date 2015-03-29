@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Mon Mar 23 11:04:59 EDT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014c-472a-54f6-000006935fc8 
-on database directory C:\Users\choward8\Documents\GitHub\TriviaApp\TriviaServer\test.db with class loader sun.misc.Launcher$AppClassLoader@2a139a55 
-Loaded from file:/C:/Users/choward8/Documents/GitHub/TriviaApp/TriviaServer/derby.jar
+Sun Mar 29 01:52:54 EDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-014c-6417-0b59-00000665c220 
+on database directory C:\Users\Carl\Documents\GitHub\TriviaApp\TriviaServer\test.db with class loader sun.misc.Launcher$AppClassLoader@c387f44 
+Loaded from file:/C:/Users/Carl/Documents/GitHub/TriviaApp/TriviaServer/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_31-b13
-user.dir=C:\Users\choward8\Documents\GitHub\TriviaApp\TriviaServer
+java.runtime.version=1.8.0_40-b26
+user.dir=C:\Users\Carl\Documents\GitHub\TriviaApp\TriviaServer
 os.name=Windows 8.1
 os.arch=amd64
 os.version=6.3

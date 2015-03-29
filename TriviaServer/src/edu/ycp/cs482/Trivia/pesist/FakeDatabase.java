@@ -39,6 +39,15 @@ public class FakeDatabase implements IDatabase{
 		}
 		return null;
 	}
+	
+	public boolean login(String User, String Pass){
+		for(User user : users){
+			if(user.getUsername().equals(user)&&user.getPassword().equals(Pass)){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	// deleting a user
 	public boolean deleteUser(String user) {

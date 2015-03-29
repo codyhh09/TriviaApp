@@ -17,8 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <!-- Add user Activity -->
+
         <activity
         android:name="edu.ycp.cs482.triviagame.Sign_up"
         android:label="Sign_up">

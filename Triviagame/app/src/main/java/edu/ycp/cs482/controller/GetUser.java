@@ -1,5 +1,6 @@
 package edu.ycp.cs482.controller;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import org.apache.http.HttpEntity;
@@ -19,11 +20,17 @@ import edu.ycp.cs482.Model.User;
  * Created by choward8 on 3/23/2015.
  */
 public class GetUser extends AsyncTask<String, Void, User> {
+    private Context con;
+
+    public GetUser(Context context){
+        con = context;
+    }
+
     private User getUser(String Username) throws URISyntaxException, IOException {
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();
         // Construct request
-        HttpGet request = new HttpGet("http//10.0.2.2:8081/question/"+Username);
+        HttpGet request = new HttpGet("http://10.0.2.2:8081/user/"+Username);
 
         // Execute request
         HttpResponse response = client.execute(request);
@@ -34,7 +41,6 @@ public class GetUser extends AsyncTask<String, Void, User> {
             // Parse JSON
             return JSON.getObjectMapper().readValue(entity.getContent(), User.class);
         }
-
         // Return null if invalid response
         return null;
     }

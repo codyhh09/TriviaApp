@@ -1,9 +1,5 @@
 package edu.ycp.cs482.controller;
 
-/**
- * Created by choward8 on 3/15/2015.
- */
-
 import android.os.AsyncTask;
 
 import java.io.IOException;

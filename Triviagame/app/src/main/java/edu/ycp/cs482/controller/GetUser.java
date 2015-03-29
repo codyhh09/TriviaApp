@@ -1,6 +1,5 @@
 package edu.ycp.cs482.controller;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import org.apache.http.HttpEntity;

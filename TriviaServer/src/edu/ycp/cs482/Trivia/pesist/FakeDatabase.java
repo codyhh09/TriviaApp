@@ -40,6 +40,12 @@ public class FakeDatabase implements IDatabase{
 		return null;
 	}
 	
+	public User chgUser(String oldUser, String newUser){
+		User user = getUser(oldUser);
+		user.setUsername(newUser);
+		return user;
+	}
+	
 	public boolean login(String User, String Pass){
 		for(User user : users){
 			if(user.getUsername().equals(user)&&user.getPassword().equals(Pass)){

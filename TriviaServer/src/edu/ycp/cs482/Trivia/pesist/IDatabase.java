@@ -13,6 +13,8 @@ public interface IDatabase {
 	
 	public boolean login(String User, String Pass);
 	
+	public User chgUser(String oldUser, String newUser);
+	
 	public List<User> getAllUser();
 	
 	public boolean deleteUser(String user);

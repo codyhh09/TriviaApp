@@ -16,16 +16,7 @@ import java.net.URISyntaxException;
 import edu.ycp.cs482.JSON.JSON;
 import edu.ycp.cs482.Model.User;
 
-/**
- * Created by choward8 on 3/23/2015.
- */
 public class GetUser extends AsyncTask<String, Void, User> {
-    private Context con;
-
-    public GetUser(Context context){
-        con = context;
-    }
-
     private User getUser(String Username) throws URISyntaxException, IOException {
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();

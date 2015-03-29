@@ -195,6 +195,33 @@ public class RealDatabase implements IDatabase{
 	}
 	
 	@Override
+	public User chgUser(String oldUser, String newUser) {
+		return executeTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update users set users.username = ? where users.username = ?");
+					
+					stmt.setString(1,  newUser);
+					stmt.setString(2, oldUser);
+					
+					stmt.executeUpdate();
+					User user = new User();
+					System.out.println("changed");
+					return user;
+					
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+	}
+	
+	@Override
 	public List<User> getAllUser() {
 		return executeTransaction(new Transaction<List<User>>() {
 			@Override

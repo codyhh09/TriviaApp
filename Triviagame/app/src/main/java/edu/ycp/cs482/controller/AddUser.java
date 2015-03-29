@@ -1,9 +1,5 @@
 package edu.ycp.cs482.controller;
 
-/**
- * Created by choward8 on 3/15/2015.
- */
-
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URI;

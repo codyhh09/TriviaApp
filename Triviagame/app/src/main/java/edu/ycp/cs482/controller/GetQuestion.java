@@ -16,12 +16,9 @@ import java.net.URISyntaxException;
 import edu.ycp.cs482.JSON.JSON;
 import edu.ycp.cs482.Model.Question;
 
-/**
- * Created by Carl on 3/15/2015.
- */
 public class GetQuestion {
 
-    public Question getUser(int id) throws ClientProtocolException, URISyntaxException, IOException {
+    public Question getQuestion(int id) throws ClientProtocolException, URISyntaxException, IOException {
         return makeGetRequest(id);
     }
 

@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-/**
- * Created by Carl on 3/15/2015.
- */
 public class DeleteQuestion {
     public boolean deleteQuestion(int id) throws ClientProtocolException, URISyntaxException, IOException {
         return makeDeleteRequest(id);

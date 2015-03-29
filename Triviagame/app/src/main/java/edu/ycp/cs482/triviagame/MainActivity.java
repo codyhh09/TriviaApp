@@ -10,14 +10,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.PopupMenu;
+import android.app.ActionBar;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ActionMenuView;
-//import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 
-public class MainActivity extends Activity {
+import edu.ycp.cs482.Model.Question;
+import edu.ycp.cs482.controller.GetQuestion;
+
+public class MainActivity extends ActionBarActivity{
 
     private int streak = 0;
+
+    // action bar
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +35,9 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -37,29 +45,30 @@ public class MainActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        switch(id)
+        switch(item.getItemId())
         {
-            case R.id.btnSettings:
+            case R.id.settings:
                 setContentView(R.layout.settings);
+                setSettingsPage();
                 return true;
-            case R.id.btnSignOut:
-                setContentView(R.layout.login_page);
-                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
-        return super.onOptionsItemSelected(item);
+//        return super.onOptionsItemSelected(item);
     }
 
     public void setDefaultView()
     {
         setContentView(R.layout.login_page);
+
+        GetQuestion controller = new GetQuestion();
 
         Button Signin = (Button) findViewById(R.id.signin);
         Button Signup = (Button) findViewById(R.id.btnSignUp);
@@ -90,11 +99,25 @@ public class MainActivity extends Activity {
         setContentView(R.layout.action_page);
 
         final int TIMER = 21000;
+        GetQuestion controller = new GetQuestion();
+//        Question q;
 
+        TextView question = (TextView) findViewById(R.id.lblQuestion);
         Button AnswerA = (Button) findViewById(R.id.btnAnsA);
         Button AnswerB = (Button) findViewById(R.id.btnAnsB);
         Button AnswerC = (Button) findViewById(R.id.btnAnsC);
         Button AnswerD = (Button) findViewById(R.id.btnAnsD);
+        try {
+//            q = controller.getQuestion(1);
+//            question.setText(controller.getQuestion(1).getAnswer2());
+//            AnswerA.setText(q.getAnswer1());
+//            AnswerB.setText(q.getAnswer2());
+//            AnswerC.setText(q.getAnswer3());
+//            AnswerD.setText(q.getAnswer4());
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+
 
         final CountDownTimer timer = new CountDownTimer(TIMER, 1000)
         {
@@ -153,7 +176,9 @@ public class MainActivity extends Activity {
                 setMainPage();
             }
         });
-    }
+
+
+}
 
     public void setMainPage()
     {

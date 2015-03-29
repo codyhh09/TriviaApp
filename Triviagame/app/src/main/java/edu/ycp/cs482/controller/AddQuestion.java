@@ -19,9 +19,6 @@ import java.net.URISyntaxException;
 import edu.ycp.cs482.JSON.JSON;
 import edu.ycp.cs482.Model.Question;
 
-/**
- * Created by Carl on 3/15/2015.
- */
 public class AddQuestion {
     public boolean postQuestion(String question, String answer1, String answer2, String answer3, String answer4, String finalanswer) throws URISyntaxException, JsonGenerationException, JsonMappingException, IOException {
         return makePostRequest(question, answer1, answer2, answer3, answer4, finalanswer);

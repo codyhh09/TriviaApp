@@ -1,7 +1,0 @@
-package edu.ycp.cs482.Trivia.servlet;
-
-import edu.ycp.cs.cs496.TGOH.pesist.IDatabase;
-
-public class FakeDatabase implements IDatabase{
-
-}

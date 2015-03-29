@@ -1,6 +1,0 @@
-package edu.ycp.cs482.Trivia.persist;
-
-public class IDatabase {
-	// method names going to the servlet
-	
-}

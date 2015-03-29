@@ -1,5 +1,0 @@
-package edu.ycp.cs482.Trivia.servlet;
-
-public class IDatabase {
-
-}

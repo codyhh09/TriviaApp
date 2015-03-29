@@ -11,6 +11,8 @@ public interface IDatabase {
 	
 	public User getUser(String username);
 	
+	public boolean login(String User, String Pass);
+	
 	public List<User> getAllUser();
 	
 	public boolean deleteUser(String user);

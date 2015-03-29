@@ -166,6 +166,35 @@ public class RealDatabase implements IDatabase{
 	}
 	
 	@Override
+	public boolean login(String User, String Pass) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement("select users.* from users where users.username = ? and users.password = ?");
+					stmt.setString(1, User);
+					stmt.setString(2, Pass);
+					
+					resultSet = stmt.executeQuery();
+					
+					if (!resultSet.next()) {
+						// No such item
+						return false;
+					}
+					
+					return true;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	@Override
 	public List<User> getAllUser() {
 		return executeTransaction(new Transaction<List<User>>() {
 			@Override

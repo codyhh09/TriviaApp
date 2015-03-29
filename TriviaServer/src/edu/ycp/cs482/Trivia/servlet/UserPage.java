@@ -16,16 +16,17 @@ import edu.ycp.cs482.Trivia.controller.AddUser;
 import edu.ycp.cs482.Trivia.controller.DeleteUser;
 import edu.ycp.cs482.Trivia.controller.GetAllUsers;
 import edu.ycp.cs482.Trivia.controller.GetUser;
+import edu.ycp.cs482.Trivia.controller.LoginUser;
 
 
 public class UserPage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
+	private String user, pass, user1;
+	
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String pathInfo = req.getPathInfo();
-		if (pathInfo == null || pathInfo.equals("") || pathInfo.equals("/")) {
-			resp.setStatus(HttpServletResponse.SC_OK);
-			
+		String pathInfo = req.getPathInfo();		
+		if (pathInfo == null || pathInfo.equals("") || pathInfo.equals("/")) {		
 			GetAllUsers controller = new GetAllUsers();
 			// Set status code and content type
 			resp.setStatus(HttpServletResponse.SC_OK);
@@ -33,12 +34,27 @@ public class UserPage extends HttpServlet{
 			
 			// Return the item in JSON format
 			JSON.getObjectMapper().writeValue(resp.getWriter(), controller.getallUser());
-			return ;
+			return;
 		}
 		
 		// Get the user name
 		if (pathInfo.startsWith("/")){
 			pathInfo = pathInfo.substring(1);
+		}
+		
+		if(pathInfo.contains("+")){
+			user = pathInfo.substring(0, pathInfo.indexOf('+'));
+			pass = pathInfo.substring(pathInfo.indexOf('+')+1,pathInfo.length());
+			LoginUser controller = new LoginUser();
+			
+			// Set status code and content type
+			resp.setStatus(HttpServletResponse.SC_OK);
+			resp.setContentType("application/json");
+			
+			// Return the item in JSON format
+			JSON.getObjectMapper().writeValue(resp.getWriter(), controller.login(user, pass));
+			
+			return;
 		}
 		
 		// Use a GetUsercontroller to find the user in the database
@@ -62,17 +78,19 @@ public class UserPage extends HttpServlet{
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		User user = JSON.getObjectMapper().readValue(req.getReader(), User.class);
-		// Use a GetUser controller to find the item in the database
-		AddUser controller = new AddUser();
-		controller.addUser(user);
-		// Set status code and content type
-		resp.setStatus(HttpServletResponse.SC_OK);
-		resp.setContentType("application/json");
-		
-		// writing the operation out.
-		JSON.getObjectMapper().writeValue(resp.getWriter(), user);
+		GetUser con = new GetUser();
+
+		if(con.getUser(user.getUsername()) == null){
+			AddUser controller = new AddUser();
+			controller.addUser(user);
+			// Set status code and content type
+			resp.setStatus(HttpServletResponse.SC_OK);
+			resp.setContentType("application/json");
+			
+			// writing the operation out.
+			JSON.getObjectMapper().writeValue(resp.getWriter(), user);
+		}
 	}
 
 	
@@ -100,11 +118,9 @@ public class UserPage extends HttpServlet{
 		JSON.getObjectMapper().writeValue(resp.getWriter(), pathInfo);
 	}
 	// not finished
-	/*@Override
+	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, JsonGenerationException, JsonMappingException {
 		String pathInfo = req.getPathInfo();
-		String pass = null;
-		String user = null;
 		if (pathInfo == null || pathInfo.equals("") || pathInfo.equals("/")) {
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resp.setContentType("application/json");
@@ -115,31 +131,16 @@ public class UserPage extends HttpServlet{
 				pathInfo = pathInfo.substring(1);
 			}	
 
-			GetUserController controller = new GetUserController();
+			GetUser controller = new GetUser();
 			if (pathInfo.contains("/")){
 				user = pathInfo.substring(0, pathInfo.indexOf('/'));
-				pass = pathInfo.substring(pathInfo.indexOf('/')+1,pathInfo.length());
-			}else{
-				if(controller.getUser(pathInfo).getType().equals(UserType.PENDINGTEACHER)){
-					ReplaceStatus cont = new ReplaceStatus();
-					cont.changeStat(pathInfo);
-					// Set status code and content type
-					resp.setStatus(HttpServletResponse.SC_OK);
-					resp.setContentType("application/json");
-					
-					// writing the operation out.
-					JSON.getObjectMapper().writeValue(resp.getWriter(), pathInfo);
-					return;
-				}else{
-					resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-					resp.setContentType("text/plain");
-					resp.getWriter().println("No password");
-					return;
-				}
+				user1 = pathInfo.substring(pathInfo.indexOf('/')+1,pathInfo.indexOf('+'));
+				pass = pathInfo.substring(pathInfo.indexOf('+')+1,pathInfo.length());
+				
+				
 			}
 			// Use a GetItemByName controller to find the item in the database
-			PutPasswordController con = new PutPasswordController();
-			con.changePass(user, pass);
+
 			
 			// Set status code and content type
 			resp.setStatus(HttpServletResponse.SC_OK);
@@ -148,5 +149,5 @@ public class UserPage extends HttpServlet{
 			// writing the operation out.
 			JSON.getObjectMapper().writeValue(resp.getWriter(), user);
 		}
-	}*/
+	}
 }

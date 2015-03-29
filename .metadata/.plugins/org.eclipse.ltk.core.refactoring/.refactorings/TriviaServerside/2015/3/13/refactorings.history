@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;jaxrs-ri&apos; to &apos;lib&apos;" description="Move &apos;jaxrs-ri&apos; to &apos;lib&apos;" destination="WebContent/WEB-INF/lib" element1="jaxrs-ri" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1427053737891" updateReferences="true"/>
+</session>

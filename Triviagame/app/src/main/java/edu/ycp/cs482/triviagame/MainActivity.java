@@ -7,37 +7,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.ActionBar;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.ActionMenuView;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
 
 import edu.ycp.cs482.Model.Question;
 import edu.ycp.cs482.controller.GetQuestion;
 
-public class MainActivity extends ActionBarActivity{
+public class MainActivity extends Activity {
 
     private int streak = 0;
-
-    // action bar
-    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setDefaultView();
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
@@ -45,23 +36,14 @@ public class MainActivity extends ActionBarActivity{
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
-        switch(item.getItemId())
-        {
-            case R.id.settings:
-                setContentView(R.layout.settings);
-                setSettingsPage();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        if (id == R.id.action_settings) {
+            return true;
+        }
 
-//        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     public void setDefaultView()
@@ -79,7 +61,7 @@ public class MainActivity extends ActionBarActivity{
             @Override
             public void onClick(View v) {
                 // setting a new account to the Database.
-               setSignUpPage();
+               setMainPage();//change
             }
         });
 
@@ -100,7 +82,7 @@ public class MainActivity extends ActionBarActivity{
 
         final int TIMER = 21000;
         GetQuestion controller = new GetQuestion();
-//        Question q;
+        Question q;
 
         TextView question = (TextView) findViewById(R.id.lblQuestion);
         Button AnswerA = (Button) findViewById(R.id.btnAnsA);
@@ -108,12 +90,12 @@ public class MainActivity extends ActionBarActivity{
         Button AnswerC = (Button) findViewById(R.id.btnAnsC);
         Button AnswerD = (Button) findViewById(R.id.btnAnsD);
         try {
-//            q = controller.getQuestion(1);
-//            question.setText(controller.getQuestion(1).getAnswer2());
-//            AnswerA.setText(q.getAnswer1());
-//            AnswerB.setText(q.getAnswer2());
-//            AnswerC.setText(q.getAnswer3());
-//            AnswerD.setText(q.getAnswer4());
+            q = controller.getQuestion(1);
+            question.setText(controller.getQuestion(1).getAnswer2());
+            AnswerA.setText(q.getAnswer1());
+            AnswerB.setText(q.getAnswer2());
+            AnswerC.setText(q.getAnswer3());
+            AnswerD.setText(q.getAnswer4());
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -189,8 +171,6 @@ public class MainActivity extends ActionBarActivity{
         Button settings = (Button) findViewById(R.id.btnSettings);
         Button signOut = (Button) findViewById(R.id.btnSignOut);
 
-//        final ImageButton popup = (ImageButton) findViewById(R.id.popup);
-
         back.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
@@ -215,13 +195,6 @@ public class MainActivity extends ActionBarActivity{
                 setDefaultView();
             }
         });
-
-//        popup.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public  void onClick(View v){
-//                popup.getMenuInflater().inflate(R.id.popup, popup.getMenu());
-//            }
-//        });
     }
 
     public void setSettingsPage()
@@ -234,33 +207,6 @@ public class MainActivity extends ActionBarActivity{
             @Override
             public  void onClick(View v){
                 setMainPage();
-            }
-        });
-    }
-
-    public void setSignUpPage()
-    {
-        setContentView(R.layout.sign_up);
-
-        Button enter = (Button) findViewById(R.id.btnEnter);
-        Button back = (Button) findViewById(R.id.btnBack);
-
-        back.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public  void onClick(View v){
-                setDefaultView();
-            }
-        });
-
-        enter.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public  void onClick(View v){
-                EditText username = (EditText) findViewById(R.id.txtUser);
-
-                String user = username.getText().toString();
-
-                setMainPage();
-                Toast.makeText(MainActivity.this, "Welcome! " + user, Toast.LENGTH_SHORT).show();
             }
         });
     }

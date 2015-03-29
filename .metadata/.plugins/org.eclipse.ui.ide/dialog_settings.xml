@@ -5,6 +5,7 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\choward8\Downloads"/>
 			<item value="C:\Users\choward8\Desktop\TGOH-master"/>
 			<item value="C:\Users\choward8\Documents\GitHub\TriviaApp\Jetty"/>
 			<item value="C:\Users\Carl\Documents\GitHub\TriviaApp"/>

@@ -21,8 +21,6 @@ import edu.ycp.cs482.Trivia.controller.LoginUser;
 
 public class UserPage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	private String user, pass, user1;
-	
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();		
@@ -43,8 +41,8 @@ public class UserPage extends HttpServlet{
 		}
 		
 		if(pathInfo.contains("+")){
-			user = pathInfo.substring(0, pathInfo.indexOf('+'));
-			pass = pathInfo.substring(pathInfo.indexOf('+')+1,pathInfo.length());
+			String user = pathInfo.substring(0, pathInfo.indexOf('+'));
+			String pass = pathInfo.substring(pathInfo.indexOf('+')+1,pathInfo.length());
 			LoginUser controller = new LoginUser();
 			
 			// Set status code and content type
@@ -121,6 +119,8 @@ public class UserPage extends HttpServlet{
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, JsonGenerationException, JsonMappingException {
 		String pathInfo = req.getPathInfo();
+		String pass = null;
+		String user = null;
 		if (pathInfo == null || pathInfo.equals("") || pathInfo.equals("/")) {
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resp.setContentType("application/json");
@@ -135,8 +135,6 @@ public class UserPage extends HttpServlet{
 			if (pathInfo.contains("/")){
 				user = pathInfo.substring(0, pathInfo.indexOf('/'));
 				user1 = pathInfo.substring(pathInfo.indexOf('/')+1,pathInfo.indexOf('+'));
-				pass = pathInfo.substring(pathInfo.indexOf('+')+1,pathInfo.length());
-				
 				
 			}
 			// Use a GetItemByName controller to find the item in the database

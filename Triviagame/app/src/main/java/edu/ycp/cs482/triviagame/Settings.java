@@ -10,10 +10,6 @@ import android.widget.TextView;
 import edu.ycp.cs482.Model.User;
 import edu.ycp.cs482.controller.DeleteUser;
 
-/**
- * Created by choward8 on 3/23/2015.
- */
-
 public class Settings extends Activity {
     private Button delete, change;
     private TextView name, pass;

@@ -31,8 +31,6 @@ public class GamePage extends Activity {
         AnswerC = (Button) findViewById(R.id.btnAnsC);
         AnswerD = (Button) findViewById(R.id.btnAnsD);
 
-
-
         try {
             q = controller.execute(1).get();
         }catch(Exception e) {
@@ -56,7 +54,7 @@ public class GamePage extends Activity {
             {
                 //Time-out Pop-Up
                 Toast.makeText(GamePage.this, "Time Up!", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getApplicationContext(), Action_page.class);
+                Intent i = new Intent(getApplicationContext(), MenuPage.class);
                 startActivity(i);
             }
         }.start();
@@ -74,7 +72,7 @@ public class GamePage extends Activity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), Action_page.class);
+                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     startActivity(i);
                 }
             }
@@ -92,7 +90,7 @@ public class GamePage extends Activity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), Action_page.class);
+                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     startActivity(i);
                 }
             }
@@ -110,7 +108,7 @@ public class GamePage extends Activity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), Action_page.class);
+                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     startActivity(i);
                 }
             }
@@ -128,7 +126,7 @@ public class GamePage extends Activity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), Action_page.class);
+                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     startActivity(i);
                 }
             }

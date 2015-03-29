@@ -1,7 +1,8 @@
 package edu.ycp.cs482.controller;
 
+import android.os.AsyncTask;
+
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.apache.http.HttpResponse;
@@ -9,26 +10,28 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 
-public class DeleteUser {
-    public boolean deleteUser(String userName) throws ClientProtocolException, URISyntaxException, IOException {
-        return makeDeleteRequest(userName);
+public class DeleteUser extends AsyncTask<String, Void, Boolean>{
+    @Override
+    protected Boolean doInBackground(String... params) {
+        try{
+            return deleteUser(params[0]);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
-    private boolean makeDeleteRequest(String userName) throws URISyntaxException, ClientProtocolException, IOException {
+    private Boolean deleteUser(String userName) throws URISyntaxException, ClientProtocolException, IOException {
         // Implement method to issue delete inventory request
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();
 
-        // Construct URI
-        URI uri;
-        uri = URIUtils.createURI("http", "10.0.2.2", 8081, "/user/" +  userName, null, null);
-
         // Construct request
-        HttpDelete request = new HttpDelete(uri);
+        HttpDelete request = new HttpDelete("http://10.0.2.2:8081/user/"+userName);
 
         // Execute request
         HttpResponse response = client.execute(request);

@@ -1,7 +1,6 @@
 package edu.ycp.cs482.triviagame;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +10,7 @@ import android.widget.Toast;
 
 import edu.ycp.cs482.controller.AddUser;
 
-/**
- * Created by choward8 on 3/21/2015.
- */
-public class Sign_up extends Activity {
+public class SignUp extends Activity {
     // Progress Dialog
     private EditText inputName, inputPass;
     private String name, password;
@@ -44,7 +40,7 @@ public class Sign_up extends Activity {
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(i);
                     } else {
-                        Toast.makeText(Sign_up.this, "Welcome new User", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUp.this, "Welcome new User", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (Exception e) {

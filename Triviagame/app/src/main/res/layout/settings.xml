@@ -11,7 +11,7 @@
         android:id="@+id/textView4" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="Change Username"
@@ -24,35 +24,41 @@
         android:layout_alignParentEnd="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Change Password"
+        android:layout_below="@+id/changeBtn"
         android:ems="10"
-        android:id="@+id/chgPass"
-        android:layout_below="@+id/chgUser"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/chgPass" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Change Information"
         android:id="@+id/changeBtn"
-        android:layout_below="@+id/chgPass"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/chgUser" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:id="@+id/chgpassBtn"
+        android:layout_below="@+id/chgPass" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete User"
+        android:id="@+id/deleteBtn"
+        android:layout_below="@+id/chgpassBtn" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete User"
-        android:id="@+id/deleteBtn"
-        android:layout_below="@+id/changeBtn"
+        android:text="Back to Menu"
+        android:id="@+id/menubtn"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"

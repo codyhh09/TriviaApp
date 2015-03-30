@@ -13,22 +13,22 @@ import edu.ycp.cs482.Trivia.controller.AddQuestion;
 import edu.ycp.cs482.Trivia.controller.DeleteQuestion;
 import edu.ycp.cs482.Trivia.controller.GetAllQuestion;
 import edu.ycp.cs482.Trivia.controller.GetQuestion;
+import edu.ycp.cs482.Trivia.controller.getRandomQuestion;
 
 public class QuestionPage extends HttpServlet{
-private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+	private getRandomQuestion randomQuestion = new getRandomQuestion();
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
 		if (pathInfo == null || pathInfo.equals("") || pathInfo.equals("/")) {
 			resp.setStatus(HttpServletResponse.SC_OK);
 			
-			GetAllQuestion controller = new GetAllQuestion();
 			// Set status code and content type
 			resp.setStatus(HttpServletResponse.SC_OK);
 			resp.setContentType("application/json");
 			
 			// Return the item in JSON format
-			JSON.getObjectMapper().writeValue(resp.getWriter(), controller.getallQuestion());
+			JSON.getObjectMapper().writeValue(resp.getWriter(), randomQuestion.RandomQuestion());
 			return ;
 		}
 		

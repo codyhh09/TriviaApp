@@ -10,14 +10,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.ycp.cs482.controller.AddUser;
+import edu.ycp.cs482.controller.GetUser;
 
 /**
  * Created by choward8 on 3/21/2015.
  */
 public class Sign_up extends Activity {
     // Progress Dialog
-    private EditText inputName, inputPass;
-    private String name, password;
+    private EditText inputName, inputPass, inputheckPass;
+    private String name, password, checkpass;
+    private GetUser getUser = new GetUser();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class Sign_up extends Activity {
         // Edit Text
         inputName = (EditText) findViewById(R.id.txtUser);
         inputPass = (EditText) findViewById(R.id.txtPass);
+        inputheckPass = (EditText) findViewById(R.id.txtConfirm);
 
         // Create button
         Button btnCreateProduct = (Button) findViewById(R.id.btnEnter);
@@ -36,20 +39,27 @@ public class Sign_up extends Activity {
             @Override
             public void onClick(View view) {
                 // creating new product in background thread
-                name = inputName.getText().toString();
-                password = inputPass.getText().toString();
-                AddUser controller = new AddUser();
-                try {
-                    if (controller.execute(name, password) != null) {
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(i);
-                    } else {
-                        Toast.makeText(Sign_up.this, "Welcome new User", Toast.LENGTH_SHORT).show();
-                    }
+            name = inputName.getText().toString();
+            password = inputPass.getText().toString();
+            checkpass = inputheckPass.getText().toString();
+            try {
+                if(name!=null||password!=null||password==checkpass) {
+                    AddUser controller = new AddUser();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        if (controller.execute(name, password) != null) {
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(Sign_up.this, "Welcome new User", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                }else{
+                    Toast.makeText(Sign_up.this, "Need to fill in all fields", Toast.LENGTH_SHORT).show();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             }
         });

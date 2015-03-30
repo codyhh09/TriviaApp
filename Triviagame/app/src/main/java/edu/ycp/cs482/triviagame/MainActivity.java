@@ -3,16 +3,12 @@ package edu.ycp.cs482.triviagame;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.ycp.cs482.Model.User;
-import edu.ycp.cs482.controller.GetUser;
 import edu.ycp.cs482.controller.LoginUser;
 
 public class MainActivity extends Activity {
@@ -29,8 +25,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.login_page);
         name1 = (EditText) findViewById(R.id.txtUser);
         password1 = (EditText) findViewById(R.id.txtPass);
-        Signup = (Button) findViewById(R.id.signin);
-        Signin = (Button) findViewById(R.id.btnSignUp);
+        Signup = (Button) findViewById(R.id.btnSignUp);
+        Signin = (Button) findViewById(R.id.signin);
 
         Signin.setOnClickListener(new View.OnClickListener(){
 

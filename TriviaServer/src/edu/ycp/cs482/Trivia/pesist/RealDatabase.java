@@ -210,7 +210,35 @@ public class RealDatabase implements IDatabase{
 					
 					stmt.executeUpdate();
 					User user = new User();
-					System.out.println("changed");
+					System.out.println("changed username");
+					return user;
+					
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public User chgPass(String oldUser, String newPass) {
+
+		return executeTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update users set users.password = ? where users.username = ?");
+					
+					stmt.setString(1,  newPass);
+					stmt.setString(2, oldUser);
+					
+					stmt.executeUpdate();
+					User user = new User();
+					System.out.println("changed password");
 					return user;
 					
 				} finally {
@@ -348,6 +376,35 @@ public class RealDatabase implements IDatabase{
 					Question question = new Question();
 					loadQuestion(question, resultSet, 1);
 					System.out.println("New User has id " + id);
+					return question;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public Question randomQuestion() {
+		return executeTransaction(new Transaction<Question>() {
+			@Override
+			public Question execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement("select * from questions order by rand()");
+					
+					resultSet = stmt.executeQuery();
+					
+					if (!resultSet.next()) {
+						// No such item
+						return null;
+					}
+					
+					Question question = new Question();
+					loadQuestion(question, resultSet, 1);
 					return question;
 				} finally {
 					DBUtil.closeQuietly(resultSet);

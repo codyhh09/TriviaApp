@@ -20,6 +20,7 @@ import edu.ycp.cs482.Model.User;
 public class Action_page extends ActionBarActivity {
     private Button Signout, setting, startgame;
     private Bundle extras;
+    private int streak = 1;
     private Intent i;
     private String username;
 
@@ -54,11 +55,8 @@ public class Action_page extends ActionBarActivity {
             username= (String) savedInstanceState.getSerializable("name");
         }
 
-        Toast.makeText(Action_page.this,username,Toast.LENGTH_SHORT).show();
-
         setContentView(R.layout.activity_main);
         Signout = (Button) findViewById(R.id.btnSignOut);
-        setting = (Button) findViewById(R.id.btnSettings);
         startgame = (Button) findViewById(R.id.btnStart);
 
         Signout.setOnClickListener(new View.OnClickListener(){
@@ -69,19 +67,12 @@ public class Action_page extends ActionBarActivity {
             }
         });
 
-        setting.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                i = new Intent(getApplicationContext(), Settings.class);
-                i.putExtra("name", username);
-                startActivity(i);
-            }
-        });
-
         startgame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 i = new Intent(getApplicationContext(), GamePage.class);
+                i.putExtra("name", username);
+                i.putExtra("streak", streak);
                 startActivity(i);
             }
         });

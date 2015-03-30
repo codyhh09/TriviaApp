@@ -9,18 +9,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.controller.ChangePassword;
 import edu.ycp.cs482.controller.ChangeUser;
 import edu.ycp.cs482.controller.DeleteUser;
 import edu.ycp.cs482.controller.GetUser;
 
 public class Settings extends Activity {
-    private Button delete, change;
+    private Button delete, change, chgPss, back;
     private TextView name, pass;
     private Bundle extras;
     private String username;
     private GetUser getuser = new GetUser();
     private DeleteUser dltuser = new DeleteUser();
     private ChangeUser changeuser = new ChangeUser();
+    private ChangePassword changePassword = new ChangePassword();
     private Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +38,26 @@ public class Settings extends Activity {
         pass = (TextView) findViewById(R.id.chgPass);
         change = (Button) findViewById(R.id.changeBtn);
         delete = (Button) findViewById(R.id.deleteBtn);
+        chgPss = (Button) findViewById(R.id.chgpassBtn);
+        back = (Button) findViewById(R.id.menubtn);
 
         change.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 try{
-                    changeuser.execute(name.getText().toString(), username);
+                    changeuser.execute(username, name.getText().toString());
+                    username = name.getText().toString();
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        chgPss.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                try{
+                    changePassword.execute(username, pass.getText().toString());
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -57,6 +73,15 @@ public class Settings extends Activity {
                     e.printStackTrace();
                 }
                 i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                i = new Intent(getApplicationContext(), Action_page.class);
+                i.putExtra("name", username);
                 startActivity(i);
             }
         });

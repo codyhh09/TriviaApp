@@ -21,7 +21,7 @@ public class ChangeUser extends AsyncTask<String, Void, User> {
         HttpClient client = new DefaultHttpClient();
         User user = new User();
         // Construct request
-        HttpPut request = new HttpPut("http://10.0.2.2:8081/user/"+newUser+"/"+oldUser);
+        HttpPut request = new HttpPut("http://10.0.2.2:8081/user/"+oldUser+"/user="+newUser);
 
         // Create JSON object from user
         user.setUsername(newUser);

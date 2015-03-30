@@ -15,6 +15,8 @@ public interface IDatabase {
 	
 	public User chgUser(String oldUser, String newUser);
 	
+	public User chgPass(String oldUser, String newPass);
+	
 	public List<User> getAllUser();
 	
 	public boolean deleteUser(String user);
@@ -24,6 +26,8 @@ public interface IDatabase {
 	public void addQuestion(Question question);
 	
 	public Question getQuestion(int id);
+	
+	public Question randomQuestion();
 	
 	public boolean deleteQuestion(int id);
 }

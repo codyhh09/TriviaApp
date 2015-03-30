@@ -133,7 +133,7 @@ public class UserPage extends HttpServlet{
 
 			if (pathInfo.contains("/user=")){
 				user = pathInfo.substring(0, pathInfo.indexOf('/'));
-				user1 = pathInfo.substring(pathInfo.indexOf('=')+1,pathInfo.length());
+				user1 = pathInfo.substring(pathInfo.indexOf('/')+1,pathInfo.length());
 				users = changeuser.changeUser(user, user1);
 				
 				// Set status code and content type
@@ -147,7 +147,7 @@ public class UserPage extends HttpServlet{
 			
 			if (pathInfo.contains("/pass=")){
 				user = pathInfo.substring(0, pathInfo.indexOf('/'));
-				user1 = pathInfo.substring(pathInfo.indexOf('=')+1,pathInfo.length());
+				user1 = pathInfo.substring(pathInfo.indexOf('/')+1,pathInfo.length());
 				users = changeuser.changeUser(user, user1);
 				
 				// Set status code and content type

@@ -394,7 +394,7 @@ public class RealDatabase implements IDatabase{
 				ResultSet resultSet = null;
 				
 				try {
-					stmt = conn.prepareStatement("select * from questions order by rand()");
+					stmt = conn.prepareStatement("select * from questions order by rand() limit 1");
 					
 					resultSet = stmt.executeQuery();
 					

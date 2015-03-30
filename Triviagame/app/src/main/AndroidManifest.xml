@@ -19,12 +19,12 @@
         </activity>
 
         <activity
-        android:name="edu.ycp.cs482.triviagame.Sign_up"
-        android:label="Signup">
+            android:name="edu.ycp.cs482.triviagame.SignUp"
+            android:label="Sign_up">
         </activity>
         <activity
             android:name="edu.ycp.cs482.triviagame.Action_page"
-            android:label="Menu">
+            android:label="Actionpage">
         </activity>
         <activity
         android:name="edu.ycp.cs482.triviagame.Settings"

@@ -9,15 +9,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.controller.GetUser;
 import edu.ycp.cs482.controller.LoginUser;
 
 public class MainActivity extends Activity {
-    private User user = new User();;
+    private User user;
     private String name, password;
     private EditText name1, password1;
     private Button Signup,Signin;
     private Intent i;
+    private Bundle b;
     private boolean truth;
+    public final static String User_Key = "edu.ycp.cs482.Model.User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +28,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.login_page);
         name1 = (EditText) findViewById(R.id.txtUser);
         password1 = (EditText) findViewById(R.id.txtPass);
-        Signup = (Button) findViewById(R.id.btnSignUp);
-        Signin = (Button) findViewById(R.id.signin);
+        Signup = (Button) findViewById(R.id.signin);
+        Signin = (Button) findViewById(R.id.btnSignUp);
+        user = new User();
 
         Signin.setOnClickListener(new View.OnClickListener(){
 
@@ -54,6 +58,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+
                 i = new Intent(getApplicationContext(), Sign_up.class);
                 startActivity(i);
             }

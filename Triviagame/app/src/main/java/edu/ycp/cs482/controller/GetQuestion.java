@@ -16,9 +16,6 @@ import java.util.Random;
 import edu.ycp.cs482.JSON.JSON;
 import edu.ycp.cs482.Model.Question;
 
-/**
- * Created by Carl on 3/15/2015.
- */
 public class GetQuestion extends AsyncTask<Integer, Void, Question>{
     private int id = 2;
 

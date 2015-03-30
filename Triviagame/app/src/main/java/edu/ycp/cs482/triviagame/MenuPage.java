@@ -1,6 +1,5 @@
 package edu.ycp.cs482.triviagame;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,9 +7,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.view.MenuInflater;
+import android.support.v7.app.ActionBarActivity;
 
 //This page is where the questions will be displayed and answered.  There is a timer to countdown time.
-public class MenuPage extends Activity {
+public class MenuPage extends ActionBarActivity {
     private Button Signout, setting, startgame;
     private Bundle extras;
     private Intent i;
@@ -29,7 +30,7 @@ public class MenuPage extends Activity {
 
         setContentView(R.layout.activity_main);
         Signout = (Button) findViewById(R.id.btnSignOut);
-        setting = (Button) findViewById(R.id.btnSettings);
+        setting = (Button) findViewById(R.id.btnAddQues);
         startgame = (Button) findViewById(R.id.btnStart);
 
         Signout.setOnClickListener(new View.OnClickListener(){
@@ -61,7 +62,8 @@ public class MenuPage extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 

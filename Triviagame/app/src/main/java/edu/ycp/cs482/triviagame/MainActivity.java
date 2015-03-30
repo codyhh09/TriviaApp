@@ -27,23 +27,22 @@ public class MainActivity extends Activity {
         setContentView(R.layout.login_page);
         name1 = (EditText) findViewById(R.id.txtUser);
         password1 = (EditText) findViewById(R.id.txtPass);
-        Signup = (Button) findViewById(R.id.signin);
-        Signin = (Button) findViewById(R.id.btnSignUp);
+        Signup = (Button) findViewById(R.id.btnSignUp);
+        Signin = (Button) findViewById(R.id.signin);
         user = new User();
 
         Signin.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
-                name = name1.getText().toString();
-                password = password1.getText().toString();
-                LoginUser controller = new LoginUser();
+                //name = name1.getText().toString();
+                //password = password1.getText().toString();
+                /*LoginUser controller = new LoginUser();
                 try{
-                    truth = controller.execute(name,password).get();
+                    truth = true;//= controller.execute(name,password).get();
                 }catch (Exception e){
                     e.printStackTrace();
-                }
-                if(truth) {
+                }*/
+                if(true/*truth*/) {
                     i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", name);
                     startActivity(i);
@@ -54,10 +53,8 @@ public class MainActivity extends Activity {
         });
 
         Signup.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 i = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(i);
             }

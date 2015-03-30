@@ -34,9 +34,9 @@ public class SignUp extends Activity {
                 // creating new product in background thread
                 name = inputName.getText().toString();
                 password = inputPass.getText().toString();
-                AddUser controller = new AddUser();
+                //AddUser controller = new AddUser();
                 try {
-                    if (controller.execute(name, password) != null) {
+                    if (/*controller.execute(name, password) != null*/true) {
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(i);
                     } else {

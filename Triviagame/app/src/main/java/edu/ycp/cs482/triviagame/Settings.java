@@ -11,7 +11,7 @@ import edu.ycp.cs482.Model.User;
 import edu.ycp.cs482.controller.DeleteUser;
 
 public class Settings extends Activity {
-    private Button delete, change;
+    private Button Delete, change;
     private TextView name, pass;
     private Bundle extras;
     private String username;
@@ -27,14 +27,14 @@ public class Settings extends Activity {
             username= (String) savedInstanceState.getSerializable("name");
         }
         setContentView(R.layout.settings);
-        delete = (Button) findViewById(R.id.deleteBtn);
+        Delete = (Button) findViewById(R.id.deleteBtn);
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller = new DeleteUser();
+                //controller = new DeleteUser();
                 try{
-                    controller.execute(username);
+                    //controller.execute(username);
                 }catch(Exception e) {
                     e.printStackTrace();
                 }

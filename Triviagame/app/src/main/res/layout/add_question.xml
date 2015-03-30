@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Create Your Own Question!"
+        android:id="@+id/textView9"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Enter Question:"
+        android:id="@+id/textView10"
+        android:layout_above="@+id/txtQuestion"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtQuestion"
+        android:layout_above="@+id/textView11"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Possible Answers:"
+        android:id="@+id/textView11"
+        android:layout_above="@+id/txtAnsA"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtAnsA"
+        android:text="Answer A"
+        android:layout_above="@+id/txtAnsB"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtAnsB"
+        android:text="Answer B"
+        android:layout_above="@+id/txtAnsC"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtAnsC"
+        android:text="Answer C"
+        android:layout_above="@+id/txtAnsD"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtAnsD"
+        android:text="Answer D"
+        android:layout_above="@+id/textView12"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Correct Answer:"
+        android:id="@+id/textView12"
+        android:layout_above="@+id/radAnsA"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer B"
+        android:id="@+id/radAnsB"
+        android:layout_gravity="right"
+        android:checked="false"
+        android:layout_below="@+id/textView12"
+        android:layout_alignRight="@+id/btnSubmit"
+        android:layout_alignEnd="@+id/btnSubmit" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer A"
+        android:id="@+id/radAnsA"
+        android:layout_marginBottom="61dp"
+        android:layout_above="@+id/btnSubmit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Your Question!"
+        android:id="@+id/btnSubmit"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="57dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer C"
+        android:id="@+id/radAnsC"
+        android:layout_below="@+id/radAnsB"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer D"
+        android:id="@+id/radAnsD"
+        android:checked="false"
+        android:layout_below="@+id/radAnsB"
+        android:layout_alignLeft="@+id/radAnsB"
+        android:layout_alignStart="@+id/radAnsB" />
+</RelativeLayout>

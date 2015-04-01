@@ -17,13 +17,11 @@ import edu.ycp.cs482.JSON.JSON;
 import edu.ycp.cs482.Model.Question;
 
 public class GetQuestion extends AsyncTask<Integer, Void, Question>{
-    private int id = 2;
-
     private Question getQuestion() throws URISyntaxException, IOException{
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();
         // Construct request
-        HttpGet request = new HttpGet("http://10.0.2.2:8081/question/"+id);
+        HttpGet request = new HttpGet("http://10.0.2.2:8081/question/");
 
         // Execute request
         HttpResponse response = client.execute(request);

@@ -28,8 +28,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.login_page);
         name1 = (EditText) findViewById(R.id.txtUser);
         password1 = (EditText) findViewById(R.id.txtPass);
-        Signup = (Button) findViewById(R.id.signin);
-        Signin = (Button) findViewById(R.id.btnSignUp);
+        Signup = (Button) findViewById(R.id.btnSignUp);
+        Signin = (Button) findViewById(R.id.signin);
         user = new User();
 
         Signin.setOnClickListener(new View.OnClickListener(){
@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
                 if(truth) {
-                    i = new Intent(getApplicationContext(), Action_page.class);
+                    i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", name);
                     startActivity(i);
                 }else{
@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                i = new Intent(getApplicationContext(), Sign_up.class);
+                i = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(i);
             }
         });

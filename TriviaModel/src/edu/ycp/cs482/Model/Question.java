@@ -8,6 +8,7 @@ public class Question {
 	private String answer3;
 	private String answer4;
 	private String FinalAnswer;
+	private String creator;
 
 	public Question() {
 
@@ -20,6 +21,7 @@ public class Question {
 		this.answer3 = answer3;
 		this.answer4 = answer4;
 		this.FinalAnswer = finalanswer;
+		this.creator = null;
 	}
 
 	public int getId() {
@@ -76,5 +78,13 @@ public class Question {
 
 	public void setFinalAnswer(String finalAnswer) {
 		FinalAnswer = finalAnswer;
+	}
+	
+	public String getCreator() {
+		return creator;
+	}
+	
+	public void setCreator(String creator) {
+		this.creator = creator;
 	}
 }

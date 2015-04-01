@@ -305,6 +305,7 @@ public class RealDatabase implements IDatabase{
 						question.setAnswer3(resultSet.getString(5));
 						question.setAnswer4(resultSet.getString(6));
 						question.setFinalAnswer(resultSet.getString(7));
+						question.setCreator(resultSet.getString(8));
 						result.add(question);
 					}
 					
@@ -327,7 +328,7 @@ public class RealDatabase implements IDatabase{
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into questions (question, answer1, answer2, answer3, answer4, finalanswer) values (?, ?, ?, ?, ?, ?)",
+							"insert into questions (question, answer1, answer2, answer3, answer4, finalanswer, creator) values (?, ?, ?, ?, ?, ?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
 					
@@ -375,7 +376,6 @@ public class RealDatabase implements IDatabase{
 					
 					Question question = new Question();
 					loadQuestion(question, resultSet, 1);
-					System.out.println("New User has id " + id);
 					return question;
 				} finally {
 					DBUtil.closeQuietly(resultSet);
@@ -394,7 +394,7 @@ public class RealDatabase implements IDatabase{
 				ResultSet resultSet = null;
 				
 				try {
-					stmt = conn.prepareStatement("select * from questions order by rand() limit 1");
+					stmt = conn.prepareStatement("select * from questions order by random()");
 					
 					resultSet = stmt.executeQuery();
 					
@@ -467,15 +467,15 @@ public class RealDatabase implements IDatabase{
 					// Note that the 'id' column is an autoincrement primary key,
 					stmt = conn.prepareStatement(
 							"create table questions (" +
-							"  id integer primary key not null generated always as identity," +
+							"  id integer primary key not null generated always as identity (start with 1, increment by 1)," +
 							"  question varchar(70)," +
 							"  answer1 varchar(70)," +
 							"  answer2 varchar(70)," +
 							"  answer3 varchar(70)," +
 							"  answer4 varchar(70)," +
-							"  finalanswer varchar(70)" +
+							"  finalanswer varchar(70)," +
+							"  creator varchar(70)" +
 							")"
-
 					);
 					stmt.executeUpdate();
 					return true;
@@ -498,6 +498,7 @@ public class RealDatabase implements IDatabase{
 		stmt.setString(index++, question.getAnswer3());
 		stmt.setString(index++, question.getAnswer4());
 		stmt.setString(index++, question.getFinalAnswer());
+		stmt.setString(index++, question.getCreator());
 	}
 	
 	protected void loadUser(User user, ResultSet resultSet, int index) throws SQLException {
@@ -514,6 +515,7 @@ public class RealDatabase implements IDatabase{
 		question.setAnswer3(resultSet.getString(index++));
 		question.setAnswer4(resultSet.getString(index++));
 		question.setFinalAnswer(resultSet.getString(index++));
+		question.setCreator(resultSet.getString(index++));
 	}
 	
 	public void loadInitialUserData() {
@@ -550,7 +552,7 @@ public class RealDatabase implements IDatabase{
 				PreparedStatement stmt = null;
 				
 				try {
-					stmt = conn.prepareStatement("insert into questions (question, answer1, answer2, answer3, answer4, finalanswer) values (?, ?, ?, ?, ?, ?)");
+					stmt = conn.prepareStatement("insert into questions (question, answer1, answer2, answer3, answer4, finalanswer, creator) values (?, ?, ?, ?, ?, ?, ?)");
 					storeQuestionNoId(new Question("What is 2 + 2?","2","4","6","Moscola","4"), stmt, 1);
 					stmt.addBatch();
 					storeQuestionNoId(new Question("Who won Super Bowl I?","Packers","Seahawks","Brown","Giants","Packers"), stmt, 1);

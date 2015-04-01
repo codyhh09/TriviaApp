@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,17 +16,15 @@ import android.widget.Toast;
 import edu.ycp.cs482.Model.Question;
 import edu.ycp.cs482.controller.GetQuestion;
 
-/**
- * Created by choward8 on 3/23/2015.
- */
-public class GamePage extends Activity {
+public class GamePage extends ActionBarActivity {
     private int streak;
     private String username;
     private TextView question, currstreak;
     private Button AnswerA, AnswerB, AnswerC, AnswerD;
-    private Question q;
+    private Question q = new Question();
     private Intent i;
     private Bundle extras;
+    private GetQuestion controller = new GetQuestion();
     final int TIMER = 21000;
 
     @Override
@@ -61,8 +60,6 @@ public class GamePage extends Activity {
         }
 
         setContentView(R.layout.action_page);
-        GetQuestion controller = new GetQuestion();
-        q = new Question();
         currstreak = (TextView) findViewById(R.id.lblStreak);
         question = (TextView) findViewById(R.id.lblQuestion);
         AnswerA = (Button) findViewById(R.id.btnAnsA);
@@ -93,7 +90,7 @@ public class GamePage extends Activity {
             {
                 //Time-out Pop-Up
                 Toast.makeText(GamePage.this, "Time Up!", Toast.LENGTH_SHORT).show();
-                i = new Intent(getApplicationContext(), Action_page.class);
+                i = new Intent(getApplicationContext(), MenuPage.class);
                 i.putExtra("name", username);
                 startActivity(i);
             }
@@ -112,7 +109,7 @@ public class GamePage extends Activity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), Action_page.class);
+                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", username);
                     startActivity(i);
                 }
@@ -132,7 +129,7 @@ public class GamePage extends Activity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), Action_page.class);
+                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", username);
                     startActivity(i);
                 }
@@ -152,7 +149,7 @@ public class GamePage extends Activity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), Action_page.class);
+                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", username);
                     startActivity(i);
                 }
@@ -172,7 +169,7 @@ public class GamePage extends Activity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), Action_page.class);
+                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", username);
                     startActivity(i);
                 }

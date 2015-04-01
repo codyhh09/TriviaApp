@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.view.MenuInflater;
 import android.support.v7.app.ActionBarActivity;
+import android.app.ActionBar;
 
 //This page is where the questions will be displayed and answered.  There is a timer to countdown time.
 public class MenuPage extends ActionBarActivity {
@@ -19,6 +20,9 @@ public class MenuPage extends ActionBarActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setIcon(R.drawable.ic_action_help);
+
         if (savedInstanceState == null) {
             extras = getIntent().getExtras();
             username= extras.getString("name");
@@ -64,7 +68,8 @@ public class MenuPage extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        return true;
+        getSupportActionBar().setIcon(R.drawable.ic_action_help);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -76,6 +81,18 @@ public class MenuPage extends ActionBarActivity {
             case R.id.settings:
                 i = new Intent(getApplicationContext(), Settings.class);
                 i.putExtra("name", username);
+                startActivity(i);
+                return true;
+            case R.id.addQ:
+                return true;
+            case R.id.main:
+                i = new Intent(getApplicationContext(), MenuPage.class);
+                i.putExtra("name", username);
+                startActivity(i);
+                return true;
+            case R.id.log_out:
+                //METHOD THAT EXECUTES LOG-OUT SEQUENCE GOES HERE!
+                i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 return true;
             default:

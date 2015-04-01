@@ -24,7 +24,8 @@
         </activity>
         <activity
             android:name="edu.ycp.cs482.triviagame.MenuPage"
-            android:label="Action_page">
+            android:label="User's Page"
+            android:logo="@drawable/ic_action_help" >
         </activity>
         <activity
             android:name="edu.ycp.cs482.triviagame.Settings"

@@ -13,7 +13,7 @@ import android.app.ActionBar;
 
 //This page is where the questions will be displayed and answered.  There is a timer to countdown time.
 public class MenuPage extends ActionBarActivity {
-    private Button Signout, setting, startgame;
+    private Button startgame;
     private Bundle extras;
     private Intent i;
     private String username;
@@ -21,7 +21,7 @@ public class MenuPage extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setIcon(R.drawable.ic_action_help);
+        //getSupportActionBar().setIcon(R.drawable.ic_action_help);
 
         if (savedInstanceState == null) {
             extras = getIntent().getExtras();
@@ -33,26 +33,7 @@ public class MenuPage extends ActionBarActivity {
         Toast.makeText(MenuPage.this,username,Toast.LENGTH_SHORT).show();
 
         setContentView(R.layout.activity_main);
-        Signout = (Button) findViewById(R.id.btnSignOut);
-        setting = (Button) findViewById(R.id.btnAddQues);
         startgame = (Button) findViewById(R.id.btnStart);
-
-        Signout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
-            }
-        });
-
-        setting.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                i = new Intent(getApplicationContext(), Settings.class);
-                i.putExtra("name", username);
-                startActivity(i);
-            }
-        });
 
         startgame.setOnClickListener(new View.OnClickListener(){
             @Override

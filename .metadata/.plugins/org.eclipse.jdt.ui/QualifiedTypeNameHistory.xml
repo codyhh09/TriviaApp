@@ -29,4 +29,6 @@
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.ChangeUser"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.ChangePass"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.getRandomQuestion"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Model.QuestionType"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Model.QuestionApproved"/>
 </qualifiedTypeNameHistroy>

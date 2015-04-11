@@ -20,7 +20,6 @@ public class MainActivity extends Activity {
     private Intent i;
     private Bundle b;
     private boolean truth;
-    public final static String User_Key = "edu.ycp.cs482.Model.User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

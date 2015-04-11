@@ -64,50 +64,39 @@ public class MakeQuestion extends ActionBarActivity{
         answerC = (EditText) findViewById(R.id.txtAnsC);
         answerD = (EditText) findViewById(R.id.txtAnsD);
         submit = (Button) findViewById(R.id.btnSubmit);
+        rg = (RadioGroup) findViewById(R.id.radioGroup);
 
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Check which radio button was clicked
+                switch(checkedId) {
+                    case R.id.radAnsA:
+                            answer = answerA.getText().toString();
+                        break;
+                    case R.id.radAnsB:
+                            answer = answerB.getText().toString();
+                        break;
+                    case R.id.radAnsC:
+                            answer = answerC.getText().toString();
+                        break;
+                    case R.id.radAnsD:
+                            answer = answerD.getText().toString();
+                        break;
+                }
+            }
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
-                   // answer();
-                    addquestion.execute(question.getText().toString(), answerA.getText().toString(),answerB.getText().toString(),
-                            answerC.getText().toString(),answerD.getText().toString(), "word");
+                    addquestion.execute(question.getText().toString(), answerA.getText().toString(),answerB.getText().toString(), answerC.getText().toString(),answerD.getText().toString(), answer, username);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
         });
 
-    }
-
-    public void answer(){
-        rg = (RadioGroup) findViewById(R.id.radioGroup);
-
-        rg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean checked = ((RadioButton) v).isChecked();
-                // Check which radio button was clicked
-                switch(v.getId()) {
-                    case R.id.radAnsA:
-                        if (checked)
-                            answer = answerA.getText().toString();
-                            break;
-                    case R.id.radAnsB:
-                        if (checked)
-                            answer = answerB.getText().toString();
-                            break;
-                    case R.id.radAnsC:
-                        if (checked)
-                            answer = answerC.getText().toString();
-                            break;
-                    case R.id.radAnsD:
-                        if (checked)
-                            answer = answerD.getText().toString();
-                            break;
-                }
-            }
-        });
     }
 }

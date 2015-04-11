@@ -7,14 +7,16 @@ public class User implements Serializable {
 	private int id;
 	private String Username;
 	private String Password;
+	private int streak;
 
 	public User() {
 
 	}
 
-	public User(String _Username, String _Password) {
-		this.Username = _Username;
-		this.Password = _Password;
+	public User(String Username, String Password) {
+		this.Username = Username;
+		this.Password = Password;
+		this.streak = 0;
 	}
 
 	public int getId() {
@@ -30,7 +32,7 @@ public class User implements Serializable {
 	}
 
 	public void setUsername(String username) {
-		Username = username;
+		this.Username = username;
 	}
 
 	public String getPassword() {
@@ -38,6 +40,14 @@ public class User implements Serializable {
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.Password = password;
+	}
+	
+	public int getStreak() {
+		return streak;
+	}
+
+	public void setStreak(int streak) {
+		this.streak = streak;
 	}
 }

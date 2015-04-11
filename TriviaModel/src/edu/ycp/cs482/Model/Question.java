@@ -9,19 +9,23 @@ public class Question {
 	private String answer4;
 	private String FinalAnswer;
 	private String creator;
+	private QuestionType type;
+	private QuestionApproved right;
 
 	public Question() {
 
 	}
 
-	public Question(String Question, String answer1, String answer2, String answer3, String answer4, String finalanswer) {
+	public Question(String Question, String answer1, String answer2, String answer3, String answer4, String finalanswer, String creator, QuestionType type, QuestionApproved right) {
 		this.Question = Question;
 		this.answer1 = answer1;
 		this.answer2 = answer2;
 		this.answer3 = answer3;
 		this.answer4 = answer4;
 		this.FinalAnswer = finalanswer;
-		this.creator = null;
+		this.creator = creator;
+		this.type = type;
+		this.right = right;
 	}
 
 	public int getId() {
@@ -86,5 +90,21 @@ public class Question {
 	
 	public void setCreator(String creator) {
 		this.creator = creator;
+	}
+	
+	public QuestionType getType(){
+		return type;
+	}
+	
+	public void setType(QuestionType type){
+		this.type = type;
+	}
+	
+	public QuestionApproved getRight(){
+		return right;
+	}
+	
+	public void setRight(QuestionApproved right){
+		this.right = right;
 	}
 }

@@ -10,6 +10,8 @@ import java.util.List;
 
 import edu.ycp.cs482.Trivia.pesist.IDatabase;
 import edu.ycp.cs482.Model.Question;
+import edu.ycp.cs482.Model.QuestionApproved;
+import edu.ycp.cs482.Model.QuestionType;
 import edu.ycp.cs482.Model.User;
 import edu.ycp.cs482.Trivia.pesist.DBUtil;
 
@@ -306,6 +308,12 @@ public class RealDatabase implements IDatabase{
 						question.setAnswer4(resultSet.getString(6));
 						question.setFinalAnswer(resultSet.getString(7));
 						question.setCreator(resultSet.getString(8));
+						QuestionType[] typeValues = QuestionType.values();
+						QuestionType type = typeValues[resultSet.getInt(9)];
+						question.setType(type);
+						QuestionApproved[] ApprovedValues = QuestionApproved.values();
+						QuestionApproved right = ApprovedValues[resultSet.getInt(10)];
+						question.setRight(right);
 						result.add(question);
 					}
 					
@@ -328,7 +336,7 @@ public class RealDatabase implements IDatabase{
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into questions (question, answer1, answer2, answer3, answer4, finalanswer, creator) values (?, ?, ?, ?, ?, ?, ?)",
+							"insert into questions (question, answer1, answer2, answer3, answer4, finalanswer, creator, type, approved) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
 					
@@ -340,7 +348,7 @@ public class RealDatabase implements IDatabase{
 					// Determine the auto-generated id
 					generatedKeys = stmt.getGeneratedKeys();
 					if (!generatedKeys.next()) {
-						throw new SQLException("Could not get auto-generated key for inserted Users");
+						throw new SQLException("Could not get auto-generated key for inserted Questions");
 					}
 					
 					question.setId(generatedKeys.getInt(1));
@@ -446,7 +454,8 @@ public class RealDatabase implements IDatabase{
 							"create table users (" +
 							"  id integer primary key not null generated always as identity," +
 							"  username varchar(30)," +
-							"  password varchar(30)" +
+							"  password varchar(30)," +
+							"  streak integer default 0" +
 							")"
 					);
 					stmt.executeUpdate();			
@@ -474,7 +483,9 @@ public class RealDatabase implements IDatabase{
 							"  answer3 varchar(70)," +
 							"  answer4 varchar(70)," +
 							"  finalanswer varchar(70)," +
-							"  creator varchar(70)" +
+							"  creator varchar(70)," +
+							"  type integer not null default 0," +
+							"  approved integer not null default 0" +
 							")"
 					);
 					stmt.executeUpdate();
@@ -499,12 +510,15 @@ public class RealDatabase implements IDatabase{
 		stmt.setString(index++, question.getAnswer4());
 		stmt.setString(index++, question.getFinalAnswer());
 		stmt.setString(index++, question.getCreator());
+		stmt.setInt(index++, question.getType().ordinal());
+		stmt.setInt(index++, question.getRight().ordinal());
 	}
 	
 	protected void loadUser(User user, ResultSet resultSet, int index) throws SQLException {
 		user.setId(resultSet.getInt(index++));
 		user.setUsername(resultSet.getString(index++));
 		user.setPassword(resultSet.getString(index++));
+		user.setStreak(resultSet.getInt(index++));
 	}
 	
 	protected void loadQuestion(Question question, ResultSet resultSet, int index) throws SQLException {
@@ -516,6 +530,12 @@ public class RealDatabase implements IDatabase{
 		question.setAnswer4(resultSet.getString(index++));
 		question.setFinalAnswer(resultSet.getString(index++));
 		question.setCreator(resultSet.getString(index++));
+		QuestionType[] typeValues = QuestionType.values();
+		QuestionType type = typeValues[resultSet.getInt(index++)];
+		question.setType(type);
+		QuestionApproved[] ApprovedValues = QuestionApproved.values();
+		QuestionApproved right = ApprovedValues[resultSet.getInt(index++)];
+		question.setRight(right);
 	}
 	
 	public void loadInitialUserData() {
@@ -552,12 +572,12 @@ public class RealDatabase implements IDatabase{
 				PreparedStatement stmt = null;
 				
 				try {
-					stmt = conn.prepareStatement("insert into questions (question, answer1, answer2, answer3, answer4, finalanswer, creator) values (?, ?, ?, ?, ?, ?, ?)");
-					storeQuestionNoId(new Question("What is 2 + 2?","2","4","6","Moscola","4"), stmt, 1);
+					stmt = conn.prepareStatement("insert into questions (question, answer1, answer2, answer3, answer4, finalanswer, creator, type, approved) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					storeQuestionNoId(new Question("What is 2 + 2?","2","4","6","Moscola","4", "Cody", QuestionType.SCIENCE, QuestionApproved.PENDING), stmt, 1);
 					stmt.addBatch();
-					storeQuestionNoId(new Question("Who won Super Bowl I?","Packers","Seahawks","Brown","Giants","Packers"), stmt, 1);
+					storeQuestionNoId(new Question("Who won Super Bowl I?","Packers","Seahawks","Brown","Giants","Packers", "Jason", QuestionType.SPORTS, QuestionApproved.ACCEPTED), stmt, 1);
 					stmt.addBatch();
-					storeQuestionNoId(new Question("What color is George Washington's white horse?","Pink","Brown","George Washington didn't have a horse", "White", "White"), stmt, 1);
+					storeQuestionNoId(new Question("What color is George Washington's white horse?","Pink","Brown","George Washington didn't have a horse", "White", "White","Jason", QuestionType.ETC, QuestionApproved.ACCEPTED), stmt, 1);
 					stmt.addBatch();
 					
 					stmt.executeBatch();

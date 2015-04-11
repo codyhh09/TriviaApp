@@ -17,7 +17,7 @@ public class FakeDatabase implements IDatabase{
 		users.add(user1);
 		
 		questions = new ArrayList<Question>();
-		Question q = new Question("c","c","c","c","c","c");
+		Question q = new Question("c","c","c","c","c","c","c",QuestionType.ETC,QuestionApproved.ACCEPTED);
 		q.setId(1);
 		questions.add(q);
 	}

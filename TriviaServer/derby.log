@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Fri Apr 10 22:48:47 EDT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014c-a661-2947-00000659a140 
+Sat Apr 11 12:26:02 EDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014c-a94d-5e53-0000062f8cf8 
 on database directory C:\Users\choward8\Documents\GitHub\TriviaApp\TriviaServer\test.db with class loader sun.misc.Launcher$AppClassLoader@2a139a55 
 Loaded from file:/C:/Users/choward8/Documents/GitHub/TriviaApp/TriviaServer/derby.jar
 java.vendor=Oracle Corporation

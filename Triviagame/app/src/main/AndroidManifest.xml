@@ -20,15 +20,16 @@
 
         <activity
             android:name="edu.ycp.cs482.triviagame.SignUp"
-            android:label="Sign Up">
+            android:label="Sign_up">
         </activity>
         <activity
             android:name="edu.ycp.cs482.triviagame.MenuPage"
-            android:label="Menu">
+            android:label="User's Page"
+            android:logo="@drawable/ic_action_help" >
         </activity>
         <activity
-        android:name="edu.ycp.cs482.triviagame.Settings"
-        android:label="Setting">
+            android:name="edu.ycp.cs482.triviagame.Settings"
+            android:label="Setting page">
         </activity>
         <activity
             android:name="edu.ycp.cs482.triviagame.GamePage"

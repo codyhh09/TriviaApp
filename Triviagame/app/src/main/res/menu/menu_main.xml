@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:triviagame="http://schemas.android.com/apk/res-auto" >
+    <!-- Add Question -->
+    <item
+        android:id="@+id/addQ"
+        android:title="@string/add_question"
+        android:icon="@drawable/ic_action_new"
+        triviagame:showAsAction="ifRoom|withText"/>
+
     <!-- Settings -->
     <item
         android:id="@+id/settings"
         android:title="@string/action_settings"
         android:icon="@drawable/ic_action_settings"
+        triviagame:showAsAction="ifRoom|withText"/>
+
+    <!-- Return to Main Menu -->
+    <item
+        android:id="@+id/main"
+        android:title="@string/main_menu"
+        android:icon="@drawable/ic_action_previous_item"
+        triviagame:showAsAction="ifRoom|withText"/>
+
+    <!-- Log Out -->
+    <item
+        android:id="@+id/log_out"
+        android:title="@string/log_out"
+        android:icon="@drawable/ic_action_back"
         triviagame:showAsAction="ifRoom|withText"/>
 
 </menu>

@@ -1,6 +1,5 @@
 package edu.ycp.cs482.triviagame;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -20,6 +19,7 @@ public class GamePage extends ActionBarActivity {
     private int streak;
     private String username;
     private TextView question, currstreak;
+    private boolean lose = false;
     private Button AnswerA, AnswerB, AnswerC, AnswerD;
     private Question q = new Question();
     private Intent i;
@@ -27,26 +27,31 @@ public class GamePage extends ActionBarActivity {
     private GetQuestion controller = new GetQuestion();
     final int TIMER = 21000;
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+        getSupportActionBar().setIcon(R.drawable.ic_action_help);
+
+        for (int i = 0; i < menu.size(); i++)
+            menu.getItem(i).setVisible(false);
+
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.settings:
-                i = new Intent(getApplicationContext(), Settings.class);
-                i.putExtra("name", username);
-                startActivity(i);
-                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
-        return true;
     }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +95,10 @@ public class GamePage extends ActionBarActivity {
             {
                 //Time-out Pop-Up
                 Toast.makeText(GamePage.this, "Time Up!", Toast.LENGTH_SHORT).show();
+                lose = true;
                 i = new Intent(getApplicationContext(), MenuPage.class);
                 i.putExtra("name", username);
+                i.putExtra("lose", lose);
                 startActivity(i);
             }
         }.start();
@@ -109,8 +116,10 @@ public class GamePage extends ActionBarActivity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
+                    lose = true;
                     Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", username);
+                    i.putExtra("lose", lose);
                     startActivity(i);
                 }
             }
@@ -129,8 +138,10 @@ public class GamePage extends ActionBarActivity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
+                    lose = true;
                     Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", username);
+                    i.putExtra("lose", lose);
                     startActivity(i);
                 }
             }
@@ -149,8 +160,10 @@ public class GamePage extends ActionBarActivity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
+                    lose = true;
                     Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", username);
+                    i.putExtra("lose", lose);
                     startActivity(i);
                 }
             }
@@ -169,8 +182,10 @@ public class GamePage extends ActionBarActivity {
                 }else{
                     Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
                     timer.cancel();
+                    lose = true;
                     Intent i = new Intent(getApplicationContext(), MenuPage.class);
                     i.putExtra("name", username);
+                    i.putExtra("lose", lose);
                     startActivity(i);
                 }
             }

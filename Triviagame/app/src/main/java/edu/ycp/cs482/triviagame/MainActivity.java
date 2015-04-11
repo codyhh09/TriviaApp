@@ -1,25 +1,80 @@
 package edu.ycp.cs482.triviagame;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.CountDownTimer;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
+
 import edu.ycp.cs482.Model.User;
-import edu.ycp.cs482.controller.GetUser;
 import edu.ycp.cs482.controller.LoginUser;
 
-public class MainActivity extends Activity {
-    private User user;
+public class MainActivity extends ActionBarActivity {
     private String name, password;
+    private int counter = 3;
     private EditText name1, password1;
+    private TextView attemps;
     private Button Signup,Signin;
     private Intent i;
     private Bundle b;
+    private boolean lose = false;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String userkey = "nameKey";
+    public static final String Attempts = "Attempts left: ";
+    SharedPreferences sharedpreferences;
     private boolean truth;
+    final int TIMER = 3600000;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        getSupportActionBar().setIcon(R.drawable.ic_action_help);
+
+        for (int i = 0; i < menu.size(); i++)
+            menu.getItem(i).setVisible(false);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if(sharedpreferences.contains(userkey)){
+            i = new Intent(getApplicationContext(), MenuPage.class);
+            i.putExtra("name", name);
+            startActivity(i);
+        }
+
+
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +84,9 @@ public class MainActivity extends Activity {
         password1 = (EditText) findViewById(R.id.txtPass);
         Signup = (Button) findViewById(R.id.btnSignUp);
         Signin = (Button) findViewById(R.id.signin);
-        user = new User();
+        attemps = (TextView) findViewById(R.id.attempt);
+
+        attemps.setText(Attempts + Integer.toString(counter));
 
         Signin.setOnClickListener(new View.OnClickListener(){
 
@@ -44,11 +101,25 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
                 if(truth) {
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
                     i = new Intent(getApplicationContext(), MenuPage.class);
+                    editor.putString("name", name);
+                    editor.commit();
                     i.putExtra("name", name);
+                    i.putExtra("lose", lose);
                     startActivity(i);
                 }else{
-                    Toast.makeText(MainActivity.this,"Wrong Username and/or Password",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Wrong Credentials",
+                            Toast.LENGTH_SHORT).show();
+                    attemps.setBackgroundColor(Color.RED);
+                    counter--;
+                    attemps.setText(Attempts + Integer.toString(counter));
+                    if(counter==0){
+                        Signin.setEnabled(false);
+                        Signup.setEnabled(false);
+                        SignbackIn();
+                    }
+
                 }
             }
         });
@@ -62,5 +133,27 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
+    }
+
+    private void SignbackIn(){
+        new CountDownTimer(TIMER, 1000)
+        {
+            public void onTick(long millisUntilFinished)
+            {
+                attemps.setText(""+String.format("%d min : %d sec",
+                        TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
+
+            public void onFinish()
+            {
+                Signin.setEnabled(true);
+                Signup.setEnabled(true);
+                attemps.setBackgroundColor(Color.WHITE);
+                counter = 2;
+                attemps.setText(Attempts + Integer.toString(counter));
+            }
+        }.start();
     }
 }

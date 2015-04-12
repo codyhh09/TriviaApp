@@ -17,11 +17,15 @@ public interface IDatabase {
 	
 	public User chgPass(String oldUser, String newPass);
 	
+	public void updateStreak(String username, int Streak);
+	
 	public List<User> getAllUser();
 	
 	public boolean deleteUser(String user);
 	
 	public List<Question> getAllQuestion();
+	
+	public List<Question> getAllQuestionPending();
 	
 	public void addQuestion(Question question);
 	

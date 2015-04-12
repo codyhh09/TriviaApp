@@ -1,5 +1,5 @@
 package edu.ycp.cs482.Model;
 
 public enum QuestionType {
-	PENDING, SPORTS, SCIENCE, HISTORY, ETC,
+	SPORTS, SCIENCE, HISTORY, ETC,
 }

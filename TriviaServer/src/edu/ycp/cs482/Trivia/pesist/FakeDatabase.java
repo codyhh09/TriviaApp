@@ -61,6 +61,12 @@ public class FakeDatabase implements IDatabase{
 		return false;
 	}
 
+	public void updateStreak(String username, int Streak){
+		User user = getUser(username);
+		if(user.getStreak() < Streak){
+			user.setStreak(Streak);
+		}
+	}
 	// deleting a user
 	public boolean deleteUser(String user) {
 		for(User temp : users){
@@ -73,6 +79,16 @@ public class FakeDatabase implements IDatabase{
 	
 	public List<Question> getAllQuestion(){
 		return new ArrayList<Question>(questions);
+	}
+	
+	public List<Question> getAllQuestionPending(){
+		List<Question> qu = new ArrayList<Question>();
+		for(Question q : questions){
+			if(q.getRight() == QuestionApproved.PENDING){
+				qu.add(q);
+			}
+		}
+		return qu;
 	}
 	
 	public void addQuestion(Question question) {

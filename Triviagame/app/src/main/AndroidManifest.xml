@@ -39,6 +39,14 @@
             android:name="edu.ycp.cs482.triviagame.MakeQuestion"
             android:label="Create Your Question!">
         </activity>
+        <activity
+            android:name="edu.ycp.cs482.triviagame.ModPage"
+            android:label="Correct a question">
+        </activity>
+        <activity
+            android:name="edu.ycp.cs482.triviagame.CorrectAQuestion"
+            android:label="Fix Question">
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,9 @@
 package edu.ycp.cs482.triviagame;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,7 +11,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
     SharedPreferences sharedpreferences;
     private boolean truth;
     final int TIMER = 3600000;
+    private NotificationManager nm;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,8 +78,6 @@ public class MainActivity extends ActionBarActivity {
             i.putExtra("name", name);
             startActivity(i);
         }
-
-
         super.onResume();
     }
 
@@ -101,13 +106,18 @@ public class MainActivity extends ActionBarActivity {
                     e.printStackTrace();
                 }
                 if(truth) {
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    i = new Intent(getApplicationContext(), MenuPage.class);
-                    editor.putString("name", name);
-                    editor.commit();
-                    i.putExtra("name", name);
-                    i.putExtra("lose", lose);
-                    startActivity(i);
+                    if(name.equals("Master")){
+                        i = new Intent(getApplicationContext(), ModPage.class);
+                        startActivity(i);
+                    }else {
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        i = new Intent(getApplicationContext(), MenuPage.class);
+                        editor.putString("name", name);
+                        editor.commit();
+                        i.putExtra("name", name);
+                        i.putExtra("lose", lose);
+                        startActivity(i);
+                    }
                 }else{
                     Toast.makeText(getApplicationContext(), "Wrong Credentials",
                             Toast.LENGTH_SHORT).show();
@@ -156,4 +166,5 @@ public class MainActivity extends ActionBarActivity {
             }
         }.start();
     }
+
 }

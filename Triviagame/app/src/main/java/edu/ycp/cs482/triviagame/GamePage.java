@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import edu.ycp.cs482.Model.Question;
 import edu.ycp.cs482.controller.GetQuestion;
+import edu.ycp.cs482.controller.UpdateStreak;
 
 public class GamePage extends ActionBarActivity {
     private int streak;
@@ -25,6 +26,7 @@ public class GamePage extends ActionBarActivity {
     private Intent i;
     private Bundle extras;
     private GetQuestion controller = new GetQuestion();
+    private UpdateStreak updateStreak = new UpdateStreak();
     final int TIMER = 21000;
 
 
@@ -96,6 +98,7 @@ public class GamePage extends ActionBarActivity {
                 //Time-out Pop-Up
                 Toast.makeText(GamePage.this, "Time Up!", Toast.LENGTH_SHORT).show();
                 lose = true;
+                updateStreak.execute(username, Integer.toString(streak));
                 i = new Intent(getApplicationContext(), MenuPage.class);
                 i.putExtra("name", username);
                 i.putExtra("lose", lose);

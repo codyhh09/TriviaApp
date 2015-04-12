@@ -31,4 +31,5 @@
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.getRandomQuestion"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Model.QuestionType"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Model.QuestionApproved"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.UpdateStreak"/>
 </qualifiedTypeNameHistroy>

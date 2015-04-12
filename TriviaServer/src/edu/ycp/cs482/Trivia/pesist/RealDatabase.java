@@ -252,6 +252,34 @@ public class RealDatabase implements IDatabase{
 	}
 	
 	@Override
+	public void updateStreak(String username, int Streak) {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update users set users.streak = ? where users.username = ? and users.streak < ?");
+					
+					stmt.setInt(1,  Streak);
+					stmt.setString(2, username);
+					stmt.setInt(3,  Streak);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated streak");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+		
+	}
+	
+	@Override
 	public List<User> getAllUser() {
 		return executeTransaction(new Transaction<List<User>>() {
 			@Override
@@ -294,6 +322,49 @@ public class RealDatabase implements IDatabase{
 				try {
 					// Note: no 'where' clause, so all items will be returned
 					stmt = conn.prepareStatement("select questions.* from questions");
+					resultSet = stmt.executeQuery();
+
+					List<Question> result = new ArrayList<Question>();
+					while (resultSet.next()) {
+						Question question = new Question();
+						question.setId(resultSet.getInt(1));
+						question.setQuestion(resultSet.getString(2));
+						question.setAnswer1(resultSet.getString(3));
+						question.setAnswer2(resultSet.getString(4));
+						question.setAnswer3(resultSet.getString(5));
+						question.setAnswer4(resultSet.getString(6));
+						question.setFinalAnswer(resultSet.getString(7));
+						question.setCreator(resultSet.getString(8));
+						QuestionType[] typeValues = QuestionType.values();
+						QuestionType type = typeValues[resultSet.getInt(9)];
+						question.setType(type);
+						QuestionApproved[] ApprovedValues = QuestionApproved.values();
+						QuestionApproved right = ApprovedValues[resultSet.getInt(10)];
+						question.setRight(right);
+						result.add(question);
+					}
+					
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public List<Question> getAllQuestionPending() {
+		return executeTransaction(new Transaction<List<Question>>() {
+			@Override
+			public List<Question> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					// Note: no 'where' clause, so all items will be returned
+					stmt = conn.prepareStatement("select questions.* from questions where questions.approved=?");
+					stmt.setInt(1, QuestionApproved.PENDING.ordinal());
 					
 					resultSet = stmt.executeQuery();
 
@@ -477,13 +548,13 @@ public class RealDatabase implements IDatabase{
 					stmt = conn.prepareStatement(
 							"create table questions (" +
 							"  id integer primary key not null generated always as identity (start with 1, increment by 1)," +
-							"  question varchar(70)," +
-							"  answer1 varchar(70)," +
-							"  answer2 varchar(70)," +
-							"  answer3 varchar(70)," +
-							"  answer4 varchar(70)," +
-							"  finalanswer varchar(70)," +
-							"  creator varchar(70)," +
+							"  question varchar(100)," +
+							"  answer1 varchar(100)," +
+							"  answer2 varchar(100)," +
+							"  answer3 varchar(100)," +
+							"  answer4 varchar(100)," +
+							"  finalanswer varchar(100)," +
+							"  creator varchar(100)," +
 							"  type integer not null default 0," +
 							"  approved integer not null default 0" +
 							")"

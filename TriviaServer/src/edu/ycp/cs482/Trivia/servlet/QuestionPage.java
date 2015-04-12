@@ -13,14 +13,53 @@ import edu.ycp.cs482.Trivia.controller.AddQuestion;
 import edu.ycp.cs482.Trivia.controller.DeleteQuestion;
 import edu.ycp.cs482.Trivia.controller.GetAllQuestion;
 import edu.ycp.cs482.Trivia.controller.GetQuestion;
+import edu.ycp.cs482.Trivia.controller.getAllQusetionPending;
 import edu.ycp.cs482.Trivia.controller.getRandomQuestion;
 
 public class QuestionPage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private getRandomQuestion randomQuestion = new getRandomQuestion();
+	private getAllQusetionPending getallquestionpending = new getAllQusetionPending();
+	private GetAllQuestion getallquestion = new GetAllQuestion();
+	private GetQuestion getquestion = new GetQuestion();
+	private AddQuestion addquestion = new AddQuestion();
+	private DeleteQuestion deletequestion = new DeleteQuestion();
+	private Question question;
+	private int id;
+	private String pathInfo;
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String pathInfo = req.getPathInfo();
+		pathInfo = req.getPathInfo();
 		if (pathInfo == null || pathInfo.equals("") || pathInfo.equals("/")) {
+			resp.setStatus(HttpServletResponse.SC_OK);
+			
+			// Set status code and content type
+			resp.setStatus(HttpServletResponse.SC_OK);
+			resp.setContentType("application/json");
+			
+			// Return the item in JSON format
+			JSON.getObjectMapper().writeValue(resp.getWriter(), getallquestion.getallQuestion());
+			return ;
+		}
+		
+		// Get the user name
+		if (pathInfo.startsWith("/")){
+			pathInfo = pathInfo.substring(1);
+		}
+		
+		if(pathInfo.contains("pending")){
+			resp.setStatus(HttpServletResponse.SC_OK);
+			
+			// Set status code and content type
+			resp.setStatus(HttpServletResponse.SC_OK);
+			resp.setContentType("application/json");
+			
+			// Return the item in JSON format
+			JSON.getObjectMapper().writeValue(resp.getWriter(), getallquestionpending.GetallQuestionPending());
+			return ;
+		}
+		
+		if(pathInfo.contains("random")){
 			resp.setStatus(HttpServletResponse.SC_OK);
 			
 			// Set status code and content type
@@ -32,14 +71,9 @@ public class QuestionPage extends HttpServlet{
 			return ;
 		}
 		
-		// Get the user name
-		if (pathInfo.startsWith("/")){
-			pathInfo = pathInfo.substring(1);
-		}
-		int id = Integer.parseInt(pathInfo);
-		// Use a GetUsercontroller to find the user in the database
-		GetQuestion controller = new GetQuestion();
-		Question question = controller.getQuestion(id);
+		
+		id = Integer.parseInt(pathInfo);	
+		question = getquestion.getQuestion(id);								// Use a GetUsercontroller to find the user in the database
 		
 		if (question == null) {
 			// No such item, so return a NOT FOUND response
@@ -58,11 +92,9 @@ public class QuestionPage extends HttpServlet{
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		Question question = JSON.getObjectMapper().readValue(req.getReader(), Question.class);
+		question = JSON.getObjectMapper().readValue(req.getReader(), Question.class);
 		// Use a GetUser controller to find the item in the database
-		AddQuestion controller = new AddQuestion();
-		controller.addQuestion(question);
+		addquestion.addQuestion(question);
 		// Set status code and content type
 		resp.setStatus(HttpServletResponse.SC_OK);
 		resp.setContentType("application/json");
@@ -73,7 +105,7 @@ public class QuestionPage extends HttpServlet{
 
 	
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String pathInfo = req.getPathInfo();
+		pathInfo = req.getPathInfo();
 		if (pathInfo == null || pathInfo.equals("") || pathInfo.equals("/")) {
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			resp.setContentType("text/plain");
@@ -84,9 +116,9 @@ public class QuestionPage extends HttpServlet{
 		if (pathInfo.startsWith("/")){
 			pathInfo = pathInfo.substring(1);
 		}
-		int id = Integer.parseInt(pathInfo);
-		DeleteQuestion controller = new DeleteQuestion();
-		controller.deleteQuestion(id);
+		
+		id = Integer.parseInt(pathInfo);
+		deletequestion.deleteQuestion(id);
 
 		// Set status code and content type
 		resp.setStatus(HttpServletResponse.SC_OK);

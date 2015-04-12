@@ -19,11 +19,13 @@ import edu.ycp.cs482.Trivia.controller.DeleteUser;
 import edu.ycp.cs482.Trivia.controller.GetAllUsers;
 import edu.ycp.cs482.Trivia.controller.GetUser;
 import edu.ycp.cs482.Trivia.controller.LoginUser;
+import edu.ycp.cs482.Trivia.controller.UpdateStreak;
 
 
 public class UserPage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private String user, pass, user1;
+	private int streak;
 	private User users;
 	private GetUser getuser = new GetUser();
 	private GetAllUsers getalluser = new GetAllUsers();
@@ -31,6 +33,7 @@ public class UserPage extends HttpServlet{
 	private DeleteUser deleteUser = new DeleteUser();
 	private ChangeUser changeuser = new ChangeUser();
 	private ChangePass changepassword = new ChangePass();
+	private UpdateStreak updateStreak = new UpdateStreak();
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();		
@@ -160,6 +163,20 @@ public class UserPage extends HttpServlet{
 				JSON.getObjectMapper().writeValue(resp.getWriter(), users);
 				return;
 			}	
+			
+			if (pathInfo.contains("/streak=")){
+				user = pathInfo.substring(0, pathInfo.indexOf('/'));
+				streak = Integer.parseInt(pathInfo.substring(pathInfo.indexOf('=')+1,pathInfo.length()));
+				
+				// Set status code and content type
+				resp.setStatus(HttpServletResponse.SC_OK);
+				resp.setContentType("application/json");
+				
+				updateStreak.updateStreak(user, streak);
+				// writing the operation out.
+				JSON.getObjectMapper().writeValue(resp.getWriter(), streak);
+				return;
+			}
 			
 				
 

@@ -2,7 +2,6 @@ package edu.ycp.cs482.triviagame;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.controller.GetUser;
 import edu.ycp.cs482.controller.LoginUser;
 
 public class MainActivity extends ActionBarActivity {

@@ -40,6 +40,18 @@ public class FakeDatabase implements IDatabase{
 		return null;
 	}
 	
+	public User chgUser(String oldUser, String newUser){
+		User user = getUser(oldUser);
+		user.setUsername(newUser);
+		return user;
+	}
+	
+	public User chgPass(String oldUser, String newPass){
+		User user = getUser(oldUser);
+		user.setPassword(newPass);
+		return user;
+	}
+	
 	public boolean login(String User, String Pass){
 		for(User user : users){
 			if(user.getUsername().equals(user)&&user.getPassword().equals(Pass)){
@@ -84,6 +96,12 @@ public class FakeDatabase implements IDatabase{
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public Question randomQuestion() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

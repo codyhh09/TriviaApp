@@ -1,5 +1,7 @@
 package edu.ycp.cs482.controller;
 
+import android.os.AsyncTask;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -19,20 +21,13 @@ import java.net.URISyntaxException;
 import edu.ycp.cs482.JSON.JSON;
 import edu.ycp.cs482.Model.Question;
 
-public class AddQuestion {
-    public boolean postQuestion(String question, String answer1, String answer2, String answer3, String answer4, String finalanswer) throws URISyntaxException, JsonGenerationException, JsonMappingException, IOException {
-        return makePostRequest(question, answer1, answer2, answer3, answer4, finalanswer);
-    }
-
-    public boolean makePostRequest(String question, String answer1, String answer2, String answer3, String answer4, String finalanswer) throws URISyntaxException, JsonGenerationException, JsonMappingException, IOException {
+public class AddQuestion extends AsyncTask<String, Void, Boolean> {
+    public boolean addQuestion(String question, String answer1, String answer2, String answer3, String answer4, String finalanswer) throws URISyntaxException, JsonGenerationException, JsonMappingException, IOException {
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();
 
-        // Construct URI
-        URI uri = URIUtils.createURI("http", "10.0.2.2", 8081, "/question", null, null);
-
         // Construct request
-        HttpPost request = new HttpPost(uri);
+        HttpPost request = new HttpPost("http://10.0.2.2:8081/question");
 
         if(question != null && answer1 != null && answer2 != null && answer3 != null && answer4 != null && finalanswer != null){
             Question questions = new Question(question, answer1, answer2, answer3, answer4, finalanswer);
@@ -53,7 +48,16 @@ public class AddQuestion {
                 return false;
             }
         }
-
         return false;
+    }
+
+    @Override
+    protected Boolean doInBackground(String... params) {
+        try{
+            return addQuestion(params[0], params[1], params[2], params[3], params[4], params[5]);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

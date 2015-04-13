@@ -1,6 +1,5 @@
 package edu.ycp.cs482.controller;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import org.apache.http.HttpEntity;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import edu.ycp.cs482.JSON.JSON;
-import edu.ycp.cs482.Model.User;
 
 public class LoginUser extends AsyncTask<String, Void, Boolean> {
     private Boolean Loguser(String Username, String Pass) throws URISyntaxException, IOException {

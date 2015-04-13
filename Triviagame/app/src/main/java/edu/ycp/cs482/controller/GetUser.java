@@ -1,6 +1,5 @@
 package edu.ycp.cs482.controller;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import org.apache.http.HttpEntity;
@@ -17,12 +16,6 @@ import edu.ycp.cs482.JSON.JSON;
 import edu.ycp.cs482.Model.User;
 
 public class GetUser extends AsyncTask<String, Void, User> {
-    private Context con;
-
-    public GetUser(Context context){
-        con = context;
-    }
-
     private User getUser(String Username) throws URISyntaxException, IOException {
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();

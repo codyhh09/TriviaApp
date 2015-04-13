@@ -11,16 +11,17 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Random;
 
 import edu.ycp.cs482.JSON.JSON;
 import edu.ycp.cs482.Model.Question;
 
 public class GetQuestion extends AsyncTask<Integer, Void, Question>{
-    private Question getQuestion(int id) throws URISyntaxException, IOException{
+    private Question getQuestion() throws URISyntaxException, IOException{
         // Create HTTP client
         HttpClient client = new DefaultHttpClient();
         // Construct request
-        HttpGet request = new HttpGet("http://10.0.2.2:8081/question/"+id);
+        HttpGet request = new HttpGet("http://10.0.2.2:8081/question/");
 
         // Execute request
         HttpResponse response = client.execute(request);
@@ -31,7 +32,6 @@ public class GetQuestion extends AsyncTask<Integer, Void, Question>{
             // Parse JSON
             return JSON.getObjectMapper().readValue(entity.getContent(), Question.class);
         }
-
         // Return null if invalid response
         return null;
     }
@@ -39,7 +39,7 @@ public class GetQuestion extends AsyncTask<Integer, Void, Question>{
     @Override
     protected Question doInBackground(Integer... params) {
         try{
-            return getQuestion(params[0]);
+            return getQuestion();
         }catch (Exception e){
             e.printStackTrace();
         }

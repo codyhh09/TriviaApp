@@ -1,6 +1,5 @@
 package edu.ycp.cs482.triviagame;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,14 +11,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.controller.ChangePassword;
+import edu.ycp.cs482.controller.ChangeUser;
 import edu.ycp.cs482.controller.DeleteUser;
 
 public class Settings extends ActionBarActivity {
-    private Button Delete, change;
+    private Button delete, change, chgPss, back;    
     private TextView name, pass;
     private Bundle extras;
     private String username;
-    private DeleteUser controller;
+    private DeleteUser dltuser = new DeleteUser();
+    private ChangeUser changeuser = new ChangeUser();
+    private ChangePassword changePassword = new ChangePassword();
     private Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +34,43 @@ public class Settings extends ActionBarActivity {
             username= (String) savedInstanceState.getSerializable("name");
         }
         setContentView(R.layout.settings);
-        Delete = (Button) findViewById(R.id.deleteBtn);
+        name = (TextView) findViewById(R.id.chgUser);
+        pass = (TextView) findViewById(R.id.chgPass);
+        change = (Button) findViewById(R.id.changeBtn);
+        delete = (Button) findViewById(R.id.deleteBtn);
+        chgPss = (Button) findViewById(R.id.chgpassBtn);
+        back = (Button) findViewById(R.id.menubtn);
 
-        Delete.setOnClickListener(new View.OnClickListener() {
+        change.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //controller = new DeleteUser();
                 try{
-                    //controller.execute(username);
+                    changeuser.execute(username, name.getText().toString());
+                    username = name.getText().toString();
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        chgPss.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                try{
+                    changePassword.execute(username, pass.getText().toString());
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                startActivity(i);
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dltuser = new DeleteUser();
+                try{
+                    dltuser.execute(username);
                 }catch(Exception e) {
                     e.printStackTrace();
                 }

@@ -15,8 +15,10 @@ import android.app.ActionBar;
 public class MenuPage extends ActionBarActivity {
     private Button startgame;
     private Bundle extras;
+    private int streak = 1;
     private Intent i;
     private String username;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,8 @@ public class MenuPage extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 i = new Intent(getApplicationContext(), GamePage.class);
+                i.putExtra("name", username);
+                i.putExtra("streak", streak);
                 startActivity(i);
             }
         });

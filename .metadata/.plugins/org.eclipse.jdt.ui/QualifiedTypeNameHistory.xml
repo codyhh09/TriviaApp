@@ -26,4 +26,7 @@
 <fullyQualifiedTypeName name="edu.ycp.cs482.Model.User"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.LoginUser"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.ChangeUser"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.ChangePass"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.getRandomQuestion"/>
 </qualifiedTypeNameHistroy>

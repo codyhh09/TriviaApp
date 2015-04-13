@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Make a Question:"
-        android:id="@+id/Questiontxt"
+        android:id="@+id/Questiontxts"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -16,9 +16,9 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtQuestion"
+        android:id="@+id/txtQuestions"
         android:hint="Question"
-        android:layout_below="@+id/Questiontxt"
+        android:layout_below="@+id/Questiontxts"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -28,7 +28,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Possible Answers:"
         android:id="@+id/textView11"
-        android:layout_below="@+id/txtQuestion" />
+        android:layout_below="@+id/txtQuestions" />
 
     <EditText
         android:layout_width="match_parent"
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:text="A"
             android:id="@+id/radAnsA"
-            android:checked="false" />
+            android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit Your Question!"
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btngood"
         android:layout_gravity="center_horizontal"
         android:textSize="20dp"
         android:layout_alignParentBottom="true"

@@ -31,7 +31,6 @@ INDEX VERSION 1.127+C:\Users\choward8\Documents\GitHub\TriviaApp\.metadata\.plug
 4239370683.index
 3776425001.index
 949515501.index
-2774161934.index
 2491149910.index
 4273654345.index
 3445894199.index

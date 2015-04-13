@@ -119,5 +119,14 @@ public class FakeDatabase implements IDatabase{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public Question changeQuestion(int id, Question newq){
+		for(Question q : questions){
+			if(id == q.getId()){
+				newq.setId(id);
+				return newq;
+			}
+		}
+		return null;
+	}
 }

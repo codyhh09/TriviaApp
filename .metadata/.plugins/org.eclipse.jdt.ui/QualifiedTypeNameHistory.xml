@@ -18,7 +18,6 @@
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.DeleteUser"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.GetAllQuestion"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.GetQuestion"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Model.Question"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.AddQuestion"/>
@@ -30,6 +29,8 @@
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.ChangePass"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.getRandomQuestion"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Model.QuestionType"/>
-<fullyQualifiedTypeName name="edu.ycp.cs482.Model.QuestionApproved"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.UpdateStreak"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Model.QuestionApproved"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.getAllQusetionPending"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.GetAllQuestion"/>
 </qualifiedTypeNameHistroy>

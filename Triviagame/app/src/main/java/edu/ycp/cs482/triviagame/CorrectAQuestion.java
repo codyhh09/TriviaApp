@@ -6,10 +6,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.ycp.cs482.Model.Question;
+import edu.ycp.cs482.controller.DeleteQuestion;
 import edu.ycp.cs482.controller.GetQuestion;
 
 public class CorrectAQuestion extends ActionBarActivity{
@@ -17,8 +20,10 @@ public class CorrectAQuestion extends ActionBarActivity{
     private Intent i;
     private Bundle extras;
     private int id;
-    private TextView question, answer1, answer2, answer3, answer4;
+    private EditText question, answer1, answer2, answer3, answer4;
+    private Button Good, Bad;
     private GetQuestion getquestion = new GetQuestion();
+    private DeleteQuestion deleteQuestion = new DeleteQuestion();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,6 +66,8 @@ public class CorrectAQuestion extends ActionBarActivity{
         answer2 = (EditText) findViewById(R.id.txtAnsB);
         answer3 = (EditText) findViewById(R.id.txtAnsC);
         answer4 = (EditText) findViewById(R.id.txtAnsD);
+        Good = (Button) findViewById(R.id.btngood);
+        Bad = (Button) findViewById(R.id.btnbad);
 
         try{
             q = getquestion.execute(id).get();
@@ -73,5 +80,31 @@ public class CorrectAQuestion extends ActionBarActivity{
         answer2.setText(q.getAnswer2());
         answer3.setText(q.getAnswer3());
         answer4.setText(q.getAnswer4());
+
+        Good.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        Bad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    deleteQuestion.execute(q.getId());
+                    i = new Intent(getApplicationContext(), ModPage.class);
+                    startActivity(i);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
 }

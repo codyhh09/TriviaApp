@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,11 +38,8 @@ public class MenuPage extends ActionBarActivity {
             lose = extras.getBoolean("lose");
         } else {
             username= (String) savedInstanceState.getSerializable("name");
-            lose= (boolean) savedInstanceState.getSerializable("lose");
+            lose = (boolean) savedInstanceState.getSerializable("lose");
         }
-
-        Toast.makeText(MenuPage.this,username,Toast.LENGTH_SHORT).show();
-
         setContentView(R.layout.activity_main);
         startgame = (Button) findViewById(R.id.btnStart);
         Again = (TextView) findViewById(R.id.Resumetxt);
@@ -128,5 +126,10 @@ public class MenuPage extends ActionBarActivity {
                 Again.setVisibility(View.INVISIBLE);
             }
         }.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
 }

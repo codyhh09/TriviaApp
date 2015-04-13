@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.os.PersistableBundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class MainActivity extends ActionBarActivity {
     private String name, password;
     private int counter = 3;
     private EditText name1, password1;
+    private CountDownTimer countDownTimer;
     private TextView attemps;
     private Button Signup,Signin;
     private Intent i;
@@ -146,7 +148,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void SignbackIn(){
-        new CountDownTimer(TIMER, 1000)
+        countDownTimer = new CountDownTimer(TIMER, 1000)
         {
             public void onTick(long millisUntilFinished)
             {
@@ -154,6 +156,7 @@ public class MainActivity extends ActionBarActivity {
                         TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                moveTaskToBack(true);
             }
 
             public void onFinish()
@@ -163,8 +166,18 @@ public class MainActivity extends ActionBarActivity {
                 attemps.setBackgroundColor(Color.WHITE);
                 counter = 2;
                 attemps.setText(Attempts + Integer.toString(counter));
+                moveTaskToBack(false);
             }
         }.start();
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+    }
 }

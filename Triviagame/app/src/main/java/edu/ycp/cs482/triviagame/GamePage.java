@@ -13,19 +13,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.ycp.cs482.Model.Question;
+import edu.ycp.cs482.controller.GerRandomQuestion;
 import edu.ycp.cs482.controller.GetQuestion;
 import edu.ycp.cs482.controller.UpdateStreak;
 
 public class GamePage extends ActionBarActivity {
     private int streak;
     private String username;
-    private TextView question, currstreak;
+    private TextView question, currstreak, creator;
     private boolean lose = false;
     private Button AnswerA, AnswerB, AnswerC, AnswerD;
     private Question q = new Question();
     private Intent i;
     private Bundle extras;
-    private GetQuestion controller = new GetQuestion();
+    private GerRandomQuestion controller = new GerRandomQuestion();
     private UpdateStreak updateStreak = new UpdateStreak();
     final int TIMER = 21000;
 
@@ -69,6 +70,7 @@ public class GamePage extends ActionBarActivity {
         setContentView(R.layout.action_page);
         currstreak = (TextView) findViewById(R.id.lblStreak);
         question = (TextView) findViewById(R.id.lblQuestion);
+        creator = (TextView) findViewById(R.id.lblOwner);
         AnswerA = (Button) findViewById(R.id.btnAnsA);
         AnswerB = (Button) findViewById(R.id.btnAnsB);
         AnswerC = (Button) findViewById(R.id.btnAnsC);
@@ -84,6 +86,7 @@ public class GamePage extends ActionBarActivity {
         AnswerB.setText(q.getAnswer2());
         AnswerC.setText(q.getAnswer3());
         AnswerD.setText(q.getAnswer4());
+        creator.setText(creator.getText().toString() + q.getCreator());
         currstreak.setText(currstreak.getText().toString() + streak);
         final CountDownTimer timer = new CountDownTimer(TIMER, 1000)
         {
@@ -193,5 +196,10 @@ public class GamePage extends ActionBarActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
 }

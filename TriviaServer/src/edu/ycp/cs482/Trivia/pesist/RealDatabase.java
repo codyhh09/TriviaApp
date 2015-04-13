@@ -492,6 +492,13 @@ public class RealDatabase implements IDatabase{
 			}
 		});
 	}
+	
+
+	@Override
+	public Question changeQuestion(int id, Question newq) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public boolean deleteQuestion(int id) {

@@ -76,7 +76,7 @@ public class ModPage extends ActionBarActivity {
         lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
-                id = arg2;
+                id = question[arg2].getId();
                 i = new Intent(getApplicationContext(), CorrectAQuestion.class);
                 i.putExtra("id", id);
                 startActivity(i);

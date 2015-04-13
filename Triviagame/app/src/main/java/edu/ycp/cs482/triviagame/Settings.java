@@ -127,6 +127,11 @@ public class Settings extends ActionBarActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }
 
 

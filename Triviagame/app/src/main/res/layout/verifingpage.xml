@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Verify the Question:"
-        android:id="@+id/Questiontxt"
+        android:id="@+id/Questiontxts"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtQuestion"
         android:hint="Question"
-        android:layout_below="@+id/Questiontxt"
+        android:layout_below="@+id/Questiontxts"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -33,7 +33,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtAnsA"
+        android:id="@+id/txtAnsAs"
         android:hint="Answer A"
         android:layout_below="@+id/textView11"
         android:layout_alignParentLeft="true"
@@ -42,27 +42,27 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtAnsB"
+        android:id="@+id/txtAnsBs"
         android:hint="Answer B"
-        android:layout_below="@+id/txtAnsA"
+        android:layout_below="@+id/txtAnsAs"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtAnsC"
+        android:id="@+id/txtAnsCs"
         android:hint="Answer C"
-        android:layout_below="@+id/txtAnsB"
+        android:layout_below="@+id/txtAnsBs"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtAnsD"
+        android:id="@+id/txtAnsDs"
         android:hint="Answer D"
-        android:layout_below="@+id/txtAnsC"
+        android:layout_below="@+id/txtAnsCs"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -73,7 +73,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Correct Answer:"
         android:id="@+id/textView12"
-        android:layout_below="@+id/txtAnsD"
+        android:layout_below="@+id/txtAnsDs"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:text="A"
             android:id="@+id/radAnsA"
-            android:checked="false" />
+            android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -125,26 +125,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Good"
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btngood"
         android:layout_gravity="center_horizontal"
         android:textSize="20dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/Questiontxt"
-        android:layout_alignEnd="@+id/Questiontxt" />
+        android:layout_toLeftOf="@+id/btnbad"
+        android:layout_toStartOf="@+id/btnbad" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bad"
-        android:id="@+id/button"
-        android:layout_alignBottom="@+id/btnSubmit"
+        android:id="@+id/btnbad"
+        android:layout_alignBottom="@+id/btngood"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/textView11"
-        android:layout_toRightOf="@+id/textView11"
-        android:textSize="20dp" />
+        android:layout_toEndOf="@+id/Questiontxts"
+        android:textSize="20dp"
+        android:layout_toRightOf="@+id/Questiontxts" />
 
 
 </RelativeLayout>

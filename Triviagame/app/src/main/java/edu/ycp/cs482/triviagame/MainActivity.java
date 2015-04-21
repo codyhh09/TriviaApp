@@ -7,7 +7,9 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.CountDownTimer;
@@ -44,6 +46,7 @@ public class MainActivity extends ActionBarActivity {
     public static final String userkey = "nameKey";
     public static final String Attempts = "Attempts left: ";
     SharedPreferences sharedpreferences;
+    public static final int NOTIFICATION_ID = 1;
     private boolean truth;
     final int TIMER = 3600000;
     private NotificationManager nm;
@@ -148,7 +151,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void SignbackIn(){
-        countDownTimer = new CountDownTimer(TIMER, 1000)
+        countDownTimer = new CountDownTimer(5000, 1000)
         {
             public void onTick(long millisUntilFinished)
             {
@@ -167,6 +170,7 @@ public class MainActivity extends ActionBarActivity {
                 counter = 2;
                 attemps.setText(Attempts + Integer.toString(counter));
                 moveTaskToBack(false);
+                notification();
             }
         }.start();
     }
@@ -179,5 +183,28 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+    }
+
+    private void notification(){
+        i= new Intent(getApplicationContext(), MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+
+        builder.setSmallIcon(R.drawable.ic_action_new);
+
+        builder.setContentIntent(pendingIntent);
+
+        builder.setAutoCancel(true);
+
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+
+        builder.setContentTitle("Play Again?");
+        builder.setContentText("It's Trivia Time!");
+
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(
+                NOTIFICATION_SERVICE);
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 }

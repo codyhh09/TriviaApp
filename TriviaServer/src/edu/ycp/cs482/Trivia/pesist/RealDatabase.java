@@ -495,9 +495,185 @@ public class RealDatabase implements IDatabase{
 	
 
 	@Override
-	public Question changeQuestion(int id, Question newq) {
-		// TODO Auto-generated method stub
-		return null;
+	public void changeQuestion(int id, String question) {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update questions set questions.question = ? where questions.id=?");
+					
+					stmt.setString(1, question);
+					stmt.setInt(2,  id);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated question");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void changeStatus(int id) {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update questions set questions.approved = ? where questions.id=?");
+					
+					stmt.setInt(1, QuestionApproved.ACCEPTED.ordinal());
+					stmt.setInt(2,  id);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated question");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void changeQuestionpt1(int id, String answer1) {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update questions set questions.answer1=? where questions.id=?");
+					
+					stmt.setString(1, answer1);
+					stmt.setInt(2, id);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated question");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void changeQuestionpt2(int id, String answer2) {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update questions set questions.answer2=? where questions.id=?");
+					
+					stmt.setString(1, answer2);
+					stmt.setInt(2,  id);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated question");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void changeQuestionpt3(int id, String answer3) {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update questions set questions.answer3=? where questions.id=?");
+					
+					stmt.setString(1, answer3);
+					stmt.setInt(2,  id);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated question");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void changeQuestionpt4(int id, String answer4) {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update questions set questions.answer4=? where questions.id=?");
+					
+					stmt.setString(1, answer4);
+					stmt.setInt(2,  id);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated question");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void changeQuestionpt5(int id, String answerfinal) {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update questions set questions.finalanswer=? where questions.id=?");
+					
+					stmt.setString(1, answerfinal);
+					stmt.setInt(2, id);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated question");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
 	}
 
 	@Override

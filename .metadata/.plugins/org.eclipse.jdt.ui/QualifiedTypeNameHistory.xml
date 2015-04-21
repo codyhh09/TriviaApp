@@ -19,7 +19,6 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.GetQuestion"/>
-<fullyQualifiedTypeName name="edu.ycp.cs482.Model.Question"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.AddQuestion"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.DeleteQuestion"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Model.User"/>
@@ -33,4 +32,12 @@
 <fullyQualifiedTypeName name="edu.ycp.cs482.Model.QuestionApproved"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.getAllQusetionPending"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.GetAllQuestion"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Model.Question"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.ChangeQuestion"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.changeAnswer1"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.changeAnswer4"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.changeAnswer3"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.changeAnswer2"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.changeFinalAnswer"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.ChangeStatus"/>
 </qualifiedTypeNameHistroy>

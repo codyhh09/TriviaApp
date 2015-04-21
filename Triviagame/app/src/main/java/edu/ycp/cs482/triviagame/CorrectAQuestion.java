@@ -9,9 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import edu.ycp.cs482.Model.Question;
+import edu.ycp.cs482.controller.ChangeAnswer1;
+import edu.ycp.cs482.controller.ChangeAnswer2;
+import edu.ycp.cs482.controller.ChangeAnswer3;
+import edu.ycp.cs482.controller.ChangeAnswer4;
+import edu.ycp.cs482.controller.ChangeFinalAnswer;
+import edu.ycp.cs482.controller.ChangeQuestion;
+import edu.ycp.cs482.controller.ChangeStatus;
 import edu.ycp.cs482.controller.DeleteQuestion;
 import edu.ycp.cs482.controller.GetQuestion;
 
@@ -19,11 +27,22 @@ public class CorrectAQuestion extends ActionBarActivity{
     private Question q = new Question();
     private Intent i;
     private Bundle extras;
-    private int id;
+    private int id, choose=1;
     private EditText question, answer1, answer2, answer3, answer4;
     private Button Good, Bad;
+    private String answer;
+    private RadioGroup rg;
     private GetQuestion getquestion = new GetQuestion();
     private DeleteQuestion deleteQuestion = new DeleteQuestion();
+    private ChangeQuestion changeQuestion = new ChangeQuestion();
+    private ChangeAnswer1 changeAnswer1 = new ChangeAnswer1();
+    private ChangeAnswer2 changeAnswer2 = new ChangeAnswer2();
+    private ChangeAnswer3 changeAnswer3 = new ChangeAnswer3();
+    private ChangeAnswer4 changeAnswer4 = new ChangeAnswer4();
+    private ChangeFinalAnswer changeFinalAnswer = new ChangeFinalAnswer();
+    private ChangeStatus changeStatus = new ChangeStatus();
+
+    // make the spinner
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,13 +80,14 @@ public class CorrectAQuestion extends ActionBarActivity{
             id = (Integer) savedInstanceState.getSerializable("id");
         }
 
-        question = (EditText) findViewById(R.id.txtQuestion);
-        answer1 = (EditText) findViewById(R.id.txtAnsA);
-        answer2 = (EditText) findViewById(R.id.txtAnsB);
-        answer3 = (EditText) findViewById(R.id.txtAnsC);
-        answer4 = (EditText) findViewById(R.id.txtAnsD);
+        question = (EditText) findViewById(R.id.txtQuestions);
+        answer1 = (EditText) findViewById(R.id.txtAnsAs);
+        answer2 = (EditText) findViewById(R.id.txtAnsBs);
+        answer3 = (EditText) findViewById(R.id.txtAnsCs);
+        answer4 = (EditText) findViewById(R.id.txtAnsDs);
         Good = (Button) findViewById(R.id.btngood);
         Bad = (Button) findViewById(R.id.btnbad);
+        rg = (RadioGroup) findViewById(R.id.radioGroup1);
 
         try{
             q = getquestion.execute(id).get();
@@ -81,10 +101,61 @@ public class CorrectAQuestion extends ActionBarActivity{
         answer3.setText(q.getAnswer3());
         answer4.setText(q.getAnswer4());
 
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.radAnsA1:
+                        choose = 1;
+                        break;
+                    case R.id.radAnsB1:
+                        choose = 2;
+                        break;
+                    case R.id.radAnsC1:
+                        choose = 3;
+                        break;
+                    case R.id.radAnsD1:
+                        choose = 4;
+                        break;
+                }
+            }
+        });
+
         Good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (answer1.getText().toString() != "" && answer2.getText().toString() != "" && answer3.getText().toString() != "" && answer4.getText().toString() != "" && question.getText().toString() != "" && choose != 0){
+                    switch (choose) {
+                        case 1:
+                            answer = answer1.getText().toString();
+                            break;
+                        case 2:
+                            answer = answer2.getText().toString();
+                            break;
+                        case 3:
+                            answer = answer3.getText().toString();
+                            break;
+                        case 4:
+                            answer = answer4.getText().toString();
+                            break;
+                    }
+                    try {
+                        if(changeQuestion.execute(Integer.toString(q.getId()), question.getText().toString()).get() &&
+                                changeAnswer1.execute(Integer.toString(q.getId()), answer1.getText().toString()).get()&&
+                                changeAnswer2.execute(Integer.toString(q.getId()), answer2.getText().toString()).get()&&
+                                changeAnswer3.execute(Integer.toString(q.getId()), answer3.getText().toString()).get()&&
+                                changeAnswer4.execute(Integer.toString(q.getId()), answer4.getText().toString()).get()&&
+                                changeFinalAnswer.execute(Integer.toString(q.getId()), answer).get()&&
+                                changeStatus.execute(Integer.toString(q.getId())).get()){
+                            i = new Intent(getApplicationContext(), ModPage.class);
+                            startActivity(i);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(CorrectAQuestion.this, "Fill in all of the entries!!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

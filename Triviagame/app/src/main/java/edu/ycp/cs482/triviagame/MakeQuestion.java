@@ -57,16 +57,18 @@ public class MakeQuestion extends ActionBarActivity{
         if (savedInstanceState == null) {
             extras = getIntent().getExtras();
             username = extras.getString("name");
+            lose = extras.getBoolean("lose");
         } else {
             username = (String) savedInstanceState.getSerializable("name");
+            lose = (Boolean) savedInstanceState.getSerializable("lose");
         }
 
         setContentView(R.layout.add_question);
         question = (EditText) findViewById(R.id.txtQuestions);
-        answerA = (EditText) findViewById(R.id.txtAnsAs);
-        answerB = (EditText) findViewById(R.id.txtAnsBs);
-        answerC = (EditText) findViewById(R.id.txtAnsCs);
-        answerD = (EditText) findViewById(R.id.txtAnsDs);
+        answerA = (EditText) findViewById(R.id.txtAnsA);
+        answerB = (EditText) findViewById(R.id.txtAnsB);
+        answerC = (EditText) findViewById(R.id.txtAnsC);
+        answerD = (EditText) findViewById(R.id.txtAnsD);
         submit = (Button) findViewById(R.id.btngood);
         rg = (RadioGroup) findViewById(R.id.radioGroup);
 
@@ -94,40 +96,38 @@ public class MakeQuestion extends ActionBarActivity{
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                qe = question.getText().toString();
-                a1 = answerA.getText().toString();
-                a2 = answerB.getText().toString();
-                a3 = answerC.getText().toString();
-                a4 = answerD.getText().toString();
-
+            qe = question.getText().toString();
+            a1 = answerA.getText().toString();
+            a2 = answerB.getText().toString();
+            a3 = answerC.getText().toString();
+            a4 = answerD.getText().toString();
+            if (qe != "" && a1 != "" && a2 != "" && a3 != "" && a4 != "" && choose != 0){
                 try {
-                    if (qe != null && a1 != null && a2 != null && a3 != null && a4 != null && choose != 0){
-                        switch(choose){
-                            case 1:
-                                answer =  answerA.getText().toString();
-                                break;
-                            case 2:
-                                answer = answerB.getText().toString();
-                                break;
-                            case 3:
-                                answer = answerC.getText().toString();
-                                break;
-                            case 4:
-                                answer = answerD.getText().toString();
-                                break;
-                        }
-                        addquestion.execute(question.getText().toString(), answerA.getText().toString(), answerB.getText().toString(), answerC.getText().toString(), answerD.getText().toString(), answer, username);
-                        i = new Intent(getApplicationContext(), CorrectAQuestion.class);
-                        i.putExtra("name", username);
-                        i.putExtra("lose", lose);
-                        startActivity(i);
-                    }else {
-                        Toast.makeText(MakeQuestion.this, "Fill in all of the entries!!", Toast.LENGTH_SHORT).show();
+                    switch(choose){
+                        case 1:
+                            answer =  answerA.getText().toString();
+                            break;
+                        case 2:
+                            answer = answerB.getText().toString();
+                            break;
+                        case 3:
+                            answer = answerC.getText().toString();
+                            break;
+                        case 4:
+                            answer = answerD.getText().toString();
+                            break;
                     }
+                    addquestion.execute(question.getText().toString(), answerA.getText().toString(), answerB.getText().toString(), answerC.getText().toString(), answerD.getText().toString(), answer, username);
+                    i = new Intent(getApplicationContext(), CorrectAQuestion.class);
+                    i.putExtra("name", username);
+                    i.putExtra("lose", lose);
+                    startActivity(i);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
+            }else {
+                Toast.makeText(MakeQuestion.this, "Fill in all of the entries!!", Toast.LENGTH_SHORT).show();
+            }
             }
         });
     }

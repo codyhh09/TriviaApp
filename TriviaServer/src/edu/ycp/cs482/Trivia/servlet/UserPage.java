@@ -122,7 +122,7 @@ public class UserPage extends HttpServlet{
 		// Return the item in JSON format
 		JSON.getObjectMapper().writeValue(resp.getWriter(), pathInfo);
 	}
-	// not finished
+	
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, JsonGenerationException, JsonMappingException {
 		String pathInfo = req.getPathInfo();

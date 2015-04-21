@@ -16,7 +16,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtQuestion"
+        android:id="@+id/txtQuestions"
         android:hint="Question"
         android:layout_below="@+id/Questiontxts"
         android:layout_alignParentLeft="true"
@@ -28,7 +28,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Possible Answers:"
         android:id="@+id/textView11"
-        android:layout_below="@+id/txtQuestion" />
+        android:layout_below="@+id/txtQuestions" />
 
     <EditText
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/radioGroup"
+        android:id="@+id/radioGroup1"
         android:layout_below="@+id/textView12"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -90,23 +90,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="A"
-            android:id="@+id/radAnsA"
+            android:id="@+id/radAnsA1"
             android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="B"
-            android:id="@+id/radAnsB"
+            android:id="@+id/radAnsB1"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="C"
-            android:id="@+id/radAnsC"
+            android:id="@+id/radAnsC1"
             android:checked="false"
-            android:layout_below="@+id/radioGroup"
+            android:layout_below="@+id/radioGroup1"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -114,9 +114,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="D"
-            android:id="@+id/radAnsD"
+            android:id="@+id/radAnsD1"
             android:checked="false"
-            android:layout_below="@+id/radioGroup"
+            android:layout_below="@+id/radioGroup1"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -124,7 +124,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Good"
+        android:text="Accept"
         android:id="@+id/btngood"
         android:layout_gravity="center_horizontal"
         android:textSize="20dp"
@@ -137,7 +137,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bad"
+        android:text="Delete"
         android:id="@+id/btnbad"
         android:layout_alignBottom="@+id/btngood"
         android:layout_alignParentRight="true"

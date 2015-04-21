@@ -129,4 +129,46 @@ public class FakeDatabase implements IDatabase{
 		}
 		return null;
 	}
+
+	@Override
+	public void changeQuestionpt1(int id, String answer1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeQuestionpt2(int id, String answer2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeQuestionpt3(int id, String answer3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeQuestionpt4(int id, String answer4) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeQuestionpt5(int id, String answerfinal) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeQuestion(int id, String question) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeStatus(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -35,5 +35,17 @@ public interface IDatabase {
 	
 	public boolean deleteQuestion(int id);
 	
-	public Question changeQuestion(int id, Question newq);
+	public void changeStatus(int id);
+	
+	public void changeQuestion(int id, String question);
+	
+	public void changeQuestionpt1(int id, String answer1);
+	
+	public void changeQuestionpt2(int id, String answer2);
+	
+	public void changeQuestionpt3(int id, String answer3);
+	
+	public void changeQuestionpt4(int id, String answer4);
+	
+	public void changeQuestionpt5(int id, String answerfinal);
 }

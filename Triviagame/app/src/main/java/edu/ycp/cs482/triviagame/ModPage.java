@@ -83,4 +83,9 @@ public class ModPage extends ActionBarActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

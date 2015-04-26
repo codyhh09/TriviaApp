@@ -13,19 +13,16 @@ import android.app.ActionBar;
 
 import edu.ycp.cs482.controller.AddQuestion;
 
-//This page is where the questions will be displayed and answered.  There is a timer to countdown time.
-public class MenuPage extends ActionBarActivity {
-    private Button startgame, Shop;
+public class ShopPage extends ActionBarActivity {
+    private Button sc;
     private Bundle extras;
-    private int streak = 1;
+    private int streak;
     private Intent i;
     private String username;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //getSupportActionBar().setIcon(R.drawable.ic_action_help);
 
         if (savedInstanceState == null) {
             extras = getIntent().getExtras();
@@ -34,29 +31,13 @@ public class MenuPage extends ActionBarActivity {
             username= (String) savedInstanceState.getSerializable("name");
         }
 
-        Toast.makeText(MenuPage.this,username,Toast.LENGTH_SHORT).show();
+        setContentView(R.layout.shop_page);
+        sc = (Button) findViewById(R.id.btnSC);
 
-        setContentView(R.layout.activity_main);
-        startgame = (Button) findViewById(R.id.btnStart);
-        Shop = (Button) findViewById(R.id.btnShop);
-
-        startgame.setOnClickListener(new View.OnClickListener(){
+        sc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                i = new Intent(getApplicationContext(), GamePage.class);
-                i.putExtra("name", username);
-                i.putExtra("streak", streak);
-                startActivity(i);
-            }
-        });
-
-        Shop.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                i = new Intent(getApplicationContext(), ShopPage.class);
-                i.putExtra("name", username);
-                i.putExtra("streak", streak);
-                startActivity(i);
+                //TODO: gain continues
             }
         });
     }

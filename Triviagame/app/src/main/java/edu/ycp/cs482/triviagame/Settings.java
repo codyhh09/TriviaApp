@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.controller.AddQuestion;
 import edu.ycp.cs482.controller.ChangePassword;
 import edu.ycp.cs482.controller.ChangeUser;
 import edu.ycp.cs482.controller.DeleteUser;
@@ -99,6 +100,9 @@ public class Settings extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.addQ:
+                i = new Intent(getApplicationContext(), MakeQuestion.class);
+                i.putExtra("name", username);
+                startActivity(i);
                 return true;
             case R.id.main:
                 i = new Intent(getApplicationContext(), MenuPage.class);

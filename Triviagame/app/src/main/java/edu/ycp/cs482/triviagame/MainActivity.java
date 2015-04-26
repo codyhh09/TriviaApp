@@ -1,9 +1,11 @@
 package edu.ycp.cs482.triviagame;
 
 import android.app.ActionBar;
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
@@ -11,6 +13,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.PersistableBundle;
+import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -23,28 +26,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import edu.ycp.cs482.controller.LoginUser;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity{
     private String name, password;
     private int counter = 3;
     private EditText name1, password1;
-    private CountDownTimer countDownTimer;
     private TextView attemps;
     private Button Signup,Signin;
     private Intent i;
-    private Bundle b;
     private boolean lose = false;
-    public static final String MyPREFERENCES = "MyPrefs" ;
-    public static final String userkey = "nameKey";
     public static final String Attempts = "Attempts left: ";
-    SharedPreferences sharedpreferences;
-    public static final int NOTIFICATION_ID = 1;
     private boolean truth;
-    final int TIMER = 3600000;
-    private NotificationManager nm;
+    private CountDownTimer timer;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,19 +70,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onResume() {
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        if(sharedpreferences.contains(userkey)){
-            i = new Intent(getApplicationContext(), MenuPage.class);
-            i.putExtra("name", name);
-            startActivity(i);
-        }
-        super.onResume();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState!=null){
+            counter = savedInstanceState.getInt("Count");
+        }
         setContentView(R.layout.login_page);
         name1 = (EditText) findViewById(R.id.txtUser);
         password1 = (EditText) findViewById(R.id.txtPass);
@@ -110,10 +101,7 @@ public class MainActivity extends ActionBarActivity {
                         i = new Intent(getApplicationContext(), ModPage.class);
                         startActivity(i);
                     }else {
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
                         i = new Intent(getApplicationContext(), MenuPage.class);
-                        editor.putString("name", name);
-                        editor.commit();
                         i.putExtra("name", name);
                         i.putExtra("lose", lose);
                         startActivity(i);
@@ -125,8 +113,6 @@ public class MainActivity extends ActionBarActivity {
                     counter--;
                     attemps.setText(Attempts + Integer.toString(counter));
                     if(counter==0){
-                        Signin.setEnabled(false);
-                        Signup.setEnabled(false);
                         SignbackIn();
                     }
 
@@ -138,7 +124,6 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-
                 i = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(i);
             }
@@ -146,7 +131,35 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void SignbackIn(){
-        countDownTimer = new CountDownTimer(5000, 1000)
+
+        Signin.setEnabled(false);
+        Signup.setEnabled(false);
+
+        Long alert = new GregorianCalendar().getTimeInMillis()+5*1000;
+        Long millisUntilFinished = alert - System.currentTimeMillis();
+        i = new Intent(this, AlertReceiver.class);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alert, PendingIntent.getBroadcast(this, 1, i, PendingIntent.FLAG_UPDATE_CURRENT));
+
+        timer = new CountDownTimer(millisUntilFinished, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                attemps.setText(""+String.format("%d min : %d sec",
+                        TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
+
+            @Override
+            public void onFinish() {
+                Signin.setEnabled(true);
+                Signup.setEnabled(true);
+                counter+=2;
+                attemps.setText(Attempts + Integer.toString(counter));
+            }
+        }.start();
+
+        /*countDownTimer = new CountDownTimer(5000, 1000)
         {
             public void onTick(long millisUntilFinished)
             {
@@ -167,50 +180,26 @@ public class MainActivity extends ActionBarActivity {
                 moveTaskToBack(false);
                 notification();
             }
-        }.start();
+        }.start();*/
     }
 
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-    }
-
-    private void notification(){
-        i= new Intent(getApplicationContext(), MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-
-        builder.setSmallIcon(R.drawable.ic_action_new);
-
-        builder.setContentIntent(pendingIntent);
-
-        builder.setAutoCancel(true);
-
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
-
-        builder.setContentTitle("Play Again?");
-        builder.setContentText("It's Trivia Time!");
-
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(
-                NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
+        outState.putInt("Count", counter);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        counter = savedInstanceState.getInt("Count");
+    }
+
+    @Override
+         public void onBackPressed() {
+        //super.onBackPressed();
     }
 
 }

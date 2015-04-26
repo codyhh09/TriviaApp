@@ -82,12 +82,6 @@ public class StatPage extends ActionBarActivity {
             case R.id.log_out:
                 //METHOD THAT EXECUTES LOG-OUT SEQUENCE GOES HERE!
                 i = new Intent(getApplicationContext(), MainActivity.class);
-                SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.clear();
-                editor.commit();
-                moveTaskToBack(true);
-                StatPage.this.finish();
                 startActivity(i);
                 return true;
             default:

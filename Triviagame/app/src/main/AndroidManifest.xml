@@ -51,6 +51,8 @@
             android:name="edu.ycp.cs482.triviagame.StatPage"
             android:label="User's stats">
         </activity>
+        <receiver android:name=".AlertReceiver"></receiver>
+        <receiver android:name=".GameAlertReciever"></receiver>
     </application>
 
 </manifest>

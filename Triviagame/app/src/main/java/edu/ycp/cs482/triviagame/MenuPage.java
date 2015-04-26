@@ -1,26 +1,24 @@
 package edu.ycp.cs482.triviagame;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.PersistableBundle;
 import android.support.v4.app.NotificationCompat;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.view.MenuInflater;
 import android.support.v7.app.ActionBarActivity;
 
+import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 //This page is where the questions will be displayed and answered.  There is a timer to countdown time.
@@ -32,7 +30,7 @@ public class MenuPage extends ActionBarActivity {
     private Intent i;
     private String username;
     private boolean lose = false;
-    final int TIMER = 3600000;
+    private CountDownTimer timer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,42 +117,26 @@ public class MenuPage extends ActionBarActivity {
     }
 
     private void Playagain() {
-        new CountDownTimer(TIMER, 1000) {
+        Long alert = new GregorianCalendar().getTimeInMillis()+5*1000;
+        Long millisUntilFinished = alert - System.currentTimeMillis();
+        i = new Intent(this, GameAlertReciever.class);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alert, PendingIntent.getBroadcast(this, 1, i, PendingIntent.FLAG_UPDATE_CURRENT));
+        timer = new CountDownTimer(millisUntilFinished, 1000) {
+            @Override
             public void onTick(long millisUntilFinished) {
-                Again.setText(Again.getText().toString().substring(0, 14) + " " + String.format("%d min : %d sec",
-                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                Again.setText(""+String.format("%d min : %d sec",
+                        TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
                                 TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
             }
 
+            @Override
             public void onFinish() {
                 startgame.setEnabled(true);
                 Again.setVisibility(View.INVISIBLE);
-                notification();
             }
         }.start();
-    }
-
-    private void notification(){
-        i= new Intent(getApplicationContext(), MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-
-        builder.setSmallIcon(R.drawable.ic_action_new);
-
-        builder.setContentIntent(pendingIntent);
-
-        builder.setAutoCancel(true);
-
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
-
-        builder.setContentTitle("Play Again?");
-        builder.setContentText("It's Trivia Time!");
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(
-                NOTIFICATION_SERVICE);
-        notificationManager.notify(1, builder.build());
     }
 
     @Override
@@ -162,5 +144,8 @@ public class MenuPage extends ActionBarActivity {
         //super.onBackPressed();
     }
 
-
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
 }

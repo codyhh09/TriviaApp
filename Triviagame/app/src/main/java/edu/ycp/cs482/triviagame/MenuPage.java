@@ -48,7 +48,6 @@ public class MenuPage extends ActionBarActivity {
         stat = (Button) findViewById(R.id.btnStats);
         Again = (TextView) findViewById(R.id.Resumetxt);
 
-
         if(lose){
             Again.setVisibility(View.VISIBLE);
             startgame.setEnabled(false);

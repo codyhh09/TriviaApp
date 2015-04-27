@@ -18,12 +18,14 @@ import android.widget.TextView;
 import android.view.MenuInflater;
 import android.support.v7.app.ActionBarActivity;
 
+import edu.ycp.cs482.controller.AddQuestion;
+
 import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 //This page is where the questions will be displayed and answered.  There is a timer to countdown time.
 public class MenuPage extends ActionBarActivity {
-    private Button startgame, stat;
+    private Button startgame, Shop, stat;
     private TextView Again;
     private Bundle extras;
     private int streak = 1;
@@ -33,8 +35,42 @@ public class MenuPage extends ActionBarActivity {
     private CountDownTimer timer;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                i = new Intent(getApplicationContext(), Settings.class);
+                i.putExtra("name", username);
+                i.putExtra("lose", lose);
+                startActivity(i);
+                break;
+            case R.id.addQ:
+                i = new Intent(getApplicationContext(), MakeQuestion.class);
+                i.putExtra("name", username);
+                i.putExtra("lose", lose);
+                startActivity(i);
+                return true;
+            case R.id.log_out:
+                //METHOD THAT EXECUTES LOG-OUT SEQUENCE GOES HERE!
+                i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (savedInstanceState == null) {
             extras = getIntent().getExtras();
             username= extras.getString("name");
@@ -43,10 +79,12 @@ public class MenuPage extends ActionBarActivity {
             username= (String) savedInstanceState.getSerializable("name");
             lose = (boolean) savedInstanceState.getSerializable("lose");
         }
+        
         setContentView(R.layout.activity_main);
         startgame = (Button) findViewById(R.id.btnStart);
         stat = (Button) findViewById(R.id.btnStats);
         Again = (TextView) findViewById(R.id.Resumetxt);
+        Shop = (Button) findViewById(R.id.btnShop);
 
         if(lose){
             Again.setVisibility(View.VISIBLE);
@@ -76,43 +114,16 @@ public class MenuPage extends ActionBarActivity {
                 startActivity(i);
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        getSupportActionBar().setIcon(R.drawable.ic_action_help);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.settings:
-                i = new Intent(getApplicationContext(), Settings.class);
+        Shop.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                i = new Intent(getApplicationContext(), ShopPage.class);
                 i.putExtra("name", username);
                 i.putExtra("lose", lose);
                 startActivity(i);
-                return true;
-            case R.id.addQ:
-                i = new Intent(getApplicationContext(), MakeQuestion.class);
-                i.putExtra("name", username);
-                i.putExtra("lose", lose);
-                startActivity(i);
-                return true;
-            case R.id.log_out:
-                //METHOD THAT EXECUTES LOG-OUT SEQUENCE GOES HERE!
-                i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+            }
+        });
     }
 
     private void Playagain() {

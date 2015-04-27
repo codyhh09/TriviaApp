@@ -1,6 +1,5 @@
 package edu.ycp.cs482.triviagame;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;

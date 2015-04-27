@@ -45,6 +45,17 @@ public class MakeQuestion extends ActionBarActivity{
                 i.putExtra("lose", lose);
                 startActivity(i);
                 break;
+            case R.id.main:
+                i = new Intent(getApplicationContext(), MenuPage.class);
+                i.putExtra("name", username);
+                i.putExtra("lose", lose);
+                startActivity(i);
+                return true;
+            case R.id.log_out:
+                //METHOD THAT EXECUTES LOG-OUT SEQUENCE GOES HERE!
+                i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

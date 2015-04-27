@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.controller.AddQuestion;
 import edu.ycp.cs482.controller.ChangePassword;
 import edu.ycp.cs482.controller.ChangeUser;
 import edu.ycp.cs482.controller.DeleteUser;
@@ -21,6 +21,7 @@ public class Settings extends ActionBarActivity {
     private TextView name, pass;
     private Bundle extras;
     private String username;
+    private boolean lose;
     private DeleteUser dltuser = new DeleteUser();
     private ChangeUser changeuser = new ChangeUser();
     private ChangePassword changePassword = new ChangePassword();
@@ -46,10 +47,15 @@ public class Settings extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.addQ:
+                i = new Intent(getApplicationContext(), MakeQuestion.class);
+                i.putExtra("name", username);
+                i.putExtra("lose", lose);
+                startActivity(i);
                 return true;
             case R.id.main:
                 i = new Intent(getApplicationContext(), MenuPage.class);
                 i.putExtra("name", username);
+                i.putExtra("lose", lose);
                 startActivity(i);
                 return true;
             case R.id.log_out:
@@ -68,8 +74,10 @@ public class Settings extends ActionBarActivity {
         if (savedInstanceState == null) {
             extras = getIntent().getExtras();
             username= extras.getString("name");
+            lose = extras.getBoolean("lose");
         } else {
             username= (String) savedInstanceState.getSerializable("name");
+            lose = (boolean) savedInstanceState.getSerializable("lose");
         }
         setContentView(R.layout.settings);
         name = (TextView) findViewById(R.id.chgUser);
@@ -123,6 +131,7 @@ public class Settings extends ActionBarActivity {
             public void onClick(View v) {
                 i = new Intent(getApplicationContext(), MenuPage.class);
                 i.putExtra("name", username);
+                i.putExtra("lose", lose);
                 startActivity(i);
             }
         });
@@ -130,7 +139,10 @@ public class Settings extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        i = new Intent(getApplicationContext(), MenuPage.class);
+        i.putExtra("name", username);
+        i.putExtra("lose", lose);
+        startActivity(i);
     }
 }
 

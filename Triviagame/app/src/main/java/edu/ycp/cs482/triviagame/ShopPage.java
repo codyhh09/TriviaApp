@@ -1,17 +1,52 @@
 package edu.ycp.cs482.triviagame;
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+import android.view.MenuInflater;
+import android.support.v7.app.ActionBarActivity;
+import android.app.ActionBar;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class ShopPage extends ActionBarActivity{
+public class ShopPage extends ActionBarActivity {
+    private Button sc;
+    private Bundle extras;
+    private int streak;
     private Intent i;
     private String username;
     private boolean lose;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState == null) {
+            extras = getIntent().getExtras();
+            username= extras.getString("name");
+            lose = extras.getBoolean("lose");
+        } else {
+            username= (String) savedInstanceState.getSerializable("name");
+            lose = (boolean) savedInstanceState.getSerializable("lose");
+        }
+
+        setContentView(R.layout.shop_page);
+        sc = (Button) findViewById(R.id.btnSC);
+
+        sc.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //TODO: gain continues
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,6 +71,12 @@ public class ShopPage extends ActionBarActivity{
                 return true;
             case R.id.addQ:
                 i = new Intent(getApplicationContext(), MakeQuestion.class);
+                i.putExtra("name", username);
+                i.putExtra("lose", lose);
+                startActivity(i);
+                return true;
+            case R.id.main:
+                i = new Intent(getApplicationContext(), MenuPage.class);
                 i.putExtra("name", username);
                 i.putExtra("lose", lose);
                 startActivity(i);

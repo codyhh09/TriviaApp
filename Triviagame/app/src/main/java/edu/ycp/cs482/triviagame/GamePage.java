@@ -1,5 +1,6 @@
 package edu.ycp.cs482.triviagame;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -196,10 +197,5 @@ public class GamePage extends ActionBarActivity {
                 }
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
     }
 }

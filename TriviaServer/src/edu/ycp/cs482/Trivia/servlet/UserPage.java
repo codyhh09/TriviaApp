@@ -19,13 +19,14 @@ import edu.ycp.cs482.Trivia.controller.DeleteUser;
 import edu.ycp.cs482.Trivia.controller.GetAllUsers;
 import edu.ycp.cs482.Trivia.controller.GetUser;
 import edu.ycp.cs482.Trivia.controller.LoginUser;
+import edu.ycp.cs482.Trivia.controller.UpdateRetry;
 import edu.ycp.cs482.Trivia.controller.UpdateStreak;
 
 
 public class UserPage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private String user, pass, user1;
-	private int streak;
+	private int streak, retry;
 	private User users;
 	private GetUser getuser = new GetUser();
 	private GetAllUsers getalluser = new GetAllUsers();
@@ -34,6 +35,7 @@ public class UserPage extends HttpServlet{
 	private ChangeUser changeuser = new ChangeUser();
 	private ChangePass changepassword = new ChangePass();
 	private UpdateStreak updateStreak = new UpdateStreak();
+	private UpdateRetry updateretry = new UpdateRetry(); 
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();		
@@ -178,8 +180,19 @@ public class UserPage extends HttpServlet{
 				return;
 			}
 			
+			if (pathInfo.contains("/retry=")){
+				user = pathInfo.substring(0, pathInfo.indexOf('/'));
+				retry = Integer.parseInt(pathInfo.substring(pathInfo.indexOf('=')+1,pathInfo.length()));
 				
-
+				// Set status code and content type
+				resp.setStatus(HttpServletResponse.SC_OK);
+				resp.setContentType("application/json");
+				
+				updateretry.updateretry(user, retry);
+				// writing the operation out.
+				JSON.getObjectMapper().writeValue(resp.getWriter(), retry);
+				return;
+			}
 		}
 	}
 }

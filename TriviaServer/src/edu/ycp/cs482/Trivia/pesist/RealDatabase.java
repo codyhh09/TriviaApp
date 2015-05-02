@@ -276,7 +276,32 @@ public class RealDatabase implements IDatabase{
 				}
 			}
 		});
-		
+	}
+	
+	@Override
+	public void updateRetry(String username, int Retry){
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update users set users.streak = ? where users.username = ?");
+					
+					stmt.setInt(1,  Retry);
+					stmt.setString(2, username);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated Retry");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
 	}
 	
 	@Override
@@ -710,6 +735,7 @@ public class RealDatabase implements IDatabase{
 							"  username varchar(30)," +
 							"  password varchar(30)," +
 							"  streak integer default 0" +
+							"  retry integer default 0" +
 							")"
 					);
 					stmt.executeUpdate();			

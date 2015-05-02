@@ -8,6 +8,7 @@ public class User implements Serializable {
 	private String Username;
 	private String Password;
 	private int streak;
+	private int retry;
 
 	public User() {
 
@@ -17,6 +18,7 @@ public class User implements Serializable {
 		this.Username = Username;
 		this.Password = Password;
 		this.streak = 0;
+		this.retry = 0;
 	}
 
 	public int getId() {
@@ -49,5 +51,13 @@ public class User implements Serializable {
 
 	public void setStreak(int streak) {
 		this.streak = streak;
+	}
+	
+	public int getRetry() {
+		return retry;
+	}
+	
+	public void setRetry(int retry) {
+		this.retry = retry;
 	}
 }

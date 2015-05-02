@@ -67,6 +67,11 @@ public class FakeDatabase implements IDatabase{
 			user.setStreak(Streak);
 		}
 	}
+	
+	public void updateRetry(String username, int Retry){
+		User user = getUser(username);
+		user.setRetry(user.getStreak()+1);
+	}
 	// deleting a user
 	public boolean deleteUser(String user) {
 		for(User temp : users){

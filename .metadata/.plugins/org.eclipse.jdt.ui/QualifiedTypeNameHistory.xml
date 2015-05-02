@@ -40,4 +40,5 @@
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.changeAnswer2"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.changeFinalAnswer"/>
 <fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.ChangeStatus"/>
+<fullyQualifiedTypeName name="edu.ycp.cs482.Trivia.controller.UpdateRetry"/>
 </qualifiedTypeNameHistroy>

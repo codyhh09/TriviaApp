@@ -19,6 +19,8 @@ public interface IDatabase {
 	
 	public void updateStreak(String username, int Streak);
 	
+	public void updateRetry(String username, int Retry);
+	
 	public List<User> getAllUser();
 	
 	public boolean deleteUser(String user);

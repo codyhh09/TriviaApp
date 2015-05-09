@@ -7,10 +7,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.ycp.cs482.Model.Question;
 import edu.ycp.cs482.controller.ChangeAnswer1;
@@ -41,8 +47,13 @@ public class CorrectAQuestion extends ActionBarActivity{
     private ChangeAnswer4 changeAnswer4 = new ChangeAnswer4();
     private ChangeFinalAnswer changeFinalAnswer = new ChangeFinalAnswer();
     private ChangeStatus changeStatus = new ChangeStatus();
-
     // make the spinner
+    private Spinner spinner = (Spinner) findViewById(R.id.spinType);
+
+    public void addListenerOnSpinnerItemSelection() {
+        spinner = (Spinner) findViewById(R.id.spinType);
+        spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -172,6 +183,7 @@ public class CorrectAQuestion extends ActionBarActivity{
 
             }
         });
+
     }
 
     @Override

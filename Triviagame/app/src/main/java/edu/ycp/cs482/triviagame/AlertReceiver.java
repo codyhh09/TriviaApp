@@ -11,13 +11,13 @@ public class AlertReceiver extends BroadcastReceiver{
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        createNotification(context, "Times Up", "5 second has passed", "Alert");
+        createNotification(context, "Times Up", "5 second has passed", "Alert", intent);
 
     }
 
-    public void createNotification(Context context, String msg, String msgText, String msgAlert){
-
-        PendingIntent notificIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
+    public void createNotification(Context context, String msg, String msgText, String msgAlert, Intent intent){
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent notificIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle(msg)

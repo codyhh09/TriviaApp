@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 //This page is where the questions will be displayed and answered.  There is a timer to countdown time.
 public class MenuPage extends ActionBarActivity {
     private Button startgame, Shop, stat;
-    private TextView Again;
     private Bundle extras;
     private int streak = 1;
     private Intent i;
@@ -83,15 +82,12 @@ public class MenuPage extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         startgame = (Button) findViewById(R.id.btnStart);
         stat = (Button) findViewById(R.id.btnStats);
-        Again = (TextView) findViewById(R.id.Resumetxt);
         Shop = (Button) findViewById(R.id.btnShop);
 
         if(lose){
-            Again.setVisibility(View.VISIBLE);
             startgame.setEnabled(false);
             Playagain();
         }else{
-            Again.setVisibility(View.INVISIBLE);
             startgame.setEnabled(true);
         }
 
@@ -135,7 +131,7 @@ public class MenuPage extends ActionBarActivity {
         timer = new CountDownTimer(millisUntilFinished, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Again.setText(""+String.format("%d min : %d sec",
+                startgame.setText(""+String.format("%d min : %d sec",
                         TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
                                 TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
@@ -144,7 +140,8 @@ public class MenuPage extends ActionBarActivity {
             @Override
             public void onFinish() {
                 startgame.setEnabled(true);
-                Again.setVisibility(View.INVISIBLE);
+                startgame.setText("Start Game");
+                lose = false;
             }
         }.start();
     }

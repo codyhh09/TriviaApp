@@ -324,6 +324,8 @@ public class RealDatabase implements IDatabase{
 						user.setId(resultSet.getInt(1));
 						user.setUsername(resultSet.getString(2));
 						user.setPassword(resultSet.getString(3));
+						user.setStreak(resultSet.getInt(4));
+						user.setRetry(resultSet.getInt(5));
 						result.add(user);
 					}
 					
@@ -734,7 +736,7 @@ public class RealDatabase implements IDatabase{
 							"  id integer primary key not null generated always as identity," +
 							"  username varchar(30)," +
 							"  password varchar(30)," +
-							"  streak integer default 0" +
+							"  streak integer default 0," +
 							"  retry integer default 0" +
 							")"
 					);
@@ -799,6 +801,7 @@ public class RealDatabase implements IDatabase{
 		user.setUsername(resultSet.getString(index++));
 		user.setPassword(resultSet.getString(index++));
 		user.setStreak(resultSet.getInt(index++));
+		user.setRetry(resultSet.getInt(index++));
 	}
 	
 	protected void loadQuestion(Question question, ResultSet resultSet, int index) throws SQLException {

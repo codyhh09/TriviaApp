@@ -46,10 +46,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/txtPass"
         android:layout_alignEnd="@+id/txtPass"
-        android:phoneNumber="false"
-        android:focusable="true"
-        android:singleLine="true"/>
-
+        android:inputType="textPersonName"/>
 
     <Button
         android:layout_width="wrap_content"

@@ -16,13 +16,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.controller.GetUser;
+import edu.ycp.cs482.controller.UpdateRetry;
+
 public class ShopPage extends ActionBarActivity {
     private Button sc;
     private Bundle extras;
-    private int streak;
     private Intent i;
     private String username;
+    private User user = new User();
     private boolean lose;
+    private int update;
+    private GetUser getUser = new GetUser();
+    private UpdateRetry updateRetry = new UpdateRetry();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +50,13 @@ public class ShopPage extends ActionBarActivity {
         sc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //TODO: gain continues
+            try {
+                user = getUser.execute(username).get();
+                update = user.getRetry()+1;
+                updateRetry.execute(username, Integer.toString(update));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             }
         });
     }
@@ -90,5 +103,13 @@ public class ShopPage extends ActionBarActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        i = new Intent(getApplicationContext(), MenuPage.class);
+        i.putExtra("name", username);
+        i.putExtra("lose", lose);
+        startActivity(i);
     }
 }

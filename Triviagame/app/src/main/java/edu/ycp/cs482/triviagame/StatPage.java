@@ -86,4 +86,12 @@ public class StatPage extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        i = new Intent(getApplicationContext(), MenuPage.class);
+        i.putExtra("name", username);
+        i.putExtra("lose", lose);
+        startActivity(i);
+    }
 }

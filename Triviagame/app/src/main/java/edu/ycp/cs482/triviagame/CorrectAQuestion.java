@@ -176,6 +176,7 @@ public class CorrectAQuestion extends ActionBarActivity{
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        i = new Intent(getApplicationContext(), ModPage.class);
+        startActivity(i);
     }
 }

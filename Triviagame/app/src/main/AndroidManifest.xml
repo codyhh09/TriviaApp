@@ -13,11 +13,9 @@
             android:label="Trivia" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="edu.ycp.cs482.triviagame.SignUp"
             android:label="Sign Up">

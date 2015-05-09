@@ -1,6 +1,8 @@
 package edu.ycp.cs482.triviagame;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,13 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.ycp.cs482.Model.Question;
+import edu.ycp.cs482.Model.User;
 import edu.ycp.cs482.controller.GerRandomQuestion;
 import edu.ycp.cs482.controller.GetQuestion;
+import edu.ycp.cs482.controller.GetUser;
+import edu.ycp.cs482.controller.UpdateRetry;
 import edu.ycp.cs482.controller.UpdateStreak;
 
 public class GamePage extends ActionBarActivity {
     private int streak;
     private String username;
+    private User user = new User();
     private TextView question, currstreak, creator;
     private boolean lose = false;
     private Button AnswerA, AnswerB, AnswerC, AnswerD;
@@ -29,6 +35,8 @@ public class GamePage extends ActionBarActivity {
     private Bundle extras;
     private GerRandomQuestion controller = new GerRandomQuestion();
     private UpdateStreak updateStreak = new UpdateStreak();
+    private GetUser getUser = new GetUser();
+    private UpdateRetry updateRetry = new UpdateRetry();
     final int TIMER = 21000;
 
 
@@ -79,6 +87,7 @@ public class GamePage extends ActionBarActivity {
 
         try {
             q = controller.execute().get();
+            user = getUser.execute(username).get();
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -101,33 +110,26 @@ public class GamePage extends ActionBarActivity {
             {
                 //Time-out Pop-Up
                 Toast.makeText(GamePage.this, "Time Up!", Toast.LENGTH_SHORT).show();
-                lose = true;
-                updateStreak.execute(username, Integer.toString(streak));
-                i = new Intent(getApplicationContext(), MenuPage.class);
-                i.putExtra("name", username);
-                i.putExtra("lose", lose);
-                startActivity(i);
+                if(user.getRetry()>0) {
+                    wronganswer();
+                }else{
+                    lose = true;
+                    updateStreak.execute(username, Integer.toString(streak));
+                    i = new Intent(getApplicationContext(), MenuPage.class);
+                    i.putExtra("name", username);
+                    i.putExtra("lose", lose);
+                    startActivity(i);
+                }
             }
         }.start();
 
         AnswerA.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                if(q.getFinalAnswer().equals(AnswerA.getText().toString())){
-                    streak++;
-                    timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), GamePage.class);
-                    i.putExtra("name", username);
-                    i.putExtra("streak", streak);
-                    startActivity(i);
-                }else{
-                    Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
-                    timer.cancel();
-                    lose = true;
-                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
-                    i.putExtra("name", username);
-                    i.putExtra("lose", lose);
-                    startActivity(i);
+                if(user.getRetry()>0) {
+                    wronganswer();
+                }else {
+                    answerQuestion(AnswerA, timer, q);
                 }
             }
         });
@@ -135,21 +137,10 @@ public class GamePage extends ActionBarActivity {
         AnswerB.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                if(q.getFinalAnswer().equals(AnswerB.getText().toString())){
-                    streak++;
-                    timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), GamePage.class);
-                    i.putExtra("name", username);
-                    i.putExtra("streak", streak);
-                    startActivity(i);
+                if(user.getRetry()>0) {
+                    wronganswer();
                 }else{
-                    Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
-                    timer.cancel();
-                    lose = true;
-                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
-                    i.putExtra("name", username);
-                    i.putExtra("lose", lose);
-                    startActivity(i);
+                    answerQuestion(AnswerB, timer, q);
                 }
             }
         });
@@ -157,21 +148,10 @@ public class GamePage extends ActionBarActivity {
         AnswerC.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                if(q.getFinalAnswer().equals(AnswerC.getText().toString())){
-                    streak++;
-                    timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), GamePage.class);
-                    i.putExtra("name", username);
-                    i.putExtra("streak", streak);
-                    startActivity(i);
+                if(user.getRetry()>0) {
+                    wronganswer();
                 }else{
-                    Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
-                    timer.cancel();
-                    lose = true;
-                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
-                    i.putExtra("name", username);
-                    i.putExtra("lose", lose);
-                    startActivity(i);
+                    answerQuestion(AnswerC, timer, q);
                 }
             }
         });
@@ -179,23 +159,60 @@ public class GamePage extends ActionBarActivity {
         AnswerD.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                if(q.getFinalAnswer().equals(AnswerD.getText().toString())){
-                    streak++;
-                    timer.cancel();
-                    Intent i = new Intent(getApplicationContext(), GamePage.class);
-                    i.putExtra("name", username);
-                    i.putExtra("streak", streak);
-                    startActivity(i);
+                if(user.getRetry()>0) {
+                    wronganswer();
                 }else{
-                    Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
-                    timer.cancel();
-                    lose = true;
-                    Intent i = new Intent(getApplicationContext(), MenuPage.class);
-                    i.putExtra("name", username);
-                    i.putExtra("lose", lose);
-                    startActivity(i);
+                    answerQuestion(AnswerD, timer, q);
                 }
             }
         });
     }
+
+    public void answerQuestion(Button btn, CountDownTimer timer, Question q){
+        if(q.getFinalAnswer().equals(btn.getText().toString())){
+            streak++;
+            timer.cancel();
+            Intent i = new Intent(getApplicationContext(), GamePage.class);
+            i.putExtra("name", username);
+            i.putExtra("streak", streak);
+            startActivity(i);
+        }else{
+            Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
+            timer.cancel();
+            lose = true;
+            updateStreak.execute(username, Integer.toString(streak));
+            Intent i = new Intent(getApplicationContext(), MenuPage.class);
+            i.putExtra("name", username);
+            i.putExtra("lose", lose);
+            startActivity(i);
+        }
+    }
+
+    public void wronganswer(){
+        //Put up the Yes/No message box
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle("Would you like to use one of your retries")
+                .setMessage("Are you sure?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), GamePage.class);
+                        i.putExtra("name", username);
+                        i.putExtra("streak", streak);
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), MenuPage.class);
+                        i.putExtra("name", username);
+                        i.putExtra("lose", lose);
+                        startActivity(i);
+                    }
+                })
+                .show();
+    }
+
 }

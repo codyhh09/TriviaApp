@@ -19,8 +19,10 @@ public class SignUp extends ActionBarActivity {
     // Progress Dialog
     private EditText inputName, inputPass, inputcheckPass;
     private String name, password, checkpass;
-    private GetUser getUser = new GetUser();
     private Button btnuser, btnback;
+    private Intent i;
+    private AddUser controller = new AddUser();
+    private GetUser getUser = new GetUser();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,13 +72,11 @@ public class SignUp extends ActionBarActivity {
                 checkpass = inputcheckPass.getText().toString();
                 try {
                     if(name!=null||password!=null||password==checkpass) {
-                        AddUser controller = new AddUser();
-
-                        if (controller.execute(name, password) != null) {
+                        if (controller.execute(name, password) != null && getUser.execute(name).get() == null) {
                             Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(i);
                         } else {
-                            Toast.makeText(SignUp.this, "Welcome new User", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this, "Need to pick a new Username", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -101,6 +101,7 @@ public class SignUp extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
     }
 }

@@ -131,8 +131,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btnbad"
-        android:layout_toStartOf="@+id/btnbad" />
+        android:layout_alignRight="@+id/Questiontxts"
+        android:layout_alignEnd="@+id/Questiontxts" />
 
     <Button
         android:layout_width="wrap_content"
@@ -142,20 +142,7 @@
         android:layout_alignBottom="@+id/btngood"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/Questiontxts"
         android:textSize="20dp"
-        android:layout_toRightOf="@+id/Questiontxts" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinType"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:spinnerMode="dropdown"
-        android:entries="@array/qType"
-        android:prompt="@string/type_prompt" />
-
-
+        android:layout_toRightOf="@+id/btngood"
+        android:layout_toEndOf="@+id/btngood" />
 </RelativeLayout>

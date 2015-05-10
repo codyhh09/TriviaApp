@@ -30,20 +30,22 @@ public class ModPage extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        getSupportActionBar().setIcon(R.drawable.ic_action_help);
 
-        for (int i = 0; i < menu.size(); i++)
-            menu.getItem(i).setVisible(false);
+        menu.getItem(0).setVisible(false);
+        menu.getItem(1).setVisible(false);
+        menu.getItem(2).setVisible(false);
 
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
+            case R.id.log_out:
+                //METHOD THAT EXECUTES LOG-OUT SEQUENCE GOES HERE!
+                i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

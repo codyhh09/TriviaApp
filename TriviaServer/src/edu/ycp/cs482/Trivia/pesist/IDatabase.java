@@ -21,6 +21,8 @@ public interface IDatabase {
 	
 	public void updateRetry(String username, int Retry);
 	
+	public void updateCoins(String username, int coins);
+	
 	public List<User> getAllUser();
 	
 	public boolean deleteUser(String user);

@@ -21,12 +21,13 @@ import edu.ycp.cs482.Trivia.controller.GetUser;
 import edu.ycp.cs482.Trivia.controller.LoginUser;
 import edu.ycp.cs482.Trivia.controller.UpdateRetry;
 import edu.ycp.cs482.Trivia.controller.UpdateStreak;
+import edu.ycp.cs482.Trivia.controller.changeCoins;
 
 
 public class UserPage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private String user, pass, user1;
-	private int streak, retry;
+	private int streak, retry, coins;
 	private User users;
 	private GetUser getuser = new GetUser();
 	private GetAllUsers getalluser = new GetAllUsers();
@@ -36,6 +37,7 @@ public class UserPage extends HttpServlet{
 	private ChangePass changepassword = new ChangePass();
 	private UpdateStreak updateStreak = new UpdateStreak();
 	private UpdateRetry updateretry = new UpdateRetry(); 
+	private changeCoins changeCoins = new changeCoins();
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();		
@@ -191,6 +193,20 @@ public class UserPage extends HttpServlet{
 				updateretry.updateretry(user, retry);
 				// writing the operation out.
 				JSON.getObjectMapper().writeValue(resp.getWriter(), retry);
+				return;
+			}
+			
+			if (pathInfo.contains("/coins=")){
+				user = pathInfo.substring(0, pathInfo.indexOf('/'));
+				coins = Integer.parseInt(pathInfo.substring(pathInfo.indexOf('=')+1,pathInfo.length()));
+				
+				// Set status code and content type
+				resp.setStatus(HttpServletResponse.SC_OK);
+				resp.setContentType("application/json");
+				
+				changeCoins.changeCoins(user, coins);
+				// writing the operation out.
+				JSON.getObjectMapper().writeValue(resp.getWriter(), coins);
 				return;
 			}
 		}

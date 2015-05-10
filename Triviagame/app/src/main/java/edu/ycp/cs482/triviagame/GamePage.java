@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import edu.ycp.cs482.Model.Question;
 import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.controller.ChangeCoins;
 import edu.ycp.cs482.controller.GerRandomQuestion;
 import edu.ycp.cs482.controller.GetQuestion;
 import edu.ycp.cs482.controller.GetUser;
@@ -26,16 +27,17 @@ import edu.ycp.cs482.controller.UpdateStreak;
 public class GamePage extends ActionBarActivity {
     private int streak;
     private String username;
-    private User user = new User();
     private TextView question, currstreak, creator;
     private boolean lose = false;
     private Button AnswerA, AnswerB, AnswerC, AnswerD;
     private Question q = new Question();
     private Intent i;
     private Bundle extras;
+    private User user = new User();
     private GerRandomQuestion controller = new GerRandomQuestion();
     private UpdateStreak updateStreak = new UpdateStreak();
     private GetUser getUser = new GetUser();
+    private ChangeCoins changeCoins = new ChangeCoins();
     private UpdateRetry updateRetry = new UpdateRetry();
     final int TIMER = 21000;
 
@@ -126,44 +128,27 @@ public class GamePage extends ActionBarActivity {
         AnswerA.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                if(user.getRetry()>0) {
-                    wronganswer();
-                }else {
-                    answerQuestion(AnswerA, timer, q);
-                }
+                answerQuestion(AnswerA, timer, q);
             }
         });
 
         AnswerB.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                if(user.getRetry()>0) {
-                    wronganswer();
-                }else{
-                    answerQuestion(AnswerB, timer, q);
-                }
+                answerQuestion(AnswerB, timer, q);
             }
         });
 
         AnswerC.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                if(user.getRetry()>0) {
-                    wronganswer();
-                }else{
-                    answerQuestion(AnswerC, timer, q);
-                }
+                answerQuestion(AnswerC, timer, q);
             }
         });
 
         AnswerD.setOnClickListener(new View.OnClickListener(){
             @Override
-            public  void onClick(View v){
-                if(user.getRetry()>0) {
-                    wronganswer();
-                }else{
-                    answerQuestion(AnswerD, timer, q);
-                }
+            public  void onClick(View v){answerQuestion(AnswerD, timer, q);
             }
         });
     }
@@ -172,19 +157,27 @@ public class GamePage extends ActionBarActivity {
         if(q.getFinalAnswer().equals(btn.getText().toString())){
             streak++;
             timer.cancel();
+            if(streak%5==0){
+                changeCoins.execute(username, Integer.toString(user.getCoins()+1));
+            }
             Intent i = new Intent(getApplicationContext(), GamePage.class);
             i.putExtra("name", username);
             i.putExtra("streak", streak);
             startActivity(i);
         }else{
-            Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
-            timer.cancel();
-            lose = true;
-            updateStreak.execute(username, Integer.toString(streak));
-            Intent i = new Intent(getApplicationContext(), MenuPage.class);
-            i.putExtra("name", username);
-            i.putExtra("lose", lose);
-            startActivity(i);
+            if(user.getRetry()>0) {
+                timer.cancel();
+                wronganswer();
+            }else {
+                Toast.makeText(GamePage.this, "Incorrect!", Toast.LENGTH_SHORT).show();
+                timer.cancel();
+                lose = true;
+                updateStreak.execute(username, Integer.toString(streak));
+                Intent i = new Intent(getApplicationContext(), MenuPage.class);
+                i.putExtra("name", username);
+                i.putExtra("lose", lose);
+                startActivity(i);
+            }
         }
     }
 
@@ -197,6 +190,7 @@ public class GamePage extends ActionBarActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        updateRetry.execute(username, Integer.toString(user.getRetry()-1));
                         Intent i = new Intent(getApplicationContext(), GamePage.class);
                         i.putExtra("name", username);
                         i.putExtra("streak", streak);

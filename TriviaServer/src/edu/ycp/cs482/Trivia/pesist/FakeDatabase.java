@@ -176,4 +176,10 @@ public class FakeDatabase implements IDatabase{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void updateCoins(String username, int coins) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -287,7 +287,7 @@ public class RealDatabase implements IDatabase{
 				ResultSet keys = null;
 
 				try {					
-					stmt = conn.prepareStatement("update users set users.streak = ? where users.username = ?");
+					stmt = conn.prepareStatement("update users set users.retry = ? where users.username = ?");
 					
 					stmt.setInt(1,  Retry);
 					stmt.setString(2, username);
@@ -295,6 +295,32 @@ public class RealDatabase implements IDatabase{
 					stmt.executeUpdate();
 					
 					System.out.println("updated Retry");
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(keys);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void updateCoins(String username, int coins){
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet keys = null;
+
+				try {					
+					stmt = conn.prepareStatement("update users set users.coins = ? where users.username = ?");
+					
+					stmt.setInt(1,  coins);
+					stmt.setString(2, username);
+					
+					stmt.executeUpdate();
+					
+					System.out.println("updated coins");
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt);
@@ -326,6 +352,7 @@ public class RealDatabase implements IDatabase{
 						user.setPassword(resultSet.getString(3));
 						user.setStreak(resultSet.getInt(4));
 						user.setRetry(resultSet.getInt(5));
+						user.setCoins(resultSet.getInt(6));
 						result.add(user);
 					}
 					
@@ -737,7 +764,8 @@ public class RealDatabase implements IDatabase{
 							"  username varchar(30)," +
 							"  password varchar(30)," +
 							"  streak integer default 0," +
-							"  retry integer default 0" +
+							"  retry integer default 0," +
+							"  coins integer default 0" +
 							")"
 					);
 					stmt.executeUpdate();			
@@ -802,6 +830,7 @@ public class RealDatabase implements IDatabase{
 		user.setPassword(resultSet.getString(index++));
 		user.setStreak(resultSet.getInt(index++));
 		user.setRetry(resultSet.getInt(index++));
+		user.setCoins(resultSet.getInt(index++));
 	}
 	
 	protected void loadQuestion(Question question, ResultSet resultSet, int index) throws SQLException {

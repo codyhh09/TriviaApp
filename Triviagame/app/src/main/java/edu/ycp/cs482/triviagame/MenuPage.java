@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class MenuPage extends ActionBarActivity {
     private Button startgame, Shop, stat;
     private Bundle extras;
-    private int streak = 1;
+    private int streak = 0;
     private Intent i;
     private String username;
     private boolean lose = false;

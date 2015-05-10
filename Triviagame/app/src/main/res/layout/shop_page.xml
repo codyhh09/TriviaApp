@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="This allows you the ability to immediately continue playing, after answering a question incorectly.  COST: 5 pts"
+        android:text="This allows you the ability to immediately continue playing, after answering a question incorectly.  COST: 1 coin"
         android:id="@+id/textView9"
         android:layout_below="@+id/btnSC"
         android:layout_alignParentLeft="true"

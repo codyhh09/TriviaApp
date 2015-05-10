@@ -15,7 +15,7 @@ public class StatPage extends ActionBarActivity {
     private Bundle extras;
     private String username;
     private boolean lose;
-    private TextView longStreak;
+    private TextView longStreak, Retry, coins;
     private GetUser getUser = new GetUser();
     private User user = new User();
     private Intent i;
@@ -33,6 +33,8 @@ public class StatPage extends ActionBarActivity {
         }
         setContentView(R.layout.stat_page);
         longStreak = (TextView) findViewById(R.id.longestStreak);
+        Retry = (TextView) findViewById(R.id.textView10);
+        coins = (TextView) findViewById(R.id.textView);
 
         try{
             user = getUser.execute(username).get();
@@ -41,7 +43,8 @@ public class StatPage extends ActionBarActivity {
         }
 
         longStreak.setText(longStreak.getText().toString() + " " + user.getStreak());
-
+        Retry.setText(Retry.getText().toString() + " " + user.getRetry());
+        coins.setText(coins.getText().toString() + " " + user.getCoins());
     }
 
     @Override

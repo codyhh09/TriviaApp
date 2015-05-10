@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,9 +36,11 @@ public class CorrectAQuestion extends ActionBarActivity{
     private Bundle extras;
     private int id, choose=1;
     private EditText question, answer1, answer2, answer3, answer4;
+    private Spinner spinner;
     private Button Good, Bad;
     private String answer;
     private RadioGroup rg;
+    private String[] types;
     private GetQuestion getquestion = new GetQuestion();
     private DeleteQuestion deleteQuestion = new DeleteQuestion();
     private ChangeQuestion changeQuestion = new ChangeQuestion();
@@ -47,23 +50,15 @@ public class CorrectAQuestion extends ActionBarActivity{
     private ChangeAnswer4 changeAnswer4 = new ChangeAnswer4();
     private ChangeFinalAnswer changeFinalAnswer = new ChangeFinalAnswer();
     private ChangeStatus changeStatus = new ChangeStatus();
-    // make the spinner
-    private Spinner spinner = (Spinner) findViewById(R.id.spinType);
-
-    public void addListenerOnSpinnerItemSelection() {
-        spinner = (Spinner) findViewById(R.id.spinType);
-        spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        getSupportActionBar().setIcon(R.drawable.ic_action_help);
 
-        for (int i = 0; i < menu.size(); i++)
-            menu.getItem(i).setVisible(false);
+        menu.getItem(0).setVisible(false);
+        menu.getItem(1).setVisible(false);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -74,6 +69,15 @@ public class CorrectAQuestion extends ActionBarActivity{
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
+            case R.id.main:
+                i = new Intent(getApplicationContext(), ModPage.class);
+                startActivity(i);
+                return true;
+            case R.id.log_out:
+                //METHOD THAT EXECUTES LOG-OUT SEQUENCE GOES HERE!
+                i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -83,14 +87,12 @@ public class CorrectAQuestion extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verifingpage);
-
         if (savedInstanceState == null) {
             extras = getIntent().getExtras();
             id = extras.getInt("id");
         } else {
             id = (Integer) savedInstanceState.getSerializable("id");
         }
-
         question = (EditText) findViewById(R.id.txtQuestions);
         answer1 = (EditText) findViewById(R.id.txtAnsAs);
         answer2 = (EditText) findViewById(R.id.txtAnsBs);
@@ -112,10 +114,11 @@ public class CorrectAQuestion extends ActionBarActivity{
         answer3.setText(q.getAnswer3());
         answer4.setText(q.getAnswer4());
 
+
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.radAnsA1:
                         choose = 1;
                         break;
@@ -135,7 +138,7 @@ public class CorrectAQuestion extends ActionBarActivity{
         Good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (answer1.getText().toString() != "" && answer2.getText().toString() != "" && answer3.getText().toString() != "" && answer4.getText().toString() != "" && question.getText().toString() != "" && choose != 0){
+                if (answer1.getText().toString() != "" && answer2.getText().toString() != "" && answer3.getText().toString() != "" && answer4.getText().toString() != "" && question.getText().toString() != "" && choose != 0) {
                     switch (choose) {
                         case 1:
                             answer = answer1.getText().toString();
@@ -151,20 +154,20 @@ public class CorrectAQuestion extends ActionBarActivity{
                             break;
                     }
                     try {
-                        if(changeQuestion.execute(Integer.toString(q.getId()), question.getText().toString()).get() &&
-                                changeAnswer1.execute(Integer.toString(q.getId()), answer1.getText().toString()).get()&&
-                                changeAnswer2.execute(Integer.toString(q.getId()), answer2.getText().toString()).get()&&
-                                changeAnswer3.execute(Integer.toString(q.getId()), answer3.getText().toString()).get()&&
-                                changeAnswer4.execute(Integer.toString(q.getId()), answer4.getText().toString()).get()&&
-                                changeFinalAnswer.execute(Integer.toString(q.getId()), answer).get()&&
-                                changeStatus.execute(Integer.toString(q.getId())).get()){
+                        if (changeQuestion.execute(Integer.toString(q.getId()), question.getText().toString()).get() &&
+                                changeAnswer1.execute(Integer.toString(q.getId()), answer1.getText().toString()).get() &&
+                                changeAnswer2.execute(Integer.toString(q.getId()), answer2.getText().toString()).get() &&
+                                changeAnswer3.execute(Integer.toString(q.getId()), answer3.getText().toString()).get() &&
+                                changeAnswer4.execute(Integer.toString(q.getId()), answer4.getText().toString()).get() &&
+                                changeFinalAnswer.execute(Integer.toString(q.getId()), answer).get() &&
+                                changeStatus.execute(Integer.toString(q.getId())).get()) {
                             i = new Intent(getApplicationContext(), ModPage.class);
                             startActivity(i);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     Toast.makeText(CorrectAQuestion.this, "Fill in all of the entries!!", Toast.LENGTH_SHORT).show();
                 }
             }

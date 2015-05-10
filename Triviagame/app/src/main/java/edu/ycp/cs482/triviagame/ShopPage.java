@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import edu.ycp.cs482.Model.User;
+import edu.ycp.cs482.controller.ChangeCoins;
 import edu.ycp.cs482.controller.GetUser;
 import edu.ycp.cs482.controller.UpdateRetry;
 
@@ -27,9 +28,10 @@ public class ShopPage extends ActionBarActivity {
     private String username;
     private User user = new User();
     private boolean lose;
-    private int update;
+    private int update, coin;
     private GetUser getUser = new GetUser();
     private UpdateRetry updateRetry = new UpdateRetry();
+    private ChangeCoins changeCoins = new ChangeCoins();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,12 @@ public class ShopPage extends ActionBarActivity {
             public void onClick(View v) {
             try {
                 user = getUser.execute(username).get();
-                update = user.getRetry()+1;
-                updateRetry.execute(username, Integer.toString(update));
+                if(user.getCoins()>0) {
+                    update = user.getRetry() + 1;
+                    coin = user.getCoins() - 1;
+                    changeCoins.execute(username, Integer.toString(coin));
+                    updateRetry.execute(username, Integer.toString(update));
+                }
             }catch (Exception e){
                 e.printStackTrace();
             }

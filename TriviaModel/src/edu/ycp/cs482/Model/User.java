@@ -9,6 +9,7 @@ public class User implements Serializable {
 	private String Password;
 	private int streak;
 	private int retry;
+	private int coins;
 
 	public User() {
 
@@ -19,6 +20,7 @@ public class User implements Serializable {
 		this.Password = Password;
 		this.streak = 0;
 		this.retry = 0;
+		this.coins = 0;
 	}
 
 	public int getId() {
@@ -59,5 +61,13 @@ public class User implements Serializable {
 	
 	public void setRetry(int retry) {
 		this.retry = retry;
+	}
+	
+	public int getCoins() {
+		return coins;
+	}
+	
+	public void setCoins(int coins) {
+		this.coins = coins;
 	}
 }
